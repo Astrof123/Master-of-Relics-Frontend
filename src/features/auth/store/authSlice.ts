@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthResponse, User } from '../types';
-import { login } from './actions';
+import { login, refreshToken } from './actions';
 
 
 interface AuthState {
@@ -39,6 +39,20 @@ const authSlice = createSlice({
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.error = action.error.message || 'Не удалось войти';
+			})
+			.addCase(refreshToken.pending, (state) => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(refreshToken.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+				state.isLoading = false;
+				state.accessToken = action.payload.accessToken;
+			})
+			.addCase(refreshToken.rejected, (state, action) => {
+				state.isLoading = false;
+				state.error = action.error.message || 'Не удалось получить данные';
+				state.accessToken = null;
+				state.user = null;
 			})
 	},
 });

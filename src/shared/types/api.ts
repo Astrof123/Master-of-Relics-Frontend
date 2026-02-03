@@ -1,7 +1,6 @@
-import type { AxiosRequestConfig } from 'node_modules/axios/index.d.cts';
-
+import type { AxiosRequestConfig } from "axios";
 
 export interface RequestOptions extends AxiosRequestConfig {
     withAuth?: boolean;
-    retry?: boolean;
+    retryOnUnauthorized?: boolean;
 }
