@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthResponse, User } from '../types';
-import { login, refreshToken } from './actions';
+import { login, logout, me, refreshToken, register } from './actions';
 
 
 interface AuthState {
@@ -38,7 +38,19 @@ const authSlice = createSlice({
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.error.message || 'Не удалось войти';
+				state.error = action.payload as string || 'Не удалось войти';
+			})
+			.addCase(register.pending, (state) => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(register.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+				state.isLoading = false;
+				state.accessToken = action.payload.accessToken;
+			})
+			.addCase(register.rejected, (state, action) => {
+				state.isLoading = false;
+  				state.error = action.payload as string || 'Не удалось зарегистрироваться';
 			})
 			.addCase(refreshToken.pending, (state) => {
 				state.isLoading = true;
@@ -48,11 +60,35 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.accessToken = action.payload.accessToken;
 			})
-			.addCase(refreshToken.rejected, (state, action) => {
+			.addCase(refreshToken.rejected, (state) => {
 				state.isLoading = false;
-				state.error = action.error.message || 'Не удалось получить данные';
 				state.accessToken = null;
 				state.user = null;
+			})
+			.addCase(logout.pending, (state) => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(logout.fulfilled, (state) => {
+				state.isLoading = false;
+				state.accessToken = null;
+				state.user = null;
+			})
+			.addCase(logout.rejected, (state, action) => {
+				state.isLoading = false;
+  				state.error = action.payload as string || 'Не удалось выйти из системы';
+			})
+			.addCase(me.pending, (state) => {
+				state.isLoading = true;
+				state.error = null;
+			})
+			.addCase(me.fulfilled, (state, action: PayloadAction<User>) => {
+				state.isLoading = false;
+				state.user = action.payload;
+			})
+			.addCase(me.rejected, (state, action) => {
+				state.isLoading = false;
+  				state.error = action.payload as string || 'Не удалось выйти из системы';
 			})
 	},
 });

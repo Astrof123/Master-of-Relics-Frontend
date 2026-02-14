@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '@/features/auth/store/authSlice';
+import lobbyReducer from '@/features/lobby/store/lobbySlice';
+import connectSocketReducer from '@/features/socket/store/connectSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
+        lobby: lobbyReducer,
+        connectSocket: connectSocketReducer
     },
 });
 

@@ -1,5 +1,5 @@
 export interface User {
-    id: string;
+    id: number;
     nickname: string;
     gold: number;
 }
@@ -12,6 +12,7 @@ export interface LoginCredentials {
 
 
 export interface RegisterData {
+    inviteCode: string;
     nickname: string;
     login: string;
     password: string;

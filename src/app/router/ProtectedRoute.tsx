@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuthCheck } from '@/features/auth/hooks/useAuthCheck';
 
 interface ProtectedRouteProps {
@@ -10,26 +10,20 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute = ({
     children,
-    requireAuth = true,
-    redirectTo = '/login'
+    requireAuth = true
 }: ProtectedRouteProps) => {
-    const location = useLocation();
-    const { isAuthenticated, isLoading } = useAuthCheck();
+    const { isAuthenticated, isChecking } = useAuthCheck();
 
-    if (isLoading) {
+    if (isChecking) {
         return (
             <div className="flex items-center justify-center min-h-screen">
-                <h1>Загрузка...</h1>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
             </div>
         );
     }
 
     if (requireAuth && !isAuthenticated) {
-        return <Navigate to={redirectTo} state={{ from: location }} replace />;
-    }
-
-    if (!requireAuth && isAuthenticated) {
-        return <Navigate to="/" replace />;
+        return <Navigate to={'/login'}/>;
     }
 
     return <>{children}</>;

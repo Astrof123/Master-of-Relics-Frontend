@@ -1,30 +1,32 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProtectedRoute } from '@/app/ProtectedRoute';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthLayout } from './router/AuthLayout';
+import { SocketLayout } from './router/SocketLayout';
 
 
-// const LoginPage = lazy(() => import('@/pages/LoginPage'));
-// const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
-// const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
-// const ProfilePage = lazy(() => import('@/pages/ProfilePage'));
-// const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
-// const Layout = lazy(() => import('@/app/layouts/MainLayout'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
+const MainPage = lazy(() => import('@/pages/MainPage'));
+const CreateLobbyPage = lazy(() => import("@/pages/CreateLobbyPage"))
+const LobbyPage = lazy(() => import("@/pages/LobbyPage"))
 
 function App() {
     return (
         <BrowserRouter>
-            <Routes>
-                {/* <Route path="/login" element={
-                    <ProtectedRoute requireAuth={false}>
-                        <LoginPage />
-                    </ProtectedRoute>
-                } />
-                <Route path="/register" element={
-                    <ProtectedRoute requireAuth={false}>
-                        <RegisterPage />
-                    </ProtectedRoute>
-                } /> */}
-            </Routes>
+            <Suspense fallback={<div>Загрузка...</div>}>
+                <Routes>
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route element={<AuthLayout />}>
+                        <Route element={<SocketLayout /> } >
+                            <Route path="/" element={<MainPage />} />
+                            <Route path="/create" element={<CreateLobbyPage />} />
+                            <Route path="/my-lobby" element={<LobbyPage />} />
+                        </Route>
+                    </Route>
+                </Routes>
+            </Suspense>
+
         </BrowserRouter>
     );
 }
