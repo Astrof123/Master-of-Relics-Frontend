@@ -5,4 +5,6 @@ export interface JoinHallData {
     currentLobby: Lobby|null
 }
 
-
+export interface StartGameData {
+    gameId: string;
+}

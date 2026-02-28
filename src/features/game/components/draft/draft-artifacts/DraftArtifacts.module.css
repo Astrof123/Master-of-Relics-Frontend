@@ -1,0 +1,13 @@
+.draft-artifacts-wrapper {
+    /* width: 75%; */
+    width: 100%;
+    /* border: 1px black solid; */
+}
+
+
+.draft-artifacts-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

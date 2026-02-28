@@ -9,6 +9,10 @@ export const useAuthCheck = () => {
     const [isChecking, setIsChecking] = useState(true);
 
     const checkAuth = useCallback(async () => {
+        if (!isChecking) {
+            return;
+        }
+        
         if (accessToken) {
             setIsChecking(false);
             return;
@@ -25,7 +29,7 @@ export const useAuthCheck = () => {
                 setIsChecking(false);
             }
         }
-    }, [accessToken, isLoading, dispatch]);
+    }, [dispatch]);
 
     useEffect(() => {
         checkAuth();

@@ -1,30 +1,19 @@
-import { Navigate } from 'react-router-dom';
 import { useAuthCheck } from '@/features/auth/hooks/useAuthCheck';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-interface ProtectedRouteProps {
-    children: React.ReactNode;
-    requireAuth?: boolean;
-    redirectTo?: string;
-    showLoader?: boolean;
-}
 
-export const ProtectedRoute = ({
-    children,
-    requireAuth = true
-}: ProtectedRouteProps) => {
-    const { isAuthenticated, isChecking } = useAuthCheck();
+export const ProtectedRoute = () => {
+    const { isAuthenticated } = useAuthCheck();
 
-    if (isChecking) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-            </div>
-        );
+    const navigate = useNavigate();
+
+    if (!isAuthenticated) {
+        navigate("/login")
     }
 
-    if (requireAuth && !isAuthenticated) {
-        return <Navigate to={'/login'}/>;
-    }
-
-    return <>{children}</>;
+    return (
+        <>
+            <Outlet />
+        </>
+    )
 };

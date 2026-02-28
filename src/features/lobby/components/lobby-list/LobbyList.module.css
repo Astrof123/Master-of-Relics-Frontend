@@ -15,27 +15,27 @@
     color: #555;
 }
 
-.lobbiesList {
+.lobbies-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-top: 10px;
 }
 
-.lobbyCard {
+.lobby-card {
     padding: 16px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
 }
 
-.lobbyName {
+.lobby-name {
     font-weight: bold;
     font-size: 18px;
     color: #333;
 }
 
-.lobbyState {
+.lobby-state {
     display: inline-block;
     padding: 4px 8px;
     border-radius: 4px;
@@ -43,26 +43,26 @@
     margin-top: 8px;
 }
 
-.lobbyStateOpen {
+.lobby-state-open {
     background-color: #d4edda;
     color: #155724;
 }
 
-.lobbyStateInGame {
+.lobby-state-in-game {
     background-color: #f8d7da;
     color: #721c24;
 }
 
-.lobbyStateOther {
+.lobby-state-other {
     background-color: #e2e3e5;
     color: #383d41;
 }
 
-.playersList {
+.players-list {
     margin-top: 12px;
 }
 
-.playerItem {
+.player-item {
     display: inline-block;
     margin: 4px 8px 4px 0;
     padding: 4px 12px;
@@ -71,12 +71,12 @@
     font-size: 14px;
 }
 
-.emptyMessage {
+.empty-message {
     color: #666;
     font-style: italic;
 }
 
-.errorMessage {
+.error-message {
     color: #dc3545;
     font-weight: bold;
 }

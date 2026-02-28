@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { Provider } from 'react-redux';
 import { store } from './store.ts';
 import { initApiClient } from '@/shared/api/client.ts';
+import ModalManager from '@/features/modal/components/modal-manager/ModalManager.tsx';
 
 
 initApiClient(store);
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <Provider store={store}>
             <App />
+            <ModalManager />
         </Provider>
     </StrictMode>,
 )

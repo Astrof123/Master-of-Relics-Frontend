@@ -18,11 +18,11 @@ const LobbyList: React.FC = () => {
     const getStateClass = (state: string) => {
         switch(state.toLowerCase()) {
             case LOBBYSTATETYPE.WAITING:
-                return styles.lobbyStateOpen;
+                return styles["lobby-state-open"];
             case LOBBYSTATETYPE.PLAYING:
-                return styles.lobbyStateInGame;
+                return styles["lobby-state-in-game"];
             default:
-                return styles.lobbyStateOther;
+                return styles["lobby-state-other"];
         }
     };
 
@@ -57,20 +57,20 @@ const LobbyList: React.FC = () => {
                     <h2 className={styles.subtitle}>Доступные лобби:</h2> 
 
                     {lobbies.length > 0 ? (
-                        <div className={styles.lobbiesList}>
+                        <div className={styles["lobbies-list"]}>
                             {lobbies.map((lobby: Lobby) => (
-                                <div key={lobby.id} className={styles.lobbyCard}>
-                                    <div className={styles.lobbyName}>{lobby.name}</div>
+                                <div key={lobby.id} className={styles["lobby-card"]}>
+                                    <div className={styles["lobby-name"]}>{lobby.name}</div>
                                     
-                                    <div className={clsx(styles.lobbyState, getStateClass(lobby.state))}>
+                                    <div className={clsx(styles["lobby-state"], getStateClass(lobby.state))}>
                                         {lobby.state}
                                     </div>
                                     
-                                    <div className={styles.playersList}>
+                                    <div className={styles["players-list"]}>
                                         Игроки:
                                         <div>
                                             {Object.values(lobby.players).map((player: LobbyPlayer) => (
-                                                <span key={player.id} className={styles.playerItem}>
+                                                <span key={player.id} className={styles["player-item"]}>
                                                     {player.nickname}
                                                     {player.isReady ? "✅️" : "❌"}
                                                 </span>
@@ -82,13 +82,13 @@ const LobbyList: React.FC = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className={styles.emptyMessage}>
+                        <div className={styles["empty-message"]}>
                             Ни одного лобби ещё не создано! Станьте первым
                         </div>
                     )}
                 </div>
             ) : (
-                <h2 className={styles.errorMessage}>Вы не в сети!</h2> 
+                <h2 className={styles["error-message"]}>Вы не в сети!</h2> 
             )}
         </div>
     );

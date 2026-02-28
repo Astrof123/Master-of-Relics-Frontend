@@ -14,7 +14,9 @@ function CurrentLobby() {
     const {
         leaveLobby,
         toggleReadyLobby,
-        deleteLobby
+        deleteLobby,
+        startGame,
+        enterGame
     } = useLobbySocket();
 
 
@@ -27,11 +29,11 @@ function CurrentLobby() {
     const getStateClass = (state: string) => {
         switch(state.toLowerCase()) {
             case LOBBYSTATETYPE.WAITING:
-                return styles.lobbyStateOpen;
+                return styles["lobby-state-open"];
             case LOBBYSTATETYPE.PLAYING:
-                return styles.lobbyStateInGame;
+                return styles["lobby-state-in-game"];
             default:
-                return styles.lobbyStateOther;
+                return styles["lobby-state-other"];
         }
     };
 
@@ -44,24 +46,35 @@ function CurrentLobby() {
         }
 
         const playerLobby = lobby.players[user.id]
-        if (playerLobby) {
-            buttons.push(
-                <button key={lobby.id + "leave"} onClick={() => leaveLobby(lobby.id)} type='button'>Выйти</button>
-            )
 
-            buttons.push(
-                <button key={lobby.id + "toggle"} onClick={() => toggleReadyLobby(lobby.id)} type='button'>{playerLobby?.isReady ? "Не готов" : "Готов"}</button>
-            )     
-            if (playerLobby?.isHost && Object.keys(lobby.players).length > 1) {
+        if (lobby.state === LOBBYSTATETYPE.WAITING) {
+            if (playerLobby) {
                 buttons.push(
-                    <button key={lobby.id + "start"} type='button'>Начать</button>
-                )                
+                    <button key={lobby.id + "leave"} onClick={() => leaveLobby(lobby.id)} type='button'>Выйти</button>
+                )
+
+                buttons.push(
+                    <button key={lobby.id + "toggle"} onClick={() => toggleReadyLobby(lobby.id)} type='button'>{playerLobby?.isReady ? "Не готов" : "Готов"}</button>
+                )     
+
+                const players = Object.values(lobby.players);
+
+                if (playerLobby?.isHost && Object.keys(lobby.players).length > 1 && !players.find((player) => player.isReady === false)) {
+                    buttons.push(
+                        <button key={lobby.id + "start"} onClick={() => startGame(lobby.id)} type='button'>Начать</button>
+                    )                
+                }
             }
         }
+        else if (lobby.state === LOBBYSTATETYPE.PLAYING && playerLobby) {
+            buttons.push(
+                <button key={lobby.id + "enter"} onClick={() => enterGame(lobby.id)} type='button'>Войти в игру</button>
+            )
+        }
+
         buttons.push(
             <button key={lobby.id + "delete"} onClick={() => deleteLobby(lobby.id)} type='button'>Удалить</button>
-        )   
-
+        )
         return <>{buttons}</>;
     }
 
@@ -74,20 +87,23 @@ function CurrentLobby() {
 
     return (  
         <>
-            <div key={currentLobby.id} className={styles.lobbyCard}>
-                <div className={styles.lobbyName}>{currentLobby.name}</div>
+            <div key={currentLobby.id} className={styles["lobby-card"]}>
+                <div className={styles["lobby-name"]}>{currentLobby.name}</div>
                 
-                <div className={clsx(styles.lobbyState, getStateClass(currentLobby.state))}>
+                <div className={clsx(styles["lobby-state"], getStateClass(currentLobby.state))}>
                     {currentLobby.state}
                 </div>
                 
-                <div className={styles.playersList}>
+                <div className={styles["players-list"]}>
                     Игроки:
                     <div>
                         {Object.values(currentLobby.players).map((player: LobbyPlayer) => (
-                            <span key={player.id} className={styles.playerItem}>
+                            <span key={player.id} className={styles["player-item"]}>
                                 {player.nickname}
-                                {player.isReady ? "✅️" : "❌"}
+                                {currentLobby.state === LOBBYSTATETYPE.WAITING && (
+                                    player.isReady ? "✅️" : "❌"
+                                )}
+                                
                             </span>
                         ))}
                     </div>

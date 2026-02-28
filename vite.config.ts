@@ -13,6 +13,7 @@ export default defineConfig({
             '@app': path.resolve(__dirname, 'src/app'),
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@entities': path.resolve(__dirname, 'src/pages'),
+            "@assets": path.resolve(__dirname, 'src/assets'),
         },
     },
 })

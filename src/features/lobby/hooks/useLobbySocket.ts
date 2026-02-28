@@ -1,22 +1,23 @@
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import socketService from '../../socket/socket';
-import type { RootState } from '@app/store';
+import { useAppSelector } from '@app/store';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
-import type { JoinHallData } from '../types/socket-data-responses';
+import type { JoinHallData, StartGameData } from '../types/lobby-socket-data-responses';
 import type { Lobby } from '../types/lobby';
 import { LOBBY_EVENT_NAME } from '../types/lobby-events-name';
 import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby } from '../store/lobbySlice';
 import { useNavigate } from 'react-router-dom';
+import { GAME_EVENT_NAME } from '@/features/game/types/game-events-name';
 
 
 export const useLobbySocket = () => {
     const dispatch = useDispatch();
-    const connectState = useSelector((state: RootState) => state.connectSocket);
+    const isConnected = useAppSelector((state) => state.connectSocket.isConnected);
     const navigate = useNavigate();
 
     const joinHall = useCallback(() => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             console.warn('Нельзя присоединиться к залу игр: нет подключения');
             return;
         }
@@ -32,11 +33,11 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
     
 
     const createLobby = useCallback((data: Partial<Lobby>) => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             return;
         }
 
@@ -48,11 +49,26 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
 
+    const startGame = useCallback((lobbyId: string) => {
+        if (!isConnected) {
+            return;
+        }
+        console.log("Запуск игры")
+
+        socketService.emit(GAME_EVENT_NAME.CREATE_GAME, lobbyId, (response: SocketCallbackResponse<StartGameData>) => {
+            if (response.success) {
+                console.log(response.message);
+                navigate(`/game/${response.data.gameId}`)
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
 
     const joinLobby = useCallback((lobbyId: string) => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             return;
         }
 
@@ -64,10 +80,10 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
 
     const deleteLobby = useCallback((lobbyId: string) => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             return;
         }
 
@@ -78,10 +94,10 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
 
     const leaveLobby = useCallback((lobbyId: string) => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             return;
         }
 
@@ -94,10 +110,10 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
 
     const toggleReadyLobby = useCallback((lobbyId: string) => {
-        if (!connectState.isConnected) {
+        if (!isConnected) {
             return;
         }
 
@@ -108,7 +124,11 @@ export const useLobbySocket = () => {
                 console.error('Ошибка:', response.message);
             }
         });
-    }, [connectState.isConnected]);
+    }, [isConnected]);
+
+    const enterGame = useCallback((gameId: string) => {
+        navigate(`/game/${gameId}`)
+    }, [isConnected]);
 
     return {        
         joinHall,
@@ -116,6 +136,8 @@ export const useLobbySocket = () => {
         joinLobby,
         deleteLobby,
         leaveLobby,
-        toggleReadyLobby
+        toggleReadyLobby,
+        startGame,
+        enterGame
     };
 };

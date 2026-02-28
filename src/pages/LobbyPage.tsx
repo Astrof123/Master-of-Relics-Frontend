@@ -1,5 +1,5 @@
 import CurrentLobby from "@/features/lobby/components/current-lobby/CurrentLobby";
-import ContentLayout from "@/widgets/Contentlayout/ContentLayout";
+import ContentLayout from "@/widgets/content-layout/ContentLayout";
 
 function LobbyPage() {
     return ( 

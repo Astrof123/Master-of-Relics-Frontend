@@ -1,0 +1,30 @@
+.artifact {
+    cursor: pointer;
+    position: relative;
+    width: 160px;
+}
+
+.artifact:hover {
+    top: -5px;
+}
+
+.deck {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+.deck2 {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+
+.artifact--picked {
+    top: -8px;
+}

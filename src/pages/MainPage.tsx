@@ -1,5 +1,5 @@
 import LobbyList from "../features/lobby/components/lobby-list/LobbyList";
-import ContentLayout from "@/widgets/Contentlayout/ContentLayout";
+import ContentLayout from "@/widgets/content-layout/ContentLayout";
 
 
 function MainPage() {

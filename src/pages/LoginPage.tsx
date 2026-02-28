@@ -18,6 +18,8 @@ function LoginPage() {
         form: ""
     })
 
+    // console.log("pricol")
+
     useEffect(() => {
         if (accessToken) {
             navigate("/");
