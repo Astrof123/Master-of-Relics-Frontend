@@ -4,11 +4,10 @@ import clsx from "clsx";
 import styles from "./DraftScreen.module.css";
 
 function DraftScreen() {    
-    
     return (
         <div className={clsx(styles["draft-content"])}>
             <DraftArtifacts />
-            {/* <DraftedArtifacts /> */}
+            <DraftedArtifacts />
         </div>
     );
 }

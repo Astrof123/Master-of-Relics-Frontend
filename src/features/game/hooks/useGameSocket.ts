@@ -2,10 +2,12 @@ import { useAppSelector } from "@/app/store";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import socketService from '../../socket/socket';
-import { GAME_EVENT_NAME } from "../types/game-events-name";
 import type { SocketCallbackResponse } from "@/features/socket/types/response";
 import { setGameState, setPlayersOnline } from "../store/gameSlice";
-import type { JoinGameData } from "../types/game-socket-data-responses";
+import type { JoinGameData } from "../types/socket/game-socket-data-responses";
+import { GAME_EVENT_NAME } from "../types/socket/game-events-name";
+import type { ExtraActionData, UseFaceData, UseSkillData } from "../../action/types/action-evens-data";
+import { ACTION_EVENT_NAME } from "../../action/types/action-events-name";
 
 export const useGameSocket = () => {
     const dispatch = useDispatch();
@@ -27,7 +29,87 @@ export const useGameSocket = () => {
         });
     }, [isConnected]);
     
+    const useFace = useCallback((data: UseFaceData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.USE_FACE, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const endTurn = useCallback((gameId: string) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.END_TURN, gameId, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const endRound = useCallback((gameId: string) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.END_ROUND, gameId, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const extraAction = useCallback((data: ExtraActionData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.EXTRA_ACTION, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const useSkill = useCallback((data: UseSkillData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.USE_SKILL, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
     return {        
-        joinGame
+        joinGame,
+        useFace,
+        endTurn,
+        extraAction,
+        endRound,
+        useSkill
     };
 };

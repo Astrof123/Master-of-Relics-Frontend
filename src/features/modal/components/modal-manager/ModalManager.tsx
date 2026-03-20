@@ -3,6 +3,9 @@ import { useModal } from '../../hooks/useModal';
 import { useMemo } from 'react';
 import { MODALTYPE } from '../../types/modal';
 import DraftModalActions from '../draft-modal-actions/DraftModalActions';
+import BattleCardModal from '../battle-card-modal/BattleCardModal';
+import BattleModalActions from '../battle-modal-actions/BattleModalActions';
+import type { ModalBattleDetails } from '../../types/details';
 
 
 const ModalManager = () => {
@@ -23,6 +26,21 @@ const ModalManager = () => {
                     />
                 );
             
+            case MODALTYPE.BATTLE:
+                const detailsBattle = details as ModalBattleDetails;
+
+                if (!detailsBattle.isYour || !(detailsBattle.gameState.currentTurn === detailsBattle.gameState.player.id)) {
+                    return null;
+                }
+
+                return (
+                    <BattleModalActions 
+                        card={selectedCard}
+                        details={details as ModalBattleDetails}
+                        onClose={closeModal}
+                    />
+                );
+
             case MODALTYPE.SHOW:
                 return null;
 
@@ -31,15 +49,36 @@ const ModalManager = () => {
         }
     }, [modalType, selectedCard, details, closeModal]);
 
+    const battleCardModalRender = () => {
+        const detailsBattle = details as ModalBattleDetails;
+
+        return (
+            <BattleCardModal
+                player={detailsBattle.isYour ? detailsBattle.gameState.player : detailsBattle.gameState.enemy}
+                artifactGameId={detailsBattle.artifactGameId}
+                gameState={detailsBattle.gameState}
+                card={selectedCard}
+                isOpen={isOpen}
+                onClose={closeModal}
+                actions={actions}
+            />
+        )
+    }
+
     if (!isOpen) return null;
 
+
     return (
-        <CardModal
-            card={selectedCard}
-            isOpen={isOpen}
-            onClose={closeModal}
-            actions={actions}
-        />
+        modalType === MODALTYPE.BATTLE ? (
+            battleCardModalRender()
+        ) : (
+            <CardModal
+                card={selectedCard}
+                isOpen={isOpen}
+                onClose={closeModal}
+                actions={actions}
+            />
+        )
     );
 };
 

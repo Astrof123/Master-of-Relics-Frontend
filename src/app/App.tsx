@@ -4,6 +4,8 @@ import { AuthLayout } from './router/AuthLayout';
 import { SocketLayout } from './router/SocketLayout';
 import { LobbyLayout } from './router/LobbyLayout';
 import { ProtectedRoute } from './router/ProtectedRoute';
+import CollectionPage from '@/pages/CollectionPage';
+import LoadingPage from '@/pages/LoadingPage';
 
 
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
@@ -16,7 +18,7 @@ const GamePage = lazy(() => import("@/pages/GamePage"))
 function App() {
     return (
         <BrowserRouter>
-            <Suspense fallback={<div>Загрузка...</div>}>
+            <Suspense fallback={<LoadingPage />}>
                 <Routes>
                     <Route element={<AuthLayout />}>
                         <Route element={<ProtectedRoute />}>
@@ -24,7 +26,8 @@ function App() {
                                 <Route element={<LobbyLayout /> } >
                                     <Route path="/" element={<MainPage />} />
                                     <Route path="/create" element={<CreateLobbyPage />} />
-                                    <Route path="/my-lobby" element={<LobbyPage />} />                            
+                                    <Route path="/my-lobby" element={<LobbyPage />} />
+                                    <Route path="/collection" element={<CollectionPage />} />   
                                 </Route>
                                 <Route path="/game/:id" element={<GamePage />} />
                             </Route>                        

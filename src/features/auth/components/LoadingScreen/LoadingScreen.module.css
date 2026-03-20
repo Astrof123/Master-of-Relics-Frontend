@@ -1,0 +1,140 @@
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: linear-gradient(145deg, #0a080c 0%, #1a1518 100%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Спиннер */
+.spinner {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top-color: #aa7840;
+    border-right-color: #d49c5c;
+    border-radius: 50%;
+    animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.spinner-ring:nth-child(2) {
+    width: 70%;
+    height: 70%;
+    border-top-color: #d49c5c;
+    border-right-color: #ffd7a5;
+    animation-direction: reverse;
+    animation-duration: 1.2s;
+}
+
+.spinner-ring:nth-child(3) {
+    width: 40%;
+    height: 40%;
+    border-top-color: #ffd7a5;
+    border-right-color: #aa7840;
+    animation-duration: 1s;
+}
+
+.spinner-rune {
+    font-size: 32px;
+    color: #ffd7a5;
+    filter: drop-shadow(0 0 15px #aa7840);
+    animation: pulse 2s ease-in-out infinite;
+    z-index: 2;
+}
+
+/* Текст */
+.loading-text {
+    font-family: 'Forum', serif;
+    font-size: 24px;
+    color: #b89a7a;
+    text-shadow: 0 0 10px #aa7840;
+    margin: 0;
+    letter-spacing: 2px;
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Анимации */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px #aa7840);
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px #d49c5c);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 10px #aa7840;
+        opacity: 0.9;
+    }
+    50% {
+        text-shadow: 0 0 20px #d49c5c, 0 0 30px #ffd7a5;
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .spinner {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .spinner-rune {
+        font-size: 28px;
+    }
+    
+    .loading-text {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spinner {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .spinner-rune {
+        font-size: 24px;
+    }
+    
+    .loading-text {
+        font-size: 18px;
+    }
+}

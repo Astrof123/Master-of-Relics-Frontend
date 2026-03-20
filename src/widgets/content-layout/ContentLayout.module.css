@@ -1,13 +1,82 @@
 .layout {
     display: flex;
     min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
 
 .content {
     flex: 1;
     padding: 32px;
-    background: white;
-    margin: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin: 24px 32px 24px 24px;
+    background: rgba(26, 21, 24, 0.7);
+    backdrop-filter: blur(10px) brightness(0.8);
+    border-radius: 8px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 0 2px #5d4a36,
+        0 0 0 4px #2f241b,
+        inset 0 0 50px rgba(0, 0, 0, 0.8);
+    border: 1px solid #8b6f4c;
+    animation: fadeIn 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #8b6f4c 20%, 
+        #aa7840 50%,
+        #8b6f4c 80%, 
+        transparent 100%
+    );
+    animation: emberGlow 3s infinite;
+}
+
+.content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #8b6f4c 20%, 
+        #aa7840 50%,
+        #8b6f4c 80%, 
+        transparent 100%
+    );
+    animation: emberGlow 3s infinite 1.5s;
+}
+
+.content > * {
+    position: relative;
+    z-index: 2;
+}
+
+.content .corner-decoration {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(170, 120, 60, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

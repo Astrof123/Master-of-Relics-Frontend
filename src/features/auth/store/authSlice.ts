@@ -51,6 +51,7 @@ const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
   				state.error = action.payload as string || 'Не удалось зарегистрироваться';
+				console.log(state.error);
 			})
 			.addCase(refreshToken.pending, (state) => {
 				state.isLoading = true;

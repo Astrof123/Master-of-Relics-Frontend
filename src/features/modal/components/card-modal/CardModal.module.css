@@ -1,10 +1,394 @@
-.card-img {
-    height: 400px;
+/* Оверлей с эффектом подземелья */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0) brightness(1);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(16px) brightness(0.3);
+    }
+}
+
+/* Контент модалки с эффектом появления из тьмы */
+.modal-content {
+    max-width: 1300px;
+    width: fit-content;
+    animation: scaleIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-body {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .modal-card-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 32px;
-    justify-content: center
+    gap: 36px;
+    justify-content: center;
+    align-items: flex-start;
+    user-select: none;
+    background: linear-gradient(145deg, #1a1518 0%, #0f0b0e 100%);
+    backdrop-filter: blur(12px);
+    padding: 36px 40px;
+    border-radius: 12px;
+    border: 3px solid #5d4a36;
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.9),
+        0 0 0 2px #8b6f4c inset,
+        0 0 70px rgba(0, 0, 0, 0.9);
+    position: relative;
+}
+
+/* Эффект свечения по краям */
+.modal-card-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite;
+    z-index: 2;
+}
+
+.modal-card-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite 1.5s;
+    z-index: 2;
+}
+
+.modal-card-wrapper .top-rune {
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2f241b;
+    color: #ffd7a5;
+    width: 80px;
+    height: 36px;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    border: 2px solid #8b6f4c;
+    border-bottom: none;
+    box-shadow: 
+        0 -5px 20px rgba(170, 120, 60, 0.4),
+        inset 0 1px 5px rgba(255, 215, 140, 0.2);
+    text-shadow: 0 0 10px #aa7840;
+    z-index: 3;
+}
+
+/* Изображение карточки - древний артефакт */
+.card-img {
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 0 3px #5d4a36,
+        0 0 0 6px #2f241b,
+        0 0 50px rgba(170, 120, 60, 0.3);
+    transition: all 0.4s ease;
+    filter: brightness(1.05) contrast(1.05);
+    object-fit: cover;
+    position: relative;
+    border: none;
+}
+
+.card-img:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 30px 50px rgba(0, 0, 0, 0.9),
+        0 0 0 3px #aa7840,
+        0 0 0 6px #2f241b,
+        0 0 70px #d49c5c;
+}
+
+/* Блок с действиями - свиток заклинаний */
+.actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 320px;
+    background: linear-gradient(145deg, #2f241b 0%, #1a1518 100%);
+    padding: 32px 28px;
+    border-radius: 8px;
+    border: 2px solid #8b6f4c;
+    backdrop-filter: blur(4px);
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.8),
+        0 10px 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.actions-wrapper::before {
+    content: '✦';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 40px;
+    color: #aa7840;
+    opacity: 0.1;
+    transform: rotate(15deg);
+    text-shadow: 0 0 20px #d49c5c;
+}
+
+.actions-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    opacity: 0.5;
+}
+
+.actions-wrapper h2 {
+    color: #ffd7a5;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 16px 0;
+    text-shadow: 0 0 15px #aa7840;
+    font-family: 'Forum', serif;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #5d4a36;
+    padding-bottom: 16px;
+    position: relative;
+}
+
+.actions-wrapper button {
+    padding: 18px 32px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-family: 'Forum', serif;
+    box-shadow: 
+        0 5px 0 #2a1f18,
+        0 0 20px rgba(170, 120, 60, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.actions-wrapper button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(170, 120, 60, 0.2) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.actions-wrapper button:hover {
+    transform: translateY(-3px);
+    border-color: #d49c5c;
+    box-shadow: 
+        0 7px 0 #2a1f18,
+        0 0 40px #aa7840;
+    color: #ffffff;
+}
+
+.actions-wrapper button:hover::after {
+    opacity: 1;
+}
+
+.actions-wrapper button:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 3px 0 #2a1f18,
+        0 0 30px #aa7840;
+}
+
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b4c4c;
+    color: #d5a8a8;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 0 #3d2a26,
+        0 0 20px rgba(170, 60, 60, 0.3);
+    z-index: 20;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.close-button:hover {
+    background: linear-gradient(145deg, #442f2a, #2f1f1c);
+    border-color: #c45a5a;
+    color: #ffc0c0;
+    box-shadow: 
+        0 6px 0 #3d2a26,
+        0 0 30px #b84c4c;
+}
+
+
+.close-button img {
+    width: 20px;
+}
+
+
+/* Анимации */
+@keyframes emberGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Адаптив для мобилок */
+@media (max-width: 1024px) {
+    .card-img {
+        height: 400px;
+    }
+    
+    .actions-wrapper {
+        min-width: 280px;
+        padding: 28px 24px;
+    }
+    
+    .actions-wrapper h2 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-card-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 24px;
+        gap: 28px;
+    }
+
+    .card-img {
+        height: 350px;
+    }
+
+    .actions-wrapper {
+        min-width: 100%;
+        padding: 24px 20px;
+    }
+
+    .actions-wrapper h2 {
+        font-size: 20px;
+    }
+
+    .actions-wrapper button {
+        font-size: 18px;
+        padding: 16px 24px;
+    }
+
+    .close-button {
+        top: -10px;
+        right: -10px;
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-img {
+        height: 280px;
+    }
+    
+    .modal-card-wrapper {
+        padding: 24px 16px;
+    }
 }

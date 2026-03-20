@@ -3,25 +3,26 @@ import clsx from 'clsx';
 import styles from './ParallaxImage.module.css';
 
 interface ParallaxImageProps {
-  src: string;
-  alt?: string;
-  width?: number;
-  height?: number;
-  intensity?: number;
-  className?: string;
+    src: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    intensity?: number;
+    className?: string;
+    currentHp?: number;
 }
 
 interface RotateState {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 }
-
 
 const ParallaxImage: React.FC<ParallaxImageProps> = ({
     src,
     width = 300,
     height = 400,
     intensity = 8,
+    currentHp = null
 }) => {
     const [rotate, setRotate] = useState<RotateState>({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -35,20 +36,16 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
 
             const rect = containerRef.current.getBoundingClientRect();
             
-            // Вычисляем центр элемента
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             
-            // Вычисляем позицию мыши относительно центра
             const mouseX = e.clientX - centerX;
             const mouseY = e.clientY - centerY;
             
-            // Нормализуем значения для поворота
             const rotateY = (mouseX / (rect.width / 2)) * intensity;
             const rotateX = -(mouseY / (rect.height / 2)) * intensity;
             
             setRotate({ x: rotateX, y: rotateY });
-
         };
 
         const handleMouseLeave = () => {
@@ -77,37 +74,43 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
         };
     }, [isHovered, intensity]);
 
-
     return (
         <div className={clsx(styles.parallaxContainer)}>
             <div 
                 ref={containerRef}
                 className={styles.parallaxCard}
                 style={{
-                width: width,
-                height: height,
+                    width: width,
+                    height: height,
                 }}
             >
                 <div 
                     className={styles.parallaxInner}
-                    style={{
-                        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(1.05, 1.05, 1.05)`,
-                        transition: isHovered ? 'none' : 'transform 0.5s ease',
-                    }}
+        style={{
+            transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+            transition: 'transform 0.3s ease-out',
+        }}
                 >
                     <div className={styles.imageWrapper}>
+                        {currentHp !== null && (
+                            <span 
+                                className={clsx(styles.hp, currentHp >= 100 ? styles["hp--high"] : styles["hp--low"])}
+                                style={{
+                                    transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+                                    transition: 'transform 0.3s ease-out',
+                                }}
+                            >
+                                {currentHp}
+                            </span>
+                        )}
                         <img 
                             ref={imageRef}
                             src={src}
                             className={styles.parallaxImage}
-                            loading="lazy"
                         />
-                        
                     </div>
-                    
                 </div>
             </div>
-            
         </div>
     );
 };

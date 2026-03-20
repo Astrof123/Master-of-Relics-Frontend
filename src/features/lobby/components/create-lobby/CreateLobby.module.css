@@ -1,55 +1,218 @@
 .form {
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f5f5f5;
+    margin: 24px auto;
+    padding: 40px;
+    background: #1a1518;
+    background: linear-gradient(145deg, #2a2220 0%, #151013 100%);
+    border-radius: 12px;
+    border: 3px solid #5d4a36;
+    box-shadow: 
+        0 25px 40px rgba(0, 0, 0, 0.9),
+        0 0 0 2px #8b6f4c inset,
+        0 0 50px rgba(0, 0, 0, 0.8);
+    position: relative;
+    max-width: 600px;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+.form::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite;
+}
+
+.form > * {
+    position: relative;
+    z-index: 1;
 }
 
 .title {
-    font-size: 18px;
-    margin-bottom: 16px;
-    color: #333;
+    font-size: 24px;
+    margin-bottom: 32px;
+    color: #ffd7a5;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 15px #aa7840;
+    font-family: 'Forum', serif;
+    padding-top: 12px;
+    border-bottom: 2px solid #5d4a36;
+    padding-bottom: 16px;
 }
 
 .label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
+    margin-bottom: 24px;
+    font-weight: 600;
+    color: #b89a7a;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-family: 'Forum', serif;
+    text-shadow: 0 2px 5px black;
 }
 
 .input {
     width: 100%;
-    max-width: 300px;
-    padding: 8px 12px;
-    margin: 8px 0 16px;
-    border: 1px solid #ccc;
+    max-width: 100%;
+    padding: 16px 20px;
+    margin: 12px 0 16px;
+    border: 2px solid #5d4a36;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
+    font-family: 'Forum', serif;
+    background: #2f241b;
+    box-shadow: 
+        inset 0 4px 8px rgba(0, 0, 0, 0.8),
+        0 2px 0 #0a080c;
+    transition: all 0.2s ease;
+    color: #e8d9c0;
 }
 
 .input:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    border-color: #aa7840;
+    box-shadow: 
+        inset 0 4px 8px rgba(0, 0, 0, 0.8),
+        0 0 0 3px rgba(170, 120, 60, 0.3),
+        0 0 25px rgba(170, 120, 60, 0.4);
+    background: #3f3329;
+}
+
+.input::placeholder {
+    color: #8b6f4c;
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.input:hover {
+    border-color: #8b6f4c;
+    background: #3a2e24;
+}
+
+.input.valid {
+    border-color: #3d7a63;
+    box-shadow: 
+        inset 0 4px 8px rgba(0, 0, 0, 0.8),
+        0 0 0 2px rgba(60, 170, 120, 0.2);
+}
+
+.input.invalid {
+    border-color: #8b4c4c;
+    box-shadow: 
+        inset 0 4px 8px rgba(0, 0, 0, 0.8),
+        0 0 0 2px rgba(170, 60, 60, 0.2);
 }
 
 .button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    padding: 18px 36px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
+    font-family: 'Forum', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 5px black;
+    box-shadow: 
+        0 6px 0 #2a1f18,
+        0 0 20px rgba(170, 120, 60, 0.2);
+    width: 100%;
+    margin-top: 16px;
+    position: relative;
+    overflow: hidden;
 }
 
+
 .button:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 
+        0 8px 0 #2a1f18,
+        0 0 40px #aa7840;
+    color: #ffffff;
 }
 
 .button:active {
-    background-color: #004085;
+    transform: translateY(4px);
+    box-shadow: 
+        0 2px 0 #2a1f18,
+        0 0 30px #aa7840;
+}
+
+.helper-text {
+    font-size: 14px;
+    color: #b89a7a;
+    margin-top: -8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Forum', serif;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 16px;
+    border-radius: 4px;
+    border-left: 3px solid #aa7840;
+    text-shadow: 0 1px 3px black;
+}
+
+.helper-text::before {
+    content: '📜';
+    font-size: 16px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+/* Стили для ошибок валидации */
+.helper-text.error {
+    border-left-color: #8b4c4c;
+    color: #d5a8a8;
+}
+
+.helper-text.error::before {
+    content: '⚠️';
+    filter: drop-shadow(0 0 5px #b84c4c);
+}
+
+.helper-text.success {
+    border-left-color: #3d7a63;
+    color: #a8d5c5;
+}
+
+.helper-text.success::before {
+    content: '✓';
+    filter: drop-shadow(0 0 5px #3da075);
+}
+
+@keyframes emberGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -1,0 +1,186 @@
+.clue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffd7a5;
+    user-select: none;
+    gap: 32px;
+    font-family: 'Forum', serif;
+    text-shadow: 0 0 15px #aa7840;
+    letter-spacing: 1px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    padding: 16px 32px;
+    border-radius: 8px;
+    border: 2px solid #5d4a36;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 30px rgba(0, 0, 0, 0.8),
+        0 0 0 2px #8b6f4c inset;
+    position: relative;
+    overflow: hidden;
+    margin: 16px 0;
+}
+
+.clue::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite;
+}
+
+.clue::after {
+    content: '✦';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: #aa7840;
+    opacity: 0.2;
+    text-shadow: 0 0 20px #d49c5c;
+}
+
+.clue-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.clue-buttons button {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 12px 28px;
+    font-weight: 700;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 0 #1a1518;
+    transition: all 0.2s ease;
+    border: 2px solid;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+}
+
+.clue-buttons button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.clue-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #1a1518;
+}
+
+.clue-buttons button:hover::before {
+    opacity: 1;
+}
+
+.clue-buttons button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #1a1518;
+}
+
+.ready-button {
+    background: linear-gradient(145deg, #2f3329, #1a241b);
+    border-color: #3d7a63;
+    color: #a8d5c5;
+}
+
+.ready-button:hover {
+    border-color: #7ed957;
+    box-shadow: 0 6px 0 #1a1518, 0 0 30px #3da075;
+    color: #e0fff0;
+}
+
+.cancel-button {
+    background: linear-gradient(145deg, #332f29, #241f1b);
+    border-color: #8b4c4c;
+    color: #d5a8a8;
+}
+
+.cancel-button:hover {
+    border-color: #ff6b4a;
+    box-shadow: 0 6px 0 #1a1518, 0 0 30px #b84c4c;
+    color: #ffc0c0;
+}
+
+@keyframes emberGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .clue {
+        font-size: 18px;
+        padding: 12px 20px;
+        gap: 16px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .clue-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .clue-buttons button {
+        padding: 10px 20px;
+        font-size: 12px;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .clue {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+    
+    .clue-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .clue-buttons button {
+        width: 100%;
+        padding: 12px;
+    }
+}

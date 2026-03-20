@@ -2,11 +2,14 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import socketService from '../../socket/socket';
 import { setGameState, setPlayersOnline } from '../store/gameSlice';
-import { GAME_EVENT_NAME } from '../types/game-events-name';
-import type { ConnectionGame } from '../types/game';
+import type { ConnectionGame } from '../types/state/game';
 import { useAppSelector } from '@/app/store';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
-import type { GetGameStateData } from '../types/game-socket-data-responses';
+import { GAME_EVENT_NAME } from '../types/socket/game-events-name';
+import type { GetGameStateData } from '../types/socket/game-socket-data-responses';
+import { ACTION_EVENT_NAME } from '../../action/types/action-events-name';
+import type { AnimationData } from '../types/game/animation';
+import { pushAnimation } from '../store/animationSlice';
 
 export const useGameSocketProvider = () => {
     const dispatch = useDispatch();
@@ -23,23 +26,27 @@ export const useGameSocketProvider = () => {
     }, []);
     
     useEffect(() => {
-        console.log("Гейм провайдер")
-
         const handleGameStateUpdated = (gameId: string) => {
             getGameState(gameId);
         };
 
+        const handleNewAnimation = (data: AnimationData) => {
+            dispatch(pushAnimation(data));
+        };
+
         const handlePlayersOnlineUpdated = (data: Record<string, ConnectionGame>) => {
-            dispatch(setPlayersOnline(data))
+            dispatch(setPlayersOnline(data));
             console.log('Получено состояние подключения игроков:', data);
         };
 
         socketService.on(GAME_EVENT_NAME.GAME_STATE_UPDATED, handleGameStateUpdated);
         socketService.on(GAME_EVENT_NAME.PLAYERS_ONLINE_UPDATED, handlePlayersOnlineUpdated);
+        socketService.on(ACTION_EVENT_NAME.ANIMATION, handleNewAnimation);
 
         return () => {
             socketService.off(GAME_EVENT_NAME.GAME_STATE_UPDATED, handleGameStateUpdated);
             socketService.off(GAME_EVENT_NAME.PLAYERS_ONLINE_UPDATED, handlePlayersOnlineUpdated);
+            socketService.off(ACTION_EVENT_NAME.ANIMATION, handleNewAnimation);
         };
     }, [dispatch]);
 

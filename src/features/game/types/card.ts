@@ -1,4 +1,4 @@
 export interface CardForView {
-    id: number;
+    id: string;
     img: string;
 }

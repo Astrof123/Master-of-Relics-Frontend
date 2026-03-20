@@ -8,7 +8,7 @@ import type { Lobby } from '../types/lobby';
 import { LOBBY_EVENT_NAME } from '../types/lobby-events-name';
 import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby } from '../store/lobbySlice';
 import { useNavigate } from 'react-router-dom';
-import { GAME_EVENT_NAME } from '@/features/game/types/game-events-name';
+import { GAME_EVENT_NAME } from '@/features/game/types/socket/game-events-name';
 
 
 export const useLobbySocket = () => {

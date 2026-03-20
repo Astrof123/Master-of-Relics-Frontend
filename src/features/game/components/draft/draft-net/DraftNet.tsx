@@ -1,12 +1,11 @@
 import clsx from "clsx";
 import styles from "./DraftNet.module.css"
 import { ARTIFACTS } from "../../../constants/artifacts";
-import type { ArtifactGameState } from "../../../types/game";
-import type { EnemyArtifact } from "../../../types/game-for-client";
+import type { ArtifactGameState } from "../../../types/state/game";
+import type { EnemyArtifact } from "../../../types/state/game-for-client";
 import { useModal } from "@/features/modal/hooks/useModal";
 import type { CardForView } from "@/features/game/types/card";
 import { MODALTYPE } from "@/features/modal/types/modal";
-
 
 interface DraftNetProps {
     playerArtifacts: Record<string, ArtifactGameState>;
@@ -15,7 +14,6 @@ interface DraftNetProps {
 
 const DraftNet = (props: DraftNetProps) => {
     const { openCardModal } = useModal();
-
 
     const handleShowCard = (card: CardForView) => {
         openCardModal(card, MODALTYPE.SHOW, null)
@@ -52,6 +50,7 @@ const DraftNet = (props: DraftNetProps) => {
                                 src={ARTIFACTS[row[0]].img} 
                                 alt={ARTIFACTS[row[0]].name}
                                 onClick={() => handleShowCard({ id: row[0], img: ARTIFACTS[row[0]].imgCard })}
+                                title={ARTIFACTS[row[0]].name}
                             />
                         </div>
                         <span>{index + 1}</span>
@@ -60,6 +59,7 @@ const DraftNet = (props: DraftNetProps) => {
                                 src={ARTIFACTS[row[1]].img} 
                                 alt={ARTIFACTS[row[1]].name}
                                 onClick={() => handleShowCard({ id: row[1], img: ARTIFACTS[row[1]].imgCard })}
+                                title={ARTIFACTS[row[1]].name}
                             />
                         </div>
                     </div>

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import styles from './Sidebar.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Изменено с Link на NavLink
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import type { RootState } from '@/app/store';
 import { useSelector } from 'react-redux';
-
-
+import Dagger from '@assets/icons/dagger.png';
+import Coin from '@assets/icons/coin.png';
 
 const Sidebar = () => {
     const { user, handleMe } = useAuth();
@@ -17,25 +17,81 @@ const Sidebar = () => {
         handleMe();
     }, [])
 
+    // Функция для определения активности ссылки
+    const getActiveClass = ({ isActive }: { isActive: boolean }) => {
+        return isActive ? clsx(styles.active) : '';
+    };
+
     return (
-        <aside className={clsx(styles.sidebar)}>
-            <div className={clsx(styles.user)}>
-                <span>{user?.nickname}</span>
-                <span>{user?.gold}</span>
-                <strong>Статус:</strong> {isConnected ? '✅ Подключено' : '❌ Отключено'}
+        <aside className={styles.sidebar}>
+            <div className={styles.user}>
+                <div className={styles['user-info']}>
+                    <div className={styles["user-name-wrapper"]}>
+                        <img className={styles["user-name-decoration"]} src={Dagger} alt="" />
+                        <span className={styles['user-name']}>{user?.nickname || 'Гость'}</span>
+                    </div>
+
+                    <span className={styles['user-gold']}>
+                        <img className={styles["user-gold-decoration"]} src={Coin} alt="" />
+                        {user?.gold || 0}
+                    </span>
+                </div>
+                <div className={styles['user-status']}>
+                    <strong>Статус:</strong>
+                    <span className={clsx(
+                        styles['status-badge'],
+                        isConnected ? styles['status-online'] : styles['status-offline']
+                    )}>
+                        {isConnected ? '✅ Подключено' : '❌ Отключено'}
+                    </span>
+                </div>
             </div>
-            <div className={clsx(styles.nav)}>
-                <Link to="/">Список лобби</Link>
+            <nav className={styles.nav}>
+                <NavLink 
+                    to="/" 
+                    className={getActiveClass}
+                    end // Добавляем end для точного совпадения с корневым путем
+                >
+                    Список лобби
+                </NavLink>
+                
                 {currentLobby === null ? (
-                    <Link to="/create">Создать лобби</Link>
+                    <NavLink 
+                        to="/create" 
+                        className={getActiveClass}
+                    >
+                        Создать лобби
+                    </NavLink>
                 ) : (
-                    <Link to="/my-lobby">Ваше лобби</Link>
+                    <NavLink 
+                        to="/my-lobby" 
+                        className={getActiveClass}
+                    >
+                        Ваше лобби
+                    </NavLink>
                 )}
                 
-                <Link to="/shop">Лавка артефактов</Link>
-                <Link to="/knowledge">База знаний</Link>
-                <Link to="/collection">Коллекция</Link>
-            </div>
+                <NavLink 
+                    to="/shop" 
+                    className={getActiveClass}
+                >
+                    Лавка артефактов
+                </NavLink>
+                
+                <NavLink 
+                    to="/knowledge" 
+                    className={getActiveClass}
+                >
+                    База знаний
+                </NavLink>
+                
+                <NavLink 
+                    to="/collection" 
+                    className={getActiveClass}
+                >
+                    Коллекция
+                </NavLink>
+            </nav>
         </aside>
     );
 };

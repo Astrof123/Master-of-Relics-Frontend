@@ -11,7 +11,7 @@ export const useDraftSocket = () => {
     const dispatch = useDispatch();
     const isConnected = useAppSelector((state) => state.connectSocket.isConnected);
 
-    const pickArtifact = useCallback((gameId: string, pickedArtifactId: number) => {
+    const pickArtifact = useCallback((gameId: string, pickedArtifactId: string) => {
         if (!isConnected) {
             console.warn('Нельзя выбрать артефакт: нет подключения');
             return;

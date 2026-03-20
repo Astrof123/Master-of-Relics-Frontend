@@ -6,7 +6,7 @@ function MainPage() {
     return (
         <ContentLayout>
             <>
-                <h1>Главная страница</h1>
+                <h1>Список лобби</h1>
                 <LobbyList />
             </>
         </ContentLayout>

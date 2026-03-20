@@ -1,82 +1,389 @@
 .container {
-    padding: 20px;
-    font-family: sans-serif;
+    padding: 0;
+    font-family: 'Inter', 'Forum', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #e8d9c0;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.container::before {
+    content: '✦';
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 60px;
+    color: #aa7840;
+    opacity: 0.2;
+    transform: rotate(15deg);
+    text-shadow: 0 0 30px #d49c5c;
 }
 
 .title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 36px;
+    margin-bottom: 24px;
+    color: #ffd7a5;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 
+        0 0 10px #aa7840,
+        0 2px 5px black;
+    font-family: 'Forum', serif;
+    border-bottom: 3px solid #5d4a36;
+    padding-bottom: 12px;
+    display: inline-block;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: #aa7840;
+    box-shadow: 0 0 15px #d49c5c;
 }
 
 .subtitle {
-    font-size: 18px;
-    margin: 15px 0 10px;
-    color: #555;
+    font-size: 20px;
+    margin: 32px 0 16px;
+    color: #b89a7a;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: 1px;
+    font-family: 'Forum', serif;
+    text-shadow: 0 2px 8px black;
+    user-select: none;
+}
+
+.subtitle img {
+    width: 22px;
+}
+
+.subtitle::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #aa7840 0%, transparent 100%);
 }
 
 .lobbies-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 32px;
+    margin-top: 28px;
 }
 
 .lobby-card {
-    padding: 16px;
-    border: 1px solid #ddd;
+    padding: 28px;
+    background: #241e1b;
+    background: linear-gradient(145deg, #2f2824 0%, #1a1518 100%);
     border-radius: 8px;
-    background-color: #f9f9f9;
+    border: 2px solid #5d4a36;
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.8),
+        0 0 0 1px #8b6f4c inset,
+        0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.lobby-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    opacity: 0.5;
+    animation: emberGlow 3s infinite;
+}
+
+.lobby-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #b89a7a;
+    box-shadow: 
+        0 25px 40px rgba(0, 0, 0, 0.9),
+        0 0 0 2px #aa7840 inset,
+        0 0 50px rgba(170, 120, 60, 0.3);
+}
+
+.lobby-card::after {
+    content: '⚜️';
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: #2f241b;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    border: 2px solid #8b6f4c;
+    color: #b89a7a;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.4);
+    transform: rotate(5deg);
+}
+
+.lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #5d4a36;
 }
 
 .lobby-name {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffd7a5;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #aa7840;
+    font-family: 'Forum', serif;
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border: 1px solid #5d4a36;
 }
 
 .lobby-state {
     display: inline-block;
-    padding: 4px 8px;
+    padding: 6px 16px;
     border-radius: 4px;
-    font-size: 14px;
-    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Forum', serif;
+    border: 2px solid;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
 }
 
 .lobby-state-open {
-    background-color: #d4edda;
-    color: #155724;
+    background: #1e332c;
+    color: #a8d5c5;
+    border-color: #3d7a63;
+    box-shadow: 0 0 15px rgba(60, 170, 120, 0.4);
 }
 
 .lobby-state-in-game {
-    background-color: #f8d7da;
-    color: #721c24;
+    background: #33211e;
+    color: #d5a8a8;
+    border-color: #8b4c4c;
+    box-shadow: 0 0 15px rgba(170, 60, 60, 0.4);
 }
 
 .lobby-state-other {
-    background-color: #e2e3e5;
-    color: #383d41;
+    background: #2f241b;
+    color: #b89a7a;
+    border-color: #8b6f4c;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.2);
 }
 
 .players-list {
-    margin-top: 12px;
+    margin-top: 4px;
+    padding: 16px 0;
+    border-top: 2px dashed #5d4a36;
+    border-bottom: 2px dashed #5d4a36;
+}
+
+.players-list strong {
+    color: #b89a7a;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Forum', serif;
+    display: block;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 4px black;
+}
+
+.players-list > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .player-item {
-    display: inline-block;
-    margin: 4px 8px 4px 0;
-    padding: 4px 12px;
-    background-color: #e9ecef;
-    border-radius: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: #2f241b;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #e8d9c0;
+    border: 2px solid #5d4a36;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(170, 120, 60, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.player-item:hover {
+    background: #3f3329;
+    border-color: #aa7840;
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.4);
+}
+
+.player-item:hover::before {
+    opacity: 1;
+}
+
+.lobby-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    position: relative;
+}
+
+.lobby-actions button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 700;
     font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 1px;
+    font-family: 'Forum', serif;
+    border: 2px solid;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+.lobby-actions button:first-child {
+    background: #2f2824;
+    background: linear-gradient(145deg, #3f3530, #241e1b);
+    color: #ffd7a5;
+    border-color: #8b6f4c;
+    text-shadow: 0 2px 5px black;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.lobby-actions button:first-child:hover {
+    background: #4a3d35;
+    border-color: #d49c5c;
+    box-shadow: 
+        0 0 25px #aa7840,
+        0 5px 15px black;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.lobby-actions button:last-child {
+    background: #2a1f18;
+    background: linear-gradient(145deg, #352a22, #1f1814);
+    color: #e8d9c0;
+    border-color: #5d4a36;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.lobby-actions button:last-child:hover {
+    background: #3f3128;
+    border-color: #8b6f4c;
+    box-shadow: 0 0 20px #8b6f4c;
+    transform: translateY(-2px);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .empty-message {
-    color: #666;
-    font-style: italic;
+    color: #b89a7a;
+    text-align: center;
+    padding: 80px 24px;
+    background: rgba(26, 21, 24, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 3px dashed #5d4a36;
+    font-size: 20px;
+    font-family: 'Forum', serif;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.empty-message::before {
+    content: '✧';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 40px;
+    color: #aa7840;
+    opacity: 0.2;
+    transform: rotate(-15deg);
+}
+
+.empty-message::after {
+    content: '✧';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: #aa7840;
+    opacity: 0.2;
+    transform: rotate(15deg);
 }
 
 .error-message {
-    color: #dc3545;
-    font-weight: bold;
+    color: #d5a8a8;
+    font-weight: 600;
+    text-align: center;
+    padding: 80px 24px;
+    background: rgba(51, 33, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 3px solid #8b4c4c;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-family: 'Forum', serif;
+    box-shadow: 0 0 30px rgba(170, 60, 60, 0.3);
+    position: relative;
 }

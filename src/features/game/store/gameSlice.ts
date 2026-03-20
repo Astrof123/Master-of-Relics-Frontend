@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { ConnectionGame } from '../types/game';
-import type { GameForClient } from '../types/game-for-client';
+import type { ConnectionGame } from '../types/state/game';
+import type { GameForClient } from '../types/state/game-for-client';
 
 interface GameSocketState {
     gameState: GameForClient|null,
-    playersOnline: Record<string, ConnectionGame>
+    playersOnline: Record<string, ConnectionGame>,
 }
 
 const initialState: GameSocketState = {
     gameState: null,
-    playersOnline: {}
+    playersOnline: {},
 };
 
 const gameSocketSlice = createSlice({
@@ -24,7 +24,7 @@ const gameSocketSlice = createSlice({
         setPlayersOnline: (state, action: PayloadAction<Record<string, ConnectionGame>>) => {
             state.playersOnline = action.payload;
         },
-        setDraftedArtifact: (state, action: PayloadAction<number>) => {
+        setDraftedArtifact: (state, action: PayloadAction<string>) => {
             if (state.gameState) {
                 state.gameState.player.draft.pickedArtifact = action.payload;
             }

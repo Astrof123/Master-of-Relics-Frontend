@@ -1,13 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { CardForView } from '@/features/game/types/card';
 import type { ModalType } from '../types/modal';
-import type { ModalDraftDetails } from '../types/modalsDetails';
+import type { ModalBattleDetails, ModalDraftDetails } from '../types/details';
 
 interface ModalState {
     isOpen: boolean;
     card: CardForView | null;
     modalType: ModalType | null;
-    details: ModalDraftDetails | null;
+    details: ModalDraftDetails | ModalBattleDetails | null;
 }
 
 const initialState: ModalState = {
@@ -21,7 +21,7 @@ const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        openCardModal: (state, action: PayloadAction<{card: CardForView, modalType: ModalType, details: ModalDraftDetails | null}>) => {
+        openCardModal: (state, action: PayloadAction<{card: CardForView, modalType: ModalType, details: ModalDraftDetails | ModalBattleDetails | null}>) => {
             state.isOpen = true;
             state.card = action.payload.card;
             state.modalType = action.payload.modalType;

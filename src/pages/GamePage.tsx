@@ -5,6 +5,8 @@ import { useGameSocketProvider } from "@/features/game/hooks/useGameSocketProvid
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import clsx from "clsx";
+import { PHASE } from "@/features/game/types/state/phase";
+import GameScreen from "@/features/game/components/game/game-screen/GameScreen";
 
 
 function GamePage() {
@@ -31,7 +33,12 @@ function GamePage() {
 
     return (
         <div className={clsx("content")}>
-            <DraftScreen />
+            {gameState.phase === PHASE.DRAFT && (
+                <DraftScreen />
+            )}
+            {gameState.phase === PHASE.BATTLE && (
+                <GameScreen />
+            )}
         </div>
     );
 }

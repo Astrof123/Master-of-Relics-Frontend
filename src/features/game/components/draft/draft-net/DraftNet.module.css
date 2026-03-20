@@ -1,30 +1,155 @@
-.row-drafted-artifacts {
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.drafted-artifact {
-    box-sizing: border-box;
-    width: 75px;
-    height: 50px;
-    background-color: #191919;
-    border: 3px #454444 solid;
-    border-radius: 8px;
-    overflow: hidden;
-    
-}
-
 .rows {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    border: 2px solid #5d4a36;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.row-drafted-artifacts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px;
+    background: #2f241b;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.row-drafted-artifacts:hover {
+    background: #3f3329;
+    border-color: #aa7840;
+    transform: scale(1.01);
+    box-shadow: 
+        inset 0 2px 5px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.row-drafted-artifacts span {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffd7a5;
+    min-width: 36px;
+    text-align: center;
+    font-family: 'Forum', serif;
+    text-shadow: 0 0 10px #aa7840;
+    background: #2a1f18;
+    padding: 4px 0;
+    border-radius: 4px;
+    border: 2px solid #8b6f4c;
+    line-height: 1.2;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.drafted-artifact {
+    width: 80px;
+    height: 52px;
+    background: #1a1518;
+    border: 3px solid #5d4a36;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 2px 8px rgba(0, 0, 0, 0.8),
+        0 4px 0 #2a1f18;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.drafted-artifact:hover {
+    transform: translateY(-2px);
+    border-color: #aa7840;
+    box-shadow: 
+        inset 0 2px 8px rgba(0, 0, 0, 0.8),
+        0 6px 0 #2a1f18,
+        0 0 20px rgba(170, 120, 60, 0.4);
 }
 
 .drafted-artifact img {
-    cursor: pointer;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.drafted-artifact img:hover {
+    transform: scale(1.1);
+}
+
+.drafted-artifact:empty {
+    background: linear-gradient(145deg, #2f241b, #1a1518);
+    position: relative;
+    border-color: #5d4a36;
+}
+
+.drafted-artifact:empty::after {
+    content: '?';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #8b6f4c;
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 0 0 10px #aa7840;
+    opacity: 0.7;
+}
+
+/* Анимация для неизвестных артефактов */
+@keyframes unknownPulse {
+    0%, 100% {
+        opacity: 0.5;
+        text-shadow: 0 0 5px #aa7840;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 15px #d49c5c;
+    }
+}
+
+.drafted-artifact:empty::after {
+    animation: unknownPulse 2s infinite;
+}
+
+/* Стили для разных размеров экрана */
+@media (max-width: 1400px) {
+    .drafted-artifact {
+        width: 70px;
+        height: 46px;
+    }
+}
+
+@media (max-width: 768px) {
+    .drafted-artifact {
+        width: 60px;
+        height: 40px;
+    }
+    
+    .row-drafted-artifacts span {
+        font-size: 16px;
+        min-width: 32px;
+    }
+    
+    .rows {
+        gap: 10px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .drafted-artifact {
+        width: 50px;
+        height: 34px;
+    }
+    
+    .row-drafted-artifacts {
+        gap: 6px;
+    }
 }

@@ -1,52 +1,60 @@
 import { useAppSelector } from "@/app/store";
-import { CONNECTIONGAME } from "../../../types/game";
-import React from "react";
-import clsx from "clsx";
 import styles from "./DraftedArtifacts.module.css"
 import { useNavigate } from "react-router-dom";
 import DraftNet from "../draft-net/DraftNet";
 import { useDraftSocket } from "@/features/game/hooks/useDraftSocket";
 
-
 function DraftedArtifacts() {
-    const playersOnline = useAppSelector((state) => state.game.playersOnline);
     const gameState = useAppSelector((state) => state.game.gameState);
     const navigate = useNavigate();
     const { toggleReadyDraft } = useDraftSocket();
 
     if (gameState === null) {
-        return;
+        return null;
+    }
+
+    const endChoice = async () => {
+        if (gameState.player.draft.pickedArtifact === null) {
+            console.log("Вы не выбрали артефакт!")
+            return;
+        }
+        await toggleReadyDraft(gameState.id);
     }
 
     return (
-        <div>
-            <button type="button" onClick={() => navigate("/")}>Выйти</button>
-            <p>
-                Подключения игроков: <br />
-                {Object.entries(playersOnline).map((playerOnline) => (
-                    <React.Fragment key={playerOnline[0] + "connection"}>
-                        <span >
-                            {playerOnline[0]}: {playerOnline[1] === CONNECTIONGAME.ONLINE ? "🟢" : "🔴"}
-                        </span>
-                        <br />                    
-                    </React.Fragment>
-                ))}
-            </p>   
-            <p>
-                Фаза:
-                {gameState.phase}    
-            </p>
-            <DraftNet 
-                playerArtifacts={gameState.player.artifacts} 
-                enemyArtifacts={gameState.enemy.artifacts} 
-            />
-            <h3>{gameState.enemy.isReady ? "Противник уже сделал выбор" : "Противник выбирает..."}</h3>
-            {gameState.player.isReady ? (
-                <button onClick={() => toggleReadyDraft(gameState.id)} type="button">Отменить выбор</button>
-            ) : (
-                <button onClick={() => toggleReadyDraft(gameState.id)} type="button">Закончить выбор</button>
-            )}
-            
+        <div className={styles["drafted-wrapper"]}>
+            <button 
+                className={styles["exit-button"]} 
+                type="button" 
+                onClick={() => navigate("/")}
+            >
+                Покинуть
+            </button>
+            <div className={styles["net-container"]}>
+                <DraftNet 
+                    playerArtifacts={gameState.player.artifacts} 
+                    enemyArtifacts={gameState.enemy.artifacts} 
+                />
+            </div>
+            <div className={styles["draft-actions"]}>
+                {gameState.player.isReady ? (
+                    <button 
+                        className={styles["cancel-button"]}
+                        onClick={() => toggleReadyDraft(gameState.id)} 
+                        type="button"
+                    >
+                        Отменить
+                    </button>
+                ) : (
+                    <button 
+                        className={styles["complete-button"]}
+                        onClick={endChoice} 
+                        type="button"
+                    >
+                        Выбрать
+                    </button>
+                )}
+            </div>
         </div>
     );
 }

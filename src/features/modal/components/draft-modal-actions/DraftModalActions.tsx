@@ -1,14 +1,15 @@
 import { useCallback } from 'react';
 import { useDraftSocket } from '@/features/game/hooks/useDraftSocket';
 import type { CardForView } from '@/features/game/types/card';
+import styles from './DraftModalActions.module.css';
 
-interface Props {
+interface DraftModalActionsProps {
     card: CardForView;
     details?: any;
     onClose: () => void;
 }
 
-const DraftModalActions = ({ card, details, onClose }: Props) => {
+const DraftModalActions = ({ card, details, onClose }: DraftModalActionsProps) => {
     const { pickArtifact } = useDraftSocket();
 
     const handlePick = useCallback(() => {
@@ -18,16 +19,28 @@ const DraftModalActions = ({ card, details, onClose }: Props) => {
         }
     }, [details?.isYourDeck, details?.gameId, pickArtifact, card.id, onClose]);
 
-    if (!details?.isYourDeck) return null;
+    if (!details?.isYourDeck) {
+        return (
+            <div className={styles["view-only-message"]}>
+                <p>Просмотр колоды соперника</p>
+                <p style={{ fontSize: '14px', opacity: 0.8 }}>
+                    Нельзя выбрать артефакт
+                </p>
+            </div>
+        );
+    }
 
     return (
-        <>
-            <h2>Выберите действие</h2>
-            <button onClick={handlePick}>
-                Выбрать этот артефакт
+        <div className={styles["draft-actions"]}>
+            <h2>Действия</h2>
+            <button 
+                className={styles["pick-button"]}
+                onClick={handlePick}
+                type="button"
+            >
+                Выбрать
             </button>
-        </>
-
+        </div>
     );
 };
 

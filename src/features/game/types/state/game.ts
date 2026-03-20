@@ -1,0 +1,119 @@
+import type { ExtraActionState } from "../../../action/types/action";
+import type { EffectType } from "../game/effects";
+import type { Face } from "../game/face";
+import type { RESOURCE } from "../game/resource";
+import type { Skill } from "../game/skill";
+import type { Phase } from "./phase";
+
+export const CONNECTIONGAME  = {
+    ONLINE: 'online',
+    LEAVED: 'leaved',
+    OFFLINE: "offline"
+} as const;
+
+export type ConnectionGame  = typeof CONNECTIONGAME [keyof typeof CONNECTIONGAME];
+
+
+export const LINE  = {
+    FRONT: 'front',
+    BACK: 'back'
+} as const;
+
+export type Line  = typeof LINE [keyof typeof LINE];
+
+
+export const ARTIFACT_STATE  = {
+    READY_TO_USE: 'ready_to_use',
+    COOLDOWN: 'cooldown',
+    STUNNED: 'stunned',
+    ROOTED: 'rooted'
+} as const;
+
+export type ArtifactState  = typeof ARTIFACT_STATE [keyof typeof ARTIFACT_STATE];
+
+
+export interface SkillStateType {
+    id: Skill;
+    description: string;
+    possibleTargets: string[][];
+    countTargetEnemy: number;
+    countTargetAllies: number;
+}
+
+export interface ArtifactAvailableActions {
+    face: {
+        id: string;
+        description: string;
+        attackTargets: string[] | null,
+        healTargets: string[] | null,
+    } | null,
+    skills: SkillStateType[],
+    extraActions: ExtraActionState[]
+}
+
+export interface ArtifactGameState {
+    id: string;
+    artifactId: string;
+    face: Face;
+    state: ArtifactState;
+    currentHp: number;
+    maxHp: number;
+    position: number;
+    line: Line;
+    effects: EffectType[];
+    availableActions: ArtifactAvailableActions
+}
+
+export interface DeckArtifact {
+    artifactId: string;
+    maxHp: number;
+    skillCost: number;
+}
+
+export interface Player {
+    id: number;
+    name: string;
+    connection: ConnectionGame;
+    hero: string;
+    resources: {
+        [RESOURCE.AGILITY]: number;
+        [RESOURCE.RAGE]: number;
+        [RESOURCE.LIGHT_MANA]: number;
+        [RESOURCE.DARK_MANA]: number;
+        [RESOURCE.DESTRUCTION_MANA]: number;
+    },
+    artifacts: Record<string, ArtifactGameState>;
+    spells: {
+        light: SpellGameState[],
+        dark: SpellGameState[],
+        destruction: SpellGameState[]
+    };
+    effects: EffectType[];
+    isReady: boolean;
+    movePoints: number;
+    draft: {
+        pickedArtifact: string|null;
+        deck: DeckArtifact[];
+    },
+    availableActions: {}
+}
+
+
+export interface Game {
+    id: string;
+    phase: Phase;
+    name: string;
+    currentTurn: number;
+    logs: string[];
+    players: Record<number, Player>;
+}
+
+export interface SpellGameState {
+    id: string;
+    cooldown: boolean;
+    canUse: boolean;
+    countTarget: number;
+    possibleTargets: string[][];
+    countTargetEnemy: number;
+    countTargetAllies: number;
+}
