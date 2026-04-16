@@ -43,7 +43,6 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.CREATE_LOBBY, data, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
                 navigate("/my-lobby")
             } else {
                 console.error('Ошибка:', response.message);
@@ -73,6 +72,20 @@ export const useLobbySocket = () => {
         }
 
         socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY, lobbyId, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+                console.log(response.message);
+                navigate("/my-lobby")
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const joinLobbyByCode = useCallback((code: string) => {
+        if (!isConnected) {
+            return;
+        }
+        socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY_BY_CODE, code, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
                 console.log(response.message);
                 navigate("/my-lobby")
@@ -138,6 +151,7 @@ export const useLobbySocket = () => {
         leaveLobby,
         toggleReadyLobby,
         startGame,
-        enterGame
+        enterGame,
+        joinLobbyByCode
     };
 };

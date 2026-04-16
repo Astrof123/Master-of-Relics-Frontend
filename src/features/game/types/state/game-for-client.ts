@@ -1,8 +1,8 @@
 import type { EffectType } from "../game/effects";
 import type { Face } from "../game/face";
 import type { RESOURCE } from "../game/resource";
-import type { ArtifactState, ConnectionGame, DeckArtifact, Line, Player } from "./game";
-import type { Phase } from "./phase";
+import type { ArtifactState, ConnectionGame, ConstantsGameState, DeckArtifact, EndState, Line, Player } from "./game";
+import type { MiniPhase, Phase } from "./phase";
 
 
 export interface EnemyArtifact {
@@ -11,6 +11,7 @@ export interface EnemyArtifact {
     face: Face;
     state: ArtifactState;
     currentHp: number;
+    skillCost: number;
     maxHp: number;
     position: number;
     line: Line;
@@ -47,4 +48,7 @@ export interface GameForClient {
     logs: string[];
     player: Player;
     enemy: EnemyForClient;
+    end: EndState | null;
+    miniPhase: MiniPhase;
+    constants: ConstantsGameState;
 }

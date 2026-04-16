@@ -212,7 +212,6 @@ button {
     background: #1a1518;
 }
 
-/* Выделение текста - магическое свечение */
 ::selection {
     background: #aa7840;
     color: #0a080c;

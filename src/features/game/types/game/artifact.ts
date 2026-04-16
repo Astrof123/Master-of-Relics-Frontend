@@ -1,10 +1,9 @@
 export interface ArtifactDataType {
     id: string;
     name: string;
-    imgCard: string;
     img: string;
     imgBattle: string;
-    imgCardNoHp: string;
+    imgCardNoStats: string;
 }
 
 export const ARTIFACT  = {

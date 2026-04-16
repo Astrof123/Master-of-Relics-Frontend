@@ -278,3 +278,42 @@
     font-size: 14px;
     font-family: "Forum";
 }
+
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b4c4c;
+    color: #d5a8a8;
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 0 #3d2a26,
+        0 0 20px rgba(170, 60, 60, 0.3);
+    z-index: 20;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.close-button:hover {
+    background: linear-gradient(145deg, #442f2a, #2f1f1c);
+    border-color: #c45a5a;
+    color: #ffc0c0;
+    box-shadow: 
+        0 6px 0 #3d2a26,
+        0 0 30px #b84c4c;
+}
+
+
+.close-button img {
+    width: 20px;
+}

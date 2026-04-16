@@ -9,8 +9,10 @@ import type { EnemyForClient, GameForClient } from "@/features/game/types/state/
 import { FACES } from "@/features/game/constants/faces";
 import type { Player } from "@/features/game/types/state/game";
 import Heart from "@assets/icons/heart.jpg"
+import Cross from "@assets/icons/x-button.png";
 
-interface BattleCardModelProps {
+
+interface BattleCardModalProps {
     card: CardForView | null;
     artifactGameId: string;
     gameState: GameForClient;
@@ -20,7 +22,7 @@ interface BattleCardModelProps {
     actions: React.ReactNode;
 }
 
-const BattleCardModel = (props: BattleCardModelProps) => {
+const BattleCardModal = (props: BattleCardModalProps) => {
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -47,6 +49,7 @@ const BattleCardModel = (props: BattleCardModelProps) => {
     const faceId = props.player.artifacts[props.artifactGameId].face;
     const currentHp = props.player.artifacts[props.artifactGameId].currentHp;
     const maxHp = props.player.artifacts[props.artifactGameId].maxHp;
+    const skillCost = props.player.artifacts[props.artifactGameId].skillCost;
 
     const modalContent = (
         <div 
@@ -85,13 +88,28 @@ const BattleCardModel = (props: BattleCardModelProps) => {
                             </div>
 
                             <div className={clsx(styles["parallax"])}>
-                                <ParallaxImage width={330} height={440} currentHp={currentHp} src={props.card.img}  />
+                                <ParallaxImage 
+                                    width={330} 
+                                    height={440} 
+                                    valueLeftTop={currentHp}
+                                    valueRightTop={skillCost}
+                                    isArtifact={true}
+                                    src={props.card.img}  
+                                />
                             </div>
                             {props.actions !== null && (
                                 <div className={clsx(styles["actions"])}>
                                     {props.actions}
                                 </div>
                             )}
+
+                            <button 
+                                className={styles["close-button"]}
+                                onClick={props.onClose}
+                                aria-label="Закрыть"
+                            >
+                                <img src={Cross} alt="" />
+                            </button>
                         </div>
                         
                     </div>
@@ -106,4 +124,4 @@ const BattleCardModel = (props: BattleCardModelProps) => {
     );
 }
 
-export default BattleCardModel;
+export default BattleCardModal;

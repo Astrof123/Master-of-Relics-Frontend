@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 import { useDraftSocket } from '@/features/game/hooks/useDraftSocket';
 import type { CardForView } from '@/features/game/types/card';
 import styles from './DraftModalActions.module.css';
+import type { ModalDraftDetails } from '../../types/details';
 
 interface DraftModalActionsProps {
     card: CardForView;
-    details?: any;
+    details?: ModalDraftDetails;
     onClose: () => void;
 }
 

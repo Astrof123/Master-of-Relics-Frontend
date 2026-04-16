@@ -8,3 +8,7 @@ export interface JoinHallData {
 export interface StartGameData {
     gameId: string;
 }
+
+export interface GetLobbyListData {
+    lobbies: Lobby[]
+}

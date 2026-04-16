@@ -14,7 +14,12 @@ export const useArtifactSelection = (artifactGameId: string, isYour: boolean, ty
     const isSelected = selectedTargets[typeIndex]?.includes(artifactGameId) || false;
 
     const handleSelection = useCallback(() => {
-        if (!isChoice || !isPossibleTarget) return false;
+        if (isChoice && !isPossibleTarget) {
+            return true;
+        }
+        else if (!isChoice) {
+            return false;
+        }
 
         const select: SelectFaceTarget = {
             targetArtifactGameId: artifactGameId,

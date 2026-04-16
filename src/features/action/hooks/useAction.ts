@@ -1,6 +1,6 @@
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
 import { setChoice } from "@/features/game/store/choiceSlice";
-import { type ArtifactAvailableActions } from "@/features/game/types/state/game";
+import { type ArtifactAvailableActions, type SpellGameState } from "@/features/game/types/state/game";
 import type { ModalBattleDetails } from "@/features/modal/types/details";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import type { ExtraAction } from "../types/action";
 import type { Skill } from "@/features/game/types/game/skill";
 
 export const useAction = () => {
-    const { useFace, extraAction, useSkill } = useGameSocket();
+    const { useFace, extraAction, useSkill, useSpell } = useGameSocket();
     const dispatch = useDispatch();
     
     const faceAction = useCallback((
@@ -64,6 +64,7 @@ export const useAction = () => {
                 attackerArtifactId: details.artifactGameId,
                 isChoice: true,
                 possibleTargets: [availableActions.face.healTargets!, availableActions.face.attackTargets!],
+                countTargetAny: 0,
                 countTargetAllies: countTargetAllies,
                 countTargetEnemies: countTargetEnemies,
                 typeAction: "face",
@@ -94,6 +95,7 @@ export const useAction = () => {
                 attackerArtifactId: details.artifactGameId,
                 isChoice: true,
                 possibleTargets: [[], availableActions.face.attackTargets!],
+                countTargetAny: 0,
                 countTargetEnemies: 1,
                 countTargetAllies: 0,
                 typeAction: "face",
@@ -125,6 +127,7 @@ export const useAction = () => {
                 attackerArtifactId: details.artifactGameId,
                 isChoice: true,
                 possibleTargets: [availableActions.face.healTargets!, []],
+                countTargetAny: 0,
                 countTargetEnemies: 0,
                 countTargetAllies: 1,
                 typeAction: "face",
@@ -155,7 +158,8 @@ export const useAction = () => {
         extraAction({
             gameId,
             artifactGameId,
-            type
+            type,
+            details: null
         })
         onClose();
     }, [])
@@ -175,9 +179,9 @@ export const useAction = () => {
 
         const countTargetEnemy = skill.countTargetEnemy;
         const countTargetAllies = skill.countTargetAllies;
+        const countTargetAny = skill.countAnyTarget;
 
-
-        if (countTargetEnemy === 0 && countTargetAllies === 0) {
+        if (countTargetEnemy === 0 && countTargetAllies === 0 && countTargetAny === 0) {
             useSkill({
                 gameId: gameId,
                 artifactGameId: artifactGameId,
@@ -192,10 +196,46 @@ export const useAction = () => {
                 attackerArtifactId: artifactGameId,
                 isChoice: true,
                 possibleTargets: skill.possibleTargets,
-                countTargetEnemies: 1,
-                countTargetAllies: 0,
+                countTargetAny: countTargetAny,
+                countTargetEnemies: countTargetEnemy,
+                countTargetAllies: countTargetAllies,
                 typeAction: "skill",
                 actionId: skillId
+            }));
+            onClose();
+            return;
+        }
+    }, [])
+
+    const useSpellAction = useCallback((
+        gameId: string,
+        spell: SpellGameState,
+        onClose: () => void
+    ) => {
+
+        const countTargetEnemy = spell.countTargetEnemy;
+        const countTargetAllies = spell.countTargetAllies;
+        const countTargetAny = spell.countAnyTarget;
+
+        if (countTargetEnemy === 0 && countTargetAllies === 0 && countTargetAny === 0) {
+            useSpell({
+                gameId: gameId,
+                spellId: spell.id,
+                targets: [[], []]
+            });
+            onClose();
+            return;
+        }
+        else {
+            dispatch(setChoice({
+                attackerArtifactId: null,
+                isChoice: true,
+                possibleTargets: spell.possibleTargets,
+                countTargetAny: countTargetAny,
+                countTargetEnemies: countTargetEnemy,
+                countTargetAllies: countTargetAllies,
+                typeAction: "spell",
+                actionId: spell.id
             }));
             onClose();
             return;
@@ -205,6 +245,7 @@ export const useAction = () => {
     return {
         faceAction,
         extraAction: useExtraAction,
-        useSkill: useSkillAction
+        useSkill: useSkillAction,
+        useSpell: useSpellAction
     }
 }

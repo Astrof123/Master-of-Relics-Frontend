@@ -1,5 +1,5 @@
 import { ARTIFACTS } from '@/features/game/constants/artifacts';
-import type { ArtifactGameState, Line } from '@/features/game/types/state/game';
+import { ARTIFACT_STATE, type ArtifactGameState, type Line } from '@/features/game/types/state/game';
 import type { EnemyArtifact } from '@/features/game/types/state/game-for-client';
 import clsx from 'clsx';
 import styles from "./BattleArtifact.module.css";
@@ -7,10 +7,12 @@ import { FACES } from '@/features/game/constants/faces';
 import { useMemo } from 'react';
 import { useModal } from '@/features/modal/hooks/useModal';
 import { useAppSelector } from '@/app/store';
-import { MODALTYPE } from '@/features/modal/types/modal';
+import { MODALTYPE, type OpenModalData } from '@/features/modal/types/modal';
 import { useArtifactAnimations } from '@/features/game/hooks/useArtifactAnimations';
 import { useArtifactSelection } from '@/features/game/hooks/useArtifactSelection';
 import { useArtifactState } from '@/features/game/hooks/useArtifactState';
+import type { ModalBattleDetails } from '@/features/modal/types/details';
+import { GameHelper } from '@/features/game/helpers/game-helper';
 
 interface BattleArtifactProps {
     artifact: ArtifactGameState | EnemyArtifact; 
@@ -20,7 +22,7 @@ interface BattleArtifactProps {
 }
 
 const BattleArtifact = (props: BattleArtifactProps) => {
-    const { openCardModal } = useModal();
+    const { openModal } = useModal();
     const gameState = useAppSelector(state => state.game.gameState);
     const animations = useAppSelector(state => state.animation.animations);
     const typeIndex = props.isYour ? 0 : 1;
@@ -42,17 +44,25 @@ const BattleArtifact = (props: BattleArtifactProps) => {
     const handleCardClick = () => {
         if (handleSelection()) return;
 
-        const details = {
+        const details: ModalBattleDetails = {
+            cardForView: {
+                id: props.artifact.artifactId, 
+                img: ARTIFACTS[props.artifact.artifactId].imgCardNoStats 
+            },
             artifactGameId: props.artifact.id,
-            isYourTurn: gameState!.currentTurn === gameState!.player.id,
             isYour: props.isYour,
             gameState: gameState!
         };
 
-        openCardModal({
-            id: props.artifact.artifactId, 
-            img: ARTIFACTS[props.artifact.artifactId].imgCardNoHp 
-        }, MODALTYPE.BATTLE, details);
+        const data: OpenModalData = {
+            details: details,
+            modalType: MODALTYPE.BATTLE,
+            valueLeftTop: props.artifact.maxHp,
+            valueRightTop: props.artifact.skillCost,
+            isArtifact: true
+        }
+
+        openModal(data);
     };
 
     const artifactStyles = [styles.artifact];
@@ -69,19 +79,27 @@ const BattleArtifact = (props: BattleArtifactProps) => {
         artifactStyles.push(props.isYour ? styles["artifact--choice--allies"] : styles["artifact--choice--enemy"]);
     }
 
+    const [valueLeftTopStyles, valueRightTopStyles] = GameHelper.getStylesForCornerValues(styles, props.artifact.currentHp, props.artifact.skillCost, true);
+
     return (
         <div className={clsx(artifactStyles)} onClick={handleCardClick} style={{ animationDelay }}>
-            <img
-                className={clsx(styles["artifact-img"])}
-                src={ARTIFACTS[props.artifact.artifactId].imgBattle} 
-                alt={ARTIFACTS[props.artifact.artifactId].name}
-            />
-            <img className={clsx(styles.face)} src={FACES[props.artifact.face].img} alt={"face"} />
-            <div className={clsx(styles.state, styles[stateInfo.className])}>{stateInfo.name}</div>
-            <span 
-                className={clsx(styles.hp, props.artifact.currentHp >= 100 ? styles["hp--high"] : styles["hp--low"])}>
-                    {props.artifact.currentHp}
-            </span>
+            <div className={clsx(props.artifact.state === ARTIFACT_STATE.BREAKEN ? styles["artifact-img--breaken"] : null)}>
+                <img
+                    className={clsx(styles["artifact-img"])}
+                    src={ARTIFACTS[props.artifact.artifactId].imgBattle} 
+                    alt={ARTIFACTS[props.artifact.artifactId].name}
+                />
+                <img className={clsx(styles.face)} src={FACES[props.artifact.face].img} alt={"face"} />
+                <div className={clsx(styles.state, styles[stateInfo.className])}>{stateInfo.name}</div>
+                <span 
+                    className={clsx(valueLeftTopStyles)}>
+                        {props.artifact.currentHp}
+                </span>
+                <span 
+                    className={clsx(valueRightTopStyles)}>
+                        {props.artifact.skillCost}
+                </span>
+            </div>
             
             {showDamage && (
                 <div className={clsx(styles["damage-popup"])}>

@@ -214,7 +214,7 @@
     position: relative;
 }
 
-.actions-wrapper button {
+/* .actions-wrapper button {
     padding: 18px 32px;
     background: #2f241b;
     background: linear-gradient(145deg, #3f3329, #241e1b);
@@ -238,7 +238,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-}
+} */
 
 .actions-wrapper button::after {
     content: '';

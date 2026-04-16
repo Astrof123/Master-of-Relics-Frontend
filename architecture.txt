@@ -2,50 +2,37 @@ src/
 ├── app/                    # Настройки приложения, роутинг, провайдеры
 │   ├── router/
 │   ├── providers/
-│   ├── store/             # Глобальный state (Redux, Zustand и т.д.)
+│   ├── store/             # Глобальный state
 │   └── App.tsx
 │
 ├── features/              # Бизнес-логика по фичам (основная папка)
 │   ├── auth/
-│   │   ├── api/          # API запросы фичи
 │   │   ├── components/   # Компоненты фичи
 │   │   ├── hooks/        # Кастомные хуки фичи
 │   │   ├── store/        # Локальный state фичи
 │   │   ├── types/        # Типы фичи
-│   │   ├── utils/        # Вспомогательные функции
-│   │   └── index.ts      # Public API фичи
+│   │   └── utils/        # Вспомогательные функции
 │   │
-│   ├── products/
-│   ├── cart/
-│   └── profile/
+│   ├── game/
+│   ├── lobby/
+│   ├── socket/
+│   └── modal/
 │
-├── entities/              # Бизнес-сущности (если нужны по DDD)
-│   ├── user/
-│   ├── product/
-│   └── order/
 │
-├── widgets/               # Сложные составные компоненты (по FSD)
-│   ├── header/
-│   ├── sidebar/
-│   └── product-card/
+├── widgets/               # Сложные составные компоненты
+│   ├── content-layout/
+│   └── sidebar/
 │
-├── shared/                # Переиспользуемый код
-│   ├── api/              # Базовые настройки API
-│   ├── ui/               # UI компоненты (без логики)
-│   │   ├── button/
-│   │   ├── input/
-│   │   ├── modal/
-│   │   └── index.ts
-│   ├── lib/              # Утилиты, хелперы
-│   ├── hooks/            # Общие хуки
-│   ├── config/           # Конфигурации
-│   └── types/            # Глобальные типы
 │
 ├── pages/                 # Страницы (композиция фич/виджетов)
-│   ├── home/
-│   ├── login/
-│   ├── products/
-│   └── profile/
+│   ├── collection-page/
+│   ├── create-lobby-page/
+│   ├── game-page/
+│   ├── lobby-page/
+│   ├── login-page/
+│   ├── main-page/
+│   ├── register-page/
+│   └── loading-page/
 │
 │
 └── index.tsx

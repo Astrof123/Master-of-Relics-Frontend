@@ -254,7 +254,9 @@
 }
 
 .player-name {
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 50px;
     max-width: 50px;
     font-weight: 500;
@@ -264,12 +266,14 @@
 
 .connection-status {
     font-size: 14px;
+    
 }
 
 .player-connection-wrapper {
     display: flex;
     flex-direction: row;
     gap: 8px;
+    font-weight: 500;
 }
 
 .player-connection-status-wrapper {

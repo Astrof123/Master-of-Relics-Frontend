@@ -1,6 +1,6 @@
 import type { PickArtifactData } from "@/features/game/types/draft/draft-evens-data";
 import type { DRAFT_EVENT_NAME } from "@/features/game/types/draft/draft-events-name";
-import type { ExtraActionData, UseFaceData, UseSkillData } from "@/features/action/types/action-evens-data";
+import type { ExtraActionData, ToggleReadyMovementData, UseFaceData, UseSkillData, UseSpellData } from "@/features/action/types/action-evens-data";
 import type { ACTION_EVENT_NAME } from "@/features/action/types/action-events-name";
 import type { AnimationData } from "@/features/game/types/game/animation";
 import type { GAME_EVENT_NAME } from "@/features/game/types/socket/game-events-name";
@@ -9,10 +9,12 @@ import type { Lobby } from "@/features/lobby/types/lobby";
 import { LOBBY_EVENT_NAME } from "@/features/lobby/types/lobby-events-name";
 import type { SocketCallbackResponse } from "./response";
 import type { JoinGameData } from "@/features/game/types/socket/game-socket-data-responses";
+import type { GetLobbyListData, JoinHallData } from "@/features/lobby/types/lobby-socket-data-responses";
 
 export interface ClientToServerEvents {
-    [LOBBY_EVENT_NAME.JOIN_HALL]: (data: null, callback: (response: SocketCallbackResponse<null>) => void) => void;
-    [LOBBY_EVENT_NAME.CREATE_LOBBY]: (data: Partial<Lobby>, callback: (response: SocketCallbackResponse<Lobby>) => void) => void;
+    [LOBBY_EVENT_NAME.JOIN_HALL]: (data: null, callback: (response: SocketCallbackResponse<JoinHallData>) => void) => void;
+    [LOBBY_EVENT_NAME.GET_LOBBY_LIST]: (data: null, callback: (response: SocketCallbackResponse<GetLobbyListData>) => void) => void;
+    [LOBBY_EVENT_NAME.CREATE_LOBBY]: (data: Partial<Lobby>, callback: (response: SocketCallbackResponse<null>) => void) => void;
     [LOBBY_EVENT_NAME.JOIN_LOBBY]: (lobbyId: string, callback: (response: SocketCallbackResponse<Lobby>) => void) => void;
     [LOBBY_EVENT_NAME.DELETE_LOBBY]: (lobbyId: string, callback: (response: SocketCallbackResponse<null>) => void) => void;
     [LOBBY_EVENT_NAME.LEAVE_LOBBY]: (lobbyId: string, callback: (response: SocketCallbackResponse<null>) => void) => void;
@@ -28,10 +30,12 @@ export interface ClientToServerEvents {
     [ACTION_EVENT_NAME.EXTRA_ACTION]: (data: ExtraActionData, callback: (response: SocketCallbackResponse<null>) => void) => void;
     [ACTION_EVENT_NAME.END_ROUND]: (gameId: string, callback: (response: SocketCallbackResponse<null>) => void) => void;
     [ACTION_EVENT_NAME.USE_SKILL]: (data: UseSkillData, callback: (response: SocketCallbackResponse<null>) => void) => void;
+    [ACTION_EVENT_NAME.USE_SPELL]: (data: UseSpellData, callback: (response: SocketCallbackResponse<null>) => void) => void;
+    [ACTION_EVENT_NAME.TOGGLE_READY_MOVEMENT]: (data: ToggleReadyMovementData, callback: (response: SocketCallbackResponse<null>) => void) => void;
 }
 
 export interface ServerToClientEvents {
-    [LOBBY_EVENT_NAME.LOBBY_LIST_UPDATE]: (data: Lobby[]) => void;
+    [LOBBY_EVENT_NAME.LOBBY_LIST_UPDATED]: () => void;
     [LOBBY_EVENT_NAME.LOBBY_UPDATE]: (data: Lobby) => void;
     [GAME_EVENT_NAME.GAME_STATE_UPDATED]: (gameId: string) => void;
     [GAME_EVENT_NAME.PLAYERS_ONLINE_UPDATED]: (data: Record<string, ConnectionGame>) => void;

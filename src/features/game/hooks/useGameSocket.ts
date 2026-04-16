@@ -6,7 +6,7 @@ import type { SocketCallbackResponse } from "@/features/socket/types/response";
 import { setGameState, setPlayersOnline } from "../store/gameSlice";
 import type { JoinGameData } from "../types/socket/game-socket-data-responses";
 import { GAME_EVENT_NAME } from "../types/socket/game-events-name";
-import type { ExtraActionData, UseFaceData, UseSkillData } from "../../action/types/action-evens-data";
+import type { ExtraActionData, ToggleReadyMovementData, UseFaceData, UseSkillData, UseSpellData } from "../../action/types/action-evens-data";
 import { ACTION_EVENT_NAME } from "../../action/types/action-events-name";
 
 export const useGameSocket = () => {
@@ -104,12 +104,44 @@ export const useGameSocket = () => {
         });
     }, [isConnected]);
 
+    const useSpell = useCallback((data: UseSpellData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.USE_SPELL, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const toggleReadyMovement = useCallback((data: ToggleReadyMovementData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(ACTION_EVENT_NAME.TOGGLE_READY_MOVEMENT, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+
+            } 
+            else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
     return {        
         joinGame,
         useFace,
         endTurn,
         extraAction,
         endRound,
-        useSkill
+        useSkill,
+        useSpell,
+        toggleReadyMovement
     };
 };

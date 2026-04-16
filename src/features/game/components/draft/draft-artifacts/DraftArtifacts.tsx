@@ -5,8 +5,11 @@ import { useCallback, useState } from "react";
 import type { CardForView } from "../../../types/card";
 import DraftDeck from "../draft-deck/DraftDeck";
 import { useModal } from "@/features/modal/hooks/useModal";
-import { MODALTYPE } from "@/features/modal/types/modal";
-import { CONNECTIONGAME } from "@/features/game/types/state/game";
+import { MODALTYPE, type OpenModalData } from "@/features/modal/types/modal";
+import { CONNECTIONGAME, type DeckArtifact } from "@/features/game/types/state/game";
+import type { ModalDraftDetails } from "@/features/modal/types/details";
+import SwordsImg from "@assets/icons/two-swords.png";
+import WaitImg from "@assets/icons/wait.png";
 
 function DraftArtifacts() {
     const playersOnline = useAppSelector((state) => state.game.playersOnline);
@@ -14,7 +17,7 @@ function DraftArtifacts() {
     const [isYourDeck, setIsYourDeck] = useState(true);
     const gameId = useAppSelector(state => state.game.gameState?.id);
     
-    const { openCardModal } = useModal();
+    const { openModal } = useModal();
 
     const deckPlayer = useAppSelector(state => state.game.gameState?.player.draft.deck);
     const deckEnemy = useAppSelector(state => state.game.gameState?.enemy.draft.deck);
@@ -23,20 +26,29 @@ function DraftArtifacts() {
         return null;
     }
 
-    const handleCardClick = useCallback((card: CardForView) => {
-        const details = {
+    const handleCardClick = useCallback((card: CardForView, cardInfo: DeckArtifact) => {
+        const details: ModalDraftDetails = {
             isYourDeck,
             gameId,
+            cardForView: card
         }
-        openCardModal(card, MODALTYPE.DRAFT, details);
-    }, [openCardModal, isYourDeck, gameId]);
+
+        const data: OpenModalData = {
+            details: details,
+            modalType: MODALTYPE.DRAFT,
+            valueLeftTop: cardInfo.maxHp,
+            valueRightTop: cardInfo.skillCost,
+            isArtifact: true
+        }
+
+        openModal(data);
+    }, [openModal, isYourDeck, gameId]);
 
     return (  
         <div className={clsx(styles["draft-artifacts-wrapper"])}>
             <div className={clsx(styles["draft-artifacts-top"])}>
                 <h2>Выберите артефакт</h2>
                 <div className={styles["players-status"]}>
-                    {/* <p>Игроки:</p> */}
                     <div className={styles["player-connection-wrapper"]}>
                         {Object.entries(playersOnline).map((playerOnline) => (
                             <div key={playerOnline[0]} className={styles["player-connection"]}>

@@ -4,9 +4,10 @@ import { ARTIFACTS } from "../../../constants/artifacts";
 import type { CardForView } from "../../../types/card";
 import { useAppSelector } from "@/app/store";
 import type { DeckArtifact } from "@/features/game/types/state/game";
+import { GameHelper } from "@/features/game/helpers/game-helper";
 
 interface DraftDeckProps {
-    onHandleCardClick: (card: CardForView) => void;
+    onHandleCardClick: (card: CardForView, cardInfo: DeckArtifact) => void;
     isYour: boolean;
     deck: DeckArtifact[];
 }
@@ -27,20 +28,31 @@ const DraftDeck = (props: DraftDeckProps) => {
     return (
         <div className={clsx(styles.deck, !props.isYour && styles.isYour)}>
             <h3>{props.isYour ? "Ваша колода:" : "Колода соперника:"}</h3>
-            {props.deck.map((artifact, index) => (
-                <div key={index + "draft"} className={clsx(artifactStyle(artifact.artifactId))}>
-                    <img
-                        src={ARTIFACTS[artifact.artifactId].imgBattle} 
-                        alt={ARTIFACTS[artifact.artifactId].name}
-                        onClick={() => props.onHandleCardClick({ id: artifact.artifactId, img: ARTIFACTS[artifact.artifactId].imgCard })}
-                        title={ARTIFACTS[artifact.artifactId].name}
-                    />
-                    <span 
-                        className={clsx(styles.hp, artifact.maxHp >= 100 ? styles["hp--high"] : styles["hp--low"])}>
-                            {artifact.maxHp}
-                    </span>
-                </div>
-            ))}
+            {props.deck.map((artifact, index) => {
+                const [valueLeftTopStyles, valueRightTopStyles] = GameHelper.getStylesForCornerValues(styles, artifact.maxHp, artifact.skillCost, true);
+
+                return (
+                    <div
+                        key={index + "draft"} 
+                        onClick={() => props.onHandleCardClick({ id: artifact.artifactId, img: ARTIFACTS[artifact.artifactId].imgCardNoStats }, artifact)}
+                        className={clsx(artifactStyle(artifact.artifactId))}>
+                        <img
+                            src={ARTIFACTS[artifact.artifactId].imgBattle} 
+                            alt={ARTIFACTS[artifact.artifactId].name}
+                            
+                            title={ARTIFACTS[artifact.artifactId].name}
+                        />
+                        <span 
+                            className={clsx(valueLeftTopStyles)}>
+                                {artifact.maxHp}
+                        </span>
+                        <span 
+                            className={clsx(valueRightTopStyles)}>
+                                {artifact.skillCost}
+                        </span>
+                    </div>
+                )
+            })}
         </div>
     )
 }

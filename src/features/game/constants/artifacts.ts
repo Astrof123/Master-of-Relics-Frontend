@@ -1,10 +1,4 @@
-import { ARTIFACT, type Artifact, type ArtifactDataType } from "../types/game/artifact";
-import IntimidatorImgCard from "@assets/artifacts-card/Intimidator.svg";
-import ArcaneShieldImgCard from "@assets/artifacts-card/ArcaneShield.svg"
-import FrostBowImgCard from "@assets/artifacts-card/FrostBow.svg"
-import RegenerationPotionImgCard from "@assets/artifacts-card/RegenerationPotion.svg"
-import SwiftBootsImgCard from "@assets/artifacts-card/SwiftBoots.svg"
-
+import { ARTIFACT, type ArtifactDataType } from "../types/game/artifact";
 import IntimidatorImg from "@assets/artifacts-img/Intimidator.svg";
 import ArcaneShieldImg from "@assets/artifacts-img/ArcaneShield.svg"
 import FrostBowImg from "@assets/artifacts-img/FrostBow.svg"
@@ -17,51 +11,46 @@ import FrostBowImgBattle from "@assets/artifacts-battle/FrostBow.svg"
 import RegenerationPotionImgBattle from "@assets/artifacts-battle/RegenerationPotion.svg"
 import SwiftBootsImgBattle from "@assets/artifacts-battle/SwiftBoots.svg"
 
-import IntimidatorImgCardNoHp from "@assets/artifacts-card-without-hp/Intimidator.svg";
-import ArcaneShieldImgCardNoHp from "@assets/artifacts-card-without-hp/ArcaneShield.svg"
-import FrostBowImgCardNoHp from "@assets/artifacts-card-without-hp/FrostBow.svg"
-import RegenerationPotionImgCardNoHp from "@assets/artifacts-card-without-hp/RegenerationPotion.svg"
-import SwiftBootsImgCardNoHp from "@assets/artifacts-card-without-hp/SwiftBoots.svg"
+import IntimidatorImgCardNoHp from "@assets/artifacts-card-without-stats/Intimidator.svg";
+import ArcaneShieldImgCardNoHp from "@assets/artifacts-card-without-stats/ArcaneShield.svg"
+import FrostBowImgCardNoHp from "@assets/artifacts-card-without-stats/FrostBow.svg"
+import RegenerationPotionImgCardNoHp from "@assets/artifacts-card-without-stats/RegenerationPotion.svg"
+import SwiftBootsImgCardNoHp from "@assets/artifacts-card-without-stats/SwiftBoots.svg"
 
 export const ARTIFACTS: Record<string, ArtifactDataType> = {
     [ARTIFACT.INTIMIDATOR]: {
         id: ARTIFACT.INTIMIDATOR,
         name: "Intimidator",
-        imgCard: IntimidatorImgCard,
         img: IntimidatorImg,
         imgBattle: IntimidatorImgBattle,
-        imgCardNoHp: IntimidatorImgCardNoHp
+        imgCardNoStats: IntimidatorImgCardNoHp
     },
     [ARTIFACT.ARCANE_SHIELD]: {
         id: ARTIFACT.ARCANE_SHIELD,
         name: "Arcane Shield",
-        imgCard: ArcaneShieldImgCard,
         img: ArcaneShieldImg,
         imgBattle: ArcaneShieldImgBattle,
-        imgCardNoHp: ArcaneShieldImgCardNoHp
+        imgCardNoStats: ArcaneShieldImgCardNoHp
     },
     [ARTIFACT.FROST_BOW]: {
         id: ARTIFACT.FROST_BOW,
         name: "Frost Bow",
-        imgCard: FrostBowImgCard,
         img: FrostBowImg,
         imgBattle: FrostBowImgBattle,
-        imgCardNoHp: FrostBowImgCardNoHp
+        imgCardNoStats: FrostBowImgCardNoHp
     },
     [ARTIFACT.REGENERATION_POTION]: {
         id: ARTIFACT.REGENERATION_POTION,
         name: "Regeneration Potion",
-        imgCard: RegenerationPotionImgCard,
         img: RegenerationPotionImg,
         imgBattle: RegenerationPotionImgBattle,
-        imgCardNoHp: RegenerationPotionImgCardNoHp
+        imgCardNoStats: RegenerationPotionImgCardNoHp
     },
     [ARTIFACT.SWIFT_BOOTS]: {
         id: ARTIFACT.SWIFT_BOOTS,
         name: "Swift Boots",
-        imgCard: SwiftBootsImgCard,
         img: SwiftBootsImg,
         imgBattle: SwiftBootsImgBattle,
-        imgCardNoHp: SwiftBootsImgCardNoHp
+        imgCardNoStats: SwiftBootsImgCardNoHp
     }
 }

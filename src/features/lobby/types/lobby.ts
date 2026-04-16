@@ -11,6 +11,8 @@ export interface Lobby {
     name: string,
     players: Record<number, LobbyPlayer>,
     state: LobbyStateType,
+    code: string | null;
+    isPrivate: boolean;
     options: {
         mode: GameModeType
     }

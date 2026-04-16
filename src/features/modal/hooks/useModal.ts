@@ -1,12 +1,18 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import { openCardModal, closeModal } from '../store/modalSlice';
-import type { CardForView } from '@/features/game/types/card';
-import type { ModalType } from '../types/modal';
-import type { ModalBattleDetails, ModalDraftDetails } from '../types/details';
+import { openModal, closeModal } from '../store/modalSlice';
+import type { OpenModalData } from '../types/modal';
 
 export const useModal = () => {
     const dispatch = useAppDispatch();
-    const { isOpen, card, modalType, details } = useAppSelector(state => state.modal);
+    const { 
+        card, 
+        isOpen, 
+        modalType, 
+        details, 
+        valueLeftTop, 
+        valueRightTop,
+        isArtifact
+    } = useAppSelector(state => state.modal);
 
 
     return {
@@ -14,8 +20,11 @@ export const useModal = () => {
         modalType,
         isOpen,
         details,
-        openCardModal: (card: CardForView, modalType: ModalType, details: ModalDraftDetails | ModalBattleDetails | null) => {
-            dispatch(openCardModal({ card, modalType, details }));
+        valueLeftTop,
+        valueRightTop,
+        isArtifact,
+        openModal: (data: OpenModalData) => {
+            dispatch(openModal(data));
         },
         closeModal: () => dispatch(closeModal()),
     };

@@ -1,0 +1,320 @@
+.collection-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.collection-actions h2 {
+    color: #ffd7a5;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 8px 0;
+    text-shadow: 0 0 15px #aa7840;
+    font-family: 'Forum', serif;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #5d4a36;
+    padding-bottom: 16px;
+    position: relative;
+}
+
+.pick-button {
+    padding: 20px 32px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-family: 'Forum', serif;
+    box-shadow: 
+        0 6px 0 #2a1f18,
+        0 0 30px rgba(170, 120, 60, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стиль для disabled кнопки */
+.pick-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+    animation: none;
+    transform: none;
+    box-shadow: 
+        0 4px 0 #2a1f18,
+        0 0 15px rgba(170, 120, 60, 0.1);
+    border-color: #5d4a36;
+    color: #8b6f4c;
+}
+
+.pick-button:disabled::before {
+    filter: grayscale(100%);
+    animation: none;
+}
+
+.pick-button:disabled::after {
+    opacity: 0;
+    animation: none;
+}
+
+.pick-button:disabled:hover {
+    transform: none;
+    box-shadow: 
+        0 4px 0 #2a1f18,
+        0 0 15px rgba(170, 120, 60, 0.1);
+    border-color: #5d4a36;
+    color: #8b6f4c;
+}
+
+.pick-button:disabled:hover::before {
+    transform: none;
+    filter: grayscale(100%);
+}
+
+.pick-button:disabled:hover::after {
+    opacity: 0;
+}
+
+.pick-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(170, 120, 60, 0.3) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pick-button:hover {
+    transform: translateY(-4px);
+    border-color: #d49c5c;
+    box-shadow: 
+        0 8px 0 #2a1f18,
+        0 0 60px #d49c5c;
+    color: #ffffff;
+}
+
+.pick-button:hover::before {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px #ffd7a5);
+}
+
+.pick-button:hover::after {
+    opacity: 1;
+}
+
+.pick-button:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 0 #2a1f18,
+        0 0 50px #aa7840;
+}
+
+/* Анимация пульсации для привлечения внимания */
+@keyframes ritualPulse {
+    0% {
+        box-shadow: 
+            0 6px 0 #2a1f18,
+            0 0 30px rgba(170, 120, 60, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 6px 0 #2a1f18,
+            0 0 50px rgba(212, 156, 92, 0.5);
+    }
+    100% {
+        box-shadow: 
+            0 6px 0 #2a1f18,
+            0 0 30px rgba(170, 120, 60, 0.2);
+    }
+}
+
+.pick-button {
+    animation: ritualPulse 2s infinite;
+}
+
+/* Сообщение о недостатке средств */
+.insufficient-funds {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(139, 76, 76, 0.2);
+    border: 2px solid #8b4c4c;
+    border-radius: 4px;
+    color: #d5a8a8;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+
+.view-only-message {
+    padding: 40px 28px;
+    background: linear-gradient(145deg, #2f241b 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 8px;
+    text-align: center;
+    color: #b89a7a;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Forum', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    backdrop-filter: blur(4px);
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.8),
+        0 0 0 2px #8b6f4c inset;
+    position: relative;
+    overflow: hidden;
+}
+
+.view-only-message::before {
+    content: '✧';
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 50px;
+    color: #aa7840;
+    opacity: 0.1;
+    transform: rotate(-15deg);
+    text-shadow: 0 0 20px #d49c5c;
+}
+
+.view-only-message::after {
+    content: '✧';
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 50px;
+    color: #aa7840;
+    opacity: 0.1;
+    transform: rotate(15deg);
+    text-shadow: 0 0 20px #d49c5c;
+}
+
+.view-only-message span {
+    font-size: 64px;
+    filter: drop-shadow(0 0 20px #aa7840);
+    animation: emberGlow 3s infinite;
+}
+
+.view-only-message p {
+    margin: 0;
+    text-shadow: 0 2px 5px black;
+    letter-spacing: 1px;
+}
+
+.view-only-message p:last-child {
+    color: #8b6f4c;
+    font-size: 16px;
+    border-top: 1px solid #5d4a36;
+    padding-top: 12px;
+}
+
+@keyframes emberGlow {
+    0%, 100% {
+        opacity: 0.5;
+        filter: drop-shadow(0 0 10px #aa7840);
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 30px #d49c5c);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .collection-actions h2 {
+        font-size: 22px;
+    }
+    
+    .pick-button {
+        font-size: 20px;
+        padding: 18px 28px;
+        letter-spacing: 2px;
+    }
+    
+    .view-only-message {
+        font-size: 20px;
+        padding: 30px 20px;
+    }
+    
+    .view-only-message span {
+        font-size: 52px;
+    }
+    
+    .insufficient-funds {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .collection-actions h2 {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+    
+    .pick-button {
+        font-size: 16px;
+        padding: 14px 20px;
+        gap: 10px;
+    }
+    
+    .view-only-message {
+        font-size: 18px;
+        padding: 20px 16px;
+    }
+    
+    .view-only-message span {
+        font-size: 40px;
+    }
+    
+    .insufficient-funds {
+        font-size: 11px;
+        padding: 8px;
+    }
+}

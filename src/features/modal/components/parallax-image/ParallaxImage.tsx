@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import styles from './ParallaxImage.module.css';
+import { GameHelper } from '@/features/game/helpers/game-helper';
 
 interface ParallaxImageProps {
     src: string;
@@ -9,7 +10,9 @@ interface ParallaxImageProps {
     height?: number;
     intensity?: number;
     className?: string;
-    currentHp?: number;
+    valueLeftTop: number | null;
+    valueRightTop: number | null;
+    isArtifact: boolean;
 }
 
 interface RotateState {
@@ -22,7 +25,9 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
     width = 300,
     height = 400,
     intensity = 8,
-    currentHp = null
+    valueLeftTop,
+    valueRightTop,
+    isArtifact
 }) => {
     const [rotate, setRotate] = useState<RotateState>({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -74,6 +79,8 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
         };
     }, [isHovered, intensity]);
 
+    const [valueLeftTopStyles, valueRightTopStyles] = GameHelper.getStylesForCornerValues(styles, valueLeftTop, valueRightTop, isArtifact);
+
     return (
         <div className={clsx(styles.parallaxContainer)}>
             <div 
@@ -92,15 +99,26 @@ const ParallaxImage: React.FC<ParallaxImageProps> = ({
         }}
                 >
                     <div className={styles.imageWrapper}>
-                        {currentHp !== null && (
+                        {valueLeftTop !== null && (
                             <span 
-                                className={clsx(styles.hp, currentHp >= 100 ? styles["hp--high"] : styles["hp--low"])}
+                                className={clsx(valueLeftTopStyles)}
                                 style={{
                                     transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
                                     transition: 'transform 0.3s ease-out',
                                 }}
                             >
-                                {currentHp}
+                                {valueLeftTop}
+                            </span>
+                        )}
+                        {valueRightTop !== null && (
+                            <span 
+                                className={clsx(valueRightTopStyles)}
+                                style={{
+                                    transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+                                    transition: 'transform 0.3s ease-out',
+                                }}
+                            >
+                                {valueRightTop}
                             </span>
                         )}
                         <img 

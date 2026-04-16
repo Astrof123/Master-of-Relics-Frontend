@@ -168,21 +168,42 @@
     }
 }
 
-.hp {
+.value-left-top, .value-right-top {
     font-size: 16px;
     position: absolute;
     color: #ffffff;
     font-family: "Open Sans", sans-serif;
     -webkit-text-stroke: 1px black;
     font-weight: 800;
+    user-select: none;
 }
 
-.hp--high {
+.value-left-top--high {
     left: 12%;
     bottom: 18.5%;
 }
 
-.hp--low {
+.value-left-top--low {
     left: 15%;
     bottom: 18.5%;
+}
+
+.value-left-top--very-low {
+    left: 17%;
+    bottom: 18.5%;
+}
+
+.value-right-top--high {
+    right: 12%;
+    bottom: 15%;
+}
+
+.value-right-top--low {
+    right: 12.5%;
+    bottom: 15.5%;
+}
+
+.value-right-top--very-low {
+    right: 15.5%;
+    bottom: 15%;
 }

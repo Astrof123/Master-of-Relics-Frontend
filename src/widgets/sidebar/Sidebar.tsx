@@ -9,7 +9,7 @@ import Dagger from '@assets/icons/dagger.png';
 import Coin from '@assets/icons/coin.png';
 
 const Sidebar = () => {
-    const { user, handleMe } = useAuth();
+    const { user, handleMe, handleLogout } = useAuth();
     const isConnected = useSelector((state: RootState) => state.connectSocket.isConnected);
     const currentLobby = useSelector((state: RootState) => state.lobby.currentLobby)
     
@@ -17,10 +17,11 @@ const Sidebar = () => {
         handleMe();
     }, [])
 
-    // Функция для определения активности ссылки
     const getActiveClass = ({ isActive }: { isActive: boolean }) => {
         return isActive ? clsx(styles.active) : '';
     };
+
+
 
     return (
         <aside className={styles.sidebar}>
@@ -28,7 +29,7 @@ const Sidebar = () => {
                 <div className={styles['user-info']}>
                     <div className={styles["user-name-wrapper"]}>
                         <img className={styles["user-name-decoration"]} src={Dagger} alt="" />
-                        <span className={styles['user-name']}>{user?.nickname || 'Гость'}</span>
+                        <span className={styles['user-name']}>{user!.nickname.length > 20 ? user!.nickname.slice(0, 16) + "..." : user!.nickname}</span>
                     </div>
 
                     <span className={styles['user-gold']}>
@@ -45,12 +46,13 @@ const Sidebar = () => {
                         {isConnected ? '✅ Подключено' : '❌ Отключено'}
                     </span>
                 </div>
+                
             </div>
             <nav className={styles.nav}>
                 <NavLink 
                     to="/" 
                     className={getActiveClass}
-                    end // Добавляем end для точного совпадения с корневым путем
+                    end
                 >
                     Список лобби
                 </NavLink>
@@ -72,13 +74,6 @@ const Sidebar = () => {
                 )}
                 
                 <NavLink 
-                    to="/shop" 
-                    className={getActiveClass}
-                >
-                    Лавка артефактов
-                </NavLink>
-                
-                <NavLink 
                     to="/knowledge" 
                     className={getActiveClass}
                 >
@@ -91,6 +86,12 @@ const Sidebar = () => {
                 >
                     Коллекция
                 </NavLink>
+                <button
+                    onClick={handleLogout}
+                    className={styles.logout}
+                >
+                    Выйти из аккаунта
+                </button>
             </nav>
         </aside>
     );

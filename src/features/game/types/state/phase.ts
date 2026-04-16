@@ -7,3 +7,10 @@ export const PHASE  = {
 } as const;
 
 export type Phase  = typeof PHASE [keyof typeof PHASE];
+
+export const MINIPHASE  = {
+    MOVEMENT: 'movement',
+    BATTLE: 'battle'
+} as const;
+
+export type MiniPhase  = typeof MINIPHASE [keyof typeof MINIPHASE];

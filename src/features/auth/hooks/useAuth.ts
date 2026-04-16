@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { login, logout, me, register } from '../store/actions';
-import type { LoginCredentials, RegisterData } from '../types';
+import type { LoginCredentials, RegisterData } from '../types/responses';
 import { useCallback, useMemo } from 'react';
 
 

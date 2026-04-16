@@ -1,17 +1,21 @@
-import React from 'react';
 import { useLobbySocket } from '@/features/lobby/hooks/useLobbySocket';
 import { LOBBYSTATETYPE, type Lobby, type LobbyPlayer } from '@/features/lobby/types/lobby';
 import clsx from 'clsx';
 import styles from './LobbyList.module.css';
 import { useAppSelector } from '@/app/store';
 import TwoSwords from "@assets/icons/two-swords.png";
+import WaitImg from "@assets/icons/wait.png";
 
-const LobbyList: React.FC = () => {
+interface LobbyListProps {
+    searchText: string;
+}
+
+const LobbyList = (props: LobbyListProps) => {
     const user = useAppSelector((state) => state.auth.user);
     const isJoinedHall = useAppSelector((state) => state.lobby.isJoinedHall);
     const lobbies = useAppSelector((state) => state.lobby.lobbies);
-
-    const { joinLobby, deleteLobby } = useLobbySocket();
+    
+    const { joinLobby } = useLobbySocket();
 
     const getStateClass = (state: string) => {
         switch(state.toLowerCase()) {
@@ -25,7 +29,7 @@ const LobbyList: React.FC = () => {
     };
 
     const renderButtons = (lobby: Lobby) => {
-        if (user === null) return null;
+        if (user === null || lobby.isPrivate) return null;
 
         const playerLobby = lobby.players[user.id];
         const canJoin = !playerLobby && Object.keys(lobby.players).length < 2;
@@ -37,9 +41,6 @@ const LobbyList: React.FC = () => {
                         Присоединиться
                     </button>
                 )}
-                <button onClick={() => deleteLobby(lobby.id)} type="button">
-                    Удалить
-                </button>
             </div>
         );
     };
@@ -55,24 +56,31 @@ const LobbyList: React.FC = () => {
 
                     {lobbies.length > 0 ? (
                         <div className={styles["lobbies-list"]}>
-                            {lobbies.map((lobby: Lobby) => (
-                                <div key={lobby.id} className={styles["lobby-card"]}>
+                            {lobbies.filter(l => l.name.includes(props.searchText)).map((lobby: Lobby) => (
+                                <div key={lobby.id} className={clsx(styles["lobby-card"], lobby.isPrivate ? styles["lobby-card--private"] : null)}>
                                     <div className={styles["lobby-header"]}>
                                         <span className={styles["lobby-name"]}>{lobby.name}</span>
-                                        <span className={clsx(styles["lobby-state"], getStateClass(lobby.state))}>
-                                            {lobby.state === LOBBYSTATETYPE.WAITING ? 'Ожидание' : 
-                                             lobby.state === LOBBYSTATETYPE.PLAYING ? 'В игре' : lobby.state}
-                                        </span>
+                                        <div className={styles["lobby-info"]}>
+                                            {lobby.isPrivate && (
+                                                <span className={styles["private-text"]}>Приватное</span>
+                                            )}
+                                            <span className={clsx(styles["lobby-state"], getStateClass(lobby.state))}>
+                                                {lobby.state === LOBBYSTATETYPE.WAITING ? 'Ожидание' : 
+                                                lobby.state === LOBBYSTATETYPE.PLAYING ? 'В игре' : lobby.state}
+                                            </span>
+                                        </div>
                                     </div>
 
                                     <div className={styles["players-list"]}>
                                         <strong>Игроки ({Object.keys(lobby.players).length}/2):</strong>
                                         <div>
                                             {Object.values(lobby.players).map((player: LobbyPlayer) => (
-                                                <span key={player.id} className={styles["player-item"]}>
-                                                    {player.nickname}
-                                                    <span>{player.isReady ? "✅" : "⏳"}</span>
-                                                </span>
+                                                <div className={styles["player-item"]} key={player.id}>
+                                                    <span className={styles["player-item-nickname"]}>
+                                                        {player.nickname}
+                                                    </span>
+                                                    <img className={styles["player-item-icon"]} src={player.isReady ? TwoSwords : WaitImg} />                                                
+                                                </div>
                                             ))}
                                         </div>
                                     </div>

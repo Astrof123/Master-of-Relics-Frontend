@@ -11,13 +11,20 @@ import { EFFECTS } from "@/features/game/constants/effects";
 import movePointsImg from "@assets/icons/move_points.jpg";
 import type { GameForClient } from "@/features/game/types/state/game-for-client";
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
+import { useCallback } from "react";
+import { useModal } from "@/features/modal/hooks/useModal";
+import { MODALTYPE, type OpenModalData } from "@/features/modal/types/modal";
+import { MINIPHASE } from "@/features/game/types/state/phase";
+import type { ToggleReadyMovementData } from "@/features/action/types/action-evens-data";
 
 interface PlayerPanelProps {
     isYour: boolean;
 }
 
 const PlayerPanel = (props: PlayerPanelProps) => {
-    const { endTurn, endRound } = useGameSocket();
+    const { endTurn, endRound, toggleReadyMovement } = useGameSocket();
+    const { openModal } = useModal();
+    const isChoice = useAppSelector((state) => state.choice.isChoice);
 
     let playerState;
     const gameState = useAppSelector(state => state.game.gameState) as GameForClient;
@@ -41,7 +48,7 @@ const PlayerPanel = (props: PlayerPanelProps) => {
         turnStyles.push(styles["turn--enemy"])
     }
 
-    if (gameState.currentTurn === playerState?.id) {
+    if (gameState.currentTurn === playerState?.id && gameState.miniPhase !== MINIPHASE.MOVEMENT) {
         containerStyles.push(styles["container--turn"]);
     }
 
@@ -60,17 +67,48 @@ const PlayerPanel = (props: PlayerPanelProps) => {
         endRound(gameState.id)
     }
 
+    const handleToggleReadyMovement = () => {
+        const data: ToggleReadyMovementData = {
+            gameId: gameState.id,
+            artifactsWithNewPosition: gameState.player.temporaryArtifacts
+        }
+        toggleReadyMovement(data)
+    }
+
+    const handleSpellBookClick = useCallback(() => {
+        if (isChoice) {
+            return;
+        }
+
+        const data: OpenModalData = {
+            details: null,
+            modalType: MODALTYPE.SPELL_BOOK,
+            valueLeftTop: null,
+            valueRightTop: null,
+            isArtifact: true
+        }
+
+        openModal(data);
+    }, [openModal]);
+
     return (
         <div className={clsx(containerStyles)}>
-            {gameState.currentTurn === playerState?.id && (
+            {gameState.currentTurn === playerState?.id && gameState.miniPhase !== MINIPHASE.MOVEMENT && (
                 <div className={clsx(turnStyles)}>
                     Ходит...
                 </div>
             )}
             {playerState?.isReady && (
-                <div className={clsx(turnStyles, styles.round)}>
-                    Закончил раунд
-                </div>
+                gameState.miniPhase !== MINIPHASE.MOVEMENT ? (
+                    <div className={clsx(turnStyles, styles.round)}>
+                        Закончил раунд
+                    </div>
+                ) : (
+                    <div className={clsx(turnStyles, styles.round)}>
+                        Готов
+                    </div>
+                )
+
             )}
             <div className={clsx(styles["buffs"])}>
                 <div title="Очки действий" className={clsx(styles["buff-wrapper"])}>
@@ -117,24 +155,39 @@ const PlayerPanel = (props: PlayerPanelProps) => {
             </div>
             {props.isYour && (
                 <div className={clsx(styles["player-buttons"])}>
-                    <div className={clsx(styles.spellbook)} title="Книга заклинаний">
+                    <div  onClick={handleSpellBookClick} className={clsx(styles.spellbook, isChoice ? styles["spellbook--disabled"] : null)} title="Книга заклинаний">
                         <img src={spellBook} alt="Spellbook" />
                     </div>
                     <div className={clsx(styles["end-buttons"])}>
-                        <button
-                            disabled={gameState.currentTurn === playerState?.id ? false : true}
-                            onClick={handleEndRound}
-                            className={clsx(styles["end-round"])}
-                        >
-                            Закончить раунд
-                        </button>
-                        <button
-                            disabled={gameState.currentTurn === playerState?.id ? false : true}
-                            onClick={handleEndTurn} 
-                            className={clsx(styles["end-turn"])}
-                        >
-                            Закончить ход
-                        </button>                
+                        {gameState.miniPhase === MINIPHASE.MOVEMENT ? (
+                                <button
+                                    onClick={handleToggleReadyMovement} 
+                                    className={clsx(styles["end-round"])}
+                                >
+                                    Поменять готовность
+                                </button>     
+                        ) : (
+                            <>
+                                <button
+                                    disabled={gameState.currentTurn === playerState?.id && !isChoice ? false : true}
+                                    onClick={handleEndRound}
+                                    className={clsx(styles["end-round"])}
+                                >
+                                    Закончить раунд
+                                </button>
+                                <button
+                                    disabled={
+                                        gameState.currentTurn === playerState?.id && !isChoice
+                                        ? false
+                                        : true}
+                                    onClick={handleEndTurn} 
+                                    className={clsx(styles["end-turn"])}
+                                >
+                                    Закончить ход
+                                </button>      
+                            </>
+                        )}
+          
                     </div>                
                 </div>
             )}        

@@ -6,6 +6,7 @@ interface ChoiceState {
     isChoice: boolean;
     possibleTargets: string[][],
     selectedTargets: string[][],
+    countTargetAny: number;
     countTargetAllies: number;
     countTargetEnemies: number;
     typeAction: "extra_action" | "skill" | "spell" | "face" | null;
@@ -17,6 +18,7 @@ const initialState: ChoiceState = {
     isChoice: false,
     possibleTargets: [[], []],
     selectedTargets: [[], []],
+    countTargetAny: 0,
     countTargetAllies: 0,
     countTargetEnemies: 0,
     typeAction: null,
@@ -31,6 +33,7 @@ const choiceSlice = createSlice({
             state.attackerArtifactId = action.payload.attackerArtifactId
             state.isChoice = action.payload.isChoice;
             state.possibleTargets = action.payload.possibleTargets;
+            state.countTargetAny = action.payload.countTargetAny;
             state.countTargetAllies = action.payload.countTargetAllies;
             state.countTargetEnemies = action.payload.countTargetEnemies;
             state.typeAction = action.payload.typeAction;
@@ -41,6 +44,7 @@ const choiceSlice = createSlice({
             state.isChoice = initialState.isChoice;
             state.possibleTargets = initialState.possibleTargets;
             state.selectedTargets = initialState.selectedTargets;
+            state.countTargetAny = initialState.countTargetAny;
             state.countTargetAllies = initialState.countTargetAllies;
             state.countTargetEnemies = initialState.countTargetEnemies;
             state.typeAction = initialState.typeAction;

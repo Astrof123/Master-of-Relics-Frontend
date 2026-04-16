@@ -2,7 +2,7 @@
     cursor: pointer;
     position: relative;
     user-select: none;
-    transition: all 0.2s ease;
+    /* transition: all 0.2s ease; */
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
     border-radius: 12px;
     overflow: visible;
@@ -43,6 +43,14 @@
         0 10px 20px rgba(0, 0, 0, 0.5);
     transition: all 0.2s ease;
     display: block;
+}
+
+.artifact-img--breaken {
+    filter: grayscale(0.2) brightness(0.5) contrast(0.8);
+}
+
+.artifact-img--breaken:hover {
+    filter: grayscale(0.7) brightness(0.6);
 }
 
 .artifact:hover .artifact-img {
@@ -108,6 +116,13 @@
     text-shadow: 0 0 10px #ff6b4a;
 }
 
+.state--breaken {
+    background: rgba(51, 33, 30, 0.9);
+    border-color: #ff6b4a;
+    color: #ffb0a0;
+    text-shadow: 0 0 10px #ff6b4a;
+}
+
 .state--rooted {
     background: rgba(30, 45, 60, 0.9);
     border-color: #4aa0ff;
@@ -115,7 +130,7 @@
     text-shadow: 0 0 10px #4aa0ff;
 }
 
-.hp {
+.value-left-top, .value-right-top {
     font-size: 16px;
     position: absolute;
     color: #ffffff;
@@ -124,15 +139,36 @@
     font-weight: 800;
 }
 
-.hp--high {
+.value-left-top--high {
     left: 12.3%;
     bottom: 18.5%;
 }
 
-.hp--low {
+.value-left-top--low {
     left: 15.5%;
     bottom: 18.5%;
 }
+
+.value-left-top--very-low {
+    left: 18%;
+    bottom: 18.5%;
+}
+
+.value-right-top--high {
+    right: 12%;
+    bottom: 18.5%;
+}
+
+.value-right-top--low {
+    right: 13%;
+    bottom: 15.5%;
+}
+
+.value-right-top--very-low {
+    right: 16%;
+    bottom: 16%;
+}
+
 
 /* Стили для выбора целей */
 .artifact--choice {
@@ -389,3 +425,4 @@
         left: 13%;
     }
 }
+

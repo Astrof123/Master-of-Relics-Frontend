@@ -96,6 +96,9 @@
     letter-spacing: 1px;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .user-name-decoration {
@@ -117,6 +120,7 @@
     flex-direction: row;
     align-items: center;
     gap: 12px;
+    width: 100%;
 }
 
 .user-gold {
@@ -127,7 +131,7 @@
     align-items: center;
     gap: 12px;
     background: #2f241b;
-    padding: 14px 18px;
+    padding: 8px 12px;
     border-radius: 4px;
     border: 2px solid #b89a7a;
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(170, 120, 60, 0.2);
@@ -260,6 +264,77 @@
 
 /* Активная ссылка с эффектом магического камня */
 .nav a.active {
+    background: #33221a;
+    border-color: #b89a7a;
+    box-shadow: 
+        inset 0 2px 10px rgba(170, 120, 60, 0.2),
+        0 0 25px rgba(170, 120, 60, 0.4);
+    color: #ffd7a5;
+}
+
+.logout {
+    color: #e8d9c0;
+    text-decoration: none;
+    padding: 16px 24px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    border: 2px solid transparent;
+    background: #241e1b;
+    background: linear-gradient(145deg, #2f2824 0%, #1e1815 100%);
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 3px black;
+}
+
+.logout:hover {
+    background: #332b26;
+    border-color: #8b6f4c;
+    transform: translateX(8px);
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+    color: #ffd7a5;
+}
+
+.logout::before {
+    content: '❖';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aa7840;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    text-shadow: 0 0 10px #d49c5c;
+}
+
+.logout:hover::before {
+    opacity: 1;
+}
+
+.logout::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23aa7840'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    background-size: contain;
+    opacity: 0.3;
+    filter: drop-shadow(0 0 5px #aa7840);
+    transition: opacity 0.2s ease;
+}
+
+.logout:hover::after {
+    opacity: 0.9;
+}
+
+.logout.active {
     background: #33221a;
     border-color: #b89a7a;
     box-shadow: 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { AuthResponse, LoginCredentials, RegisterData, User } from '../types';
+import type { AuthResponse, LoginCredentials, RegisterData, User } from '../types/responses';
 import { api } from '@/shared/api/client';
 
 

@@ -6,6 +6,8 @@ import gameReducer from '@/features/game/store/gameSlice';
 import modalReducer from '@/features/modal/store/modalSlice';
 import choiceReducer from '@/features/game/store/choiceSlice';
 import animationReducer from '@/features/game/store/animationSlice';
+import collectionReducer from '@/features/collection/store/collectionSlice';
+import controlReducer from '@/features/game/store/controlSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
@@ -16,7 +18,9 @@ export const store = configureStore({
         game: gameReducer,
         modal: modalReducer,
         choice: choiceReducer,
-        animation: animationReducer
+        animation: animationReducer,
+        collection: collectionReducer,
+        control: controlReducer
     },
 });
 

@@ -6,14 +6,17 @@ import ReactDOM from 'react-dom';
 import ParallaxImage from "../parallax-image/ParallaxImage";
 import Cross from "@assets/icons/x-button.png";
 
-interface CardModelProps {
+interface CardModalProps {
     card: CardForView | null;
+    isArtifact: boolean;
+    valueLeftTop: number | null;
+    valueRightTop: number | null;
     isOpen: boolean;
     onClose: () => void;
     actions: React.ReactNode;
 }
 
-const CardModel = (props: CardModelProps) => {
+const CardModal = (props: CardModalProps) => {
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -50,8 +53,11 @@ const CardModel = (props: CardModelProps) => {
                         </button>
                         
                         <ParallaxImage
+                            valueLeftTop={props.valueLeftTop}
+                            valueRightTop={props.valueRightTop}
                             width={330}
                             height={440}
+                            isArtifact={props.isArtifact}
                             src={props.card.img} 
                             className={styles["card-img"]}
                         />
@@ -73,4 +79,4 @@ const CardModel = (props: CardModelProps) => {
     );
 }
 
-export default CardModel;
+export default CardModal;

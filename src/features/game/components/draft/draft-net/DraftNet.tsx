@@ -5,7 +5,8 @@ import type { ArtifactGameState } from "../../../types/state/game";
 import type { EnemyArtifact } from "../../../types/state/game-for-client";
 import { useModal } from "@/features/modal/hooks/useModal";
 import type { CardForView } from "@/features/game/types/card";
-import { MODALTYPE } from "@/features/modal/types/modal";
+import { MODALTYPE, type OpenModalData } from "@/features/modal/types/modal";
+import type { ModalShowDetails } from "@/features/modal/types/details";
 
 interface DraftNetProps {
     playerArtifacts: Record<string, ArtifactGameState>;
@@ -13,10 +14,22 @@ interface DraftNetProps {
 }
 
 const DraftNet = (props: DraftNetProps) => {
-    const { openCardModal } = useModal();
+    const { openModal } = useModal();
 
-    const handleShowCard = (card: CardForView) => {
-        openCardModal(card, MODALTYPE.SHOW, null)
+    const handleShowCard = (card: CardForView, cardInfo: ArtifactGameState | EnemyArtifact) => {
+        const details: ModalShowDetails = {
+            cardForView: card
+        }
+        
+        const data: OpenModalData = {
+            details: details,
+            modalType: MODALTYPE.SHOW,
+            valueLeftTop: cardInfo.maxHp,
+            valueRightTop: cardInfo.skillCost,
+            isArtifact: true
+        }
+
+        openModal(data)
     }
 
     const net = [];
@@ -26,7 +39,7 @@ const DraftNet = (props: DraftNetProps) => {
     for (let i = 0; i < 7; i++) {
         if (Object.keys(props.playerArtifacts).length > i) {
             net.push(
-                [artifacts1[i].artifactId, artifacts2[i].artifactId]
+                [artifacts1[i], artifacts2[i]]
             )
         }
         else {
@@ -47,19 +60,19 @@ const DraftNet = (props: DraftNetProps) => {
                     <div className={clsx(styles["row-drafted-artifacts"])} key={`row-${index}-drafted`}>
                         <div className={clsx(styles["drafted-artifact"])}>
                             <img 
-                                src={ARTIFACTS[row[0]].img} 
-                                alt={ARTIFACTS[row[0]].name}
-                                onClick={() => handleShowCard({ id: row[0], img: ARTIFACTS[row[0]].imgCard })}
-                                title={ARTIFACTS[row[0]].name}
+                                src={ARTIFACTS[row[0].artifactId].img} 
+                                alt={ARTIFACTS[row[0].artifactId].name}
+                                onClick={() => handleShowCard({ id: row[0].artifactId, img: ARTIFACTS[row[0].artifactId].imgCardNoStats }, row[0])}
+                                title={ARTIFACTS[row[0].artifactId].name}
                             />
                         </div>
                         <span>{index + 1}</span>
                         <div className={clsx(styles["drafted-artifact"])}>
                             <img 
-                                src={ARTIFACTS[row[1]].img} 
-                                alt={ARTIFACTS[row[1]].name}
-                                onClick={() => handleShowCard({ id: row[1], img: ARTIFACTS[row[1]].imgCard })}
-                                title={ARTIFACTS[row[1]].name}
+                                src={ARTIFACTS[row[1].artifactId].img} 
+                                alt={ARTIFACTS[row[1].artifactId].name}
+                                onClick={() => handleShowCard({ id: row[1].artifactId, img: ARTIFACTS[row[1].artifactId].imgCardNoStats }, row[1])}
+                                title={ARTIFACTS[row[1].artifactId].name}
                             />
                         </div>
                     </div>

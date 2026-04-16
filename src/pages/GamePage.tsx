@@ -39,6 +39,7 @@ function GamePage() {
             {gameState.phase === PHASE.BATTLE && (
                 <GameScreen />
             )}
+
         </div>
     );
 }

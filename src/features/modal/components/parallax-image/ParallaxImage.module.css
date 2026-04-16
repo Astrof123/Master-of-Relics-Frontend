@@ -77,26 +77,59 @@
     backface-visibility: hidden;
     transform: translateZ(0);
 }
-.hp {
-    font-size: 28px;
+.value-left-top, .value-right-top {
+    font-size: 26px;
     position: absolute;
     color: #ffffff;
     font-family: "Open Sans", sans-serif;
     -webkit-text-stroke: 1.5px black;
     font-weight: 800;
     z-index: 20;
-    left: 10%;
-    top: 8%;
     transform-style: preserve-3d;
     will-change: transform;
 }
 
-.hp--high {
+.value-left-top--high {
     left: 10%;
     top: 7.5%;
 }
 
-.hp--low {
+.value-left-top--low {
     left: 12.5%;
     top: 7.5%;
+}
+
+.value-left-top--very-low {
+    left: 14.5%;
+    top: 7.5%;
+}
+
+.value-left-top--high--spell {
+    left: 10%;
+    top: 7.5%;
+}
+
+.value-left-top--low--spell {
+    left: 12.5%;
+    top: 9%;
+}
+
+.value-left-top--very-low--spell {
+    left: 14.5%;
+    top: 9%;
+}
+
+.value-right-top--high {
+    right: 10%;
+    top: 8%;
+}
+
+.value-right-top--low {
+    right: 13%;
+    top: 8.5%;
+}
+
+.value-right-top--very-low {
+    right: 15%;
+    top: 8.5%;
 }

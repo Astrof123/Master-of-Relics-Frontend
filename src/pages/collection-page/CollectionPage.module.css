@@ -1,0 +1,265 @@
+.collection {
+    padding: 20px;
+    padding-top: 0px;
+}
+
+.title {
+    font-size: 28px;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    text-shadow: 0 0 15px #aa7840;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* Фильтры */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.filter {
+    padding: 10px 20px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 4px;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter:hover {
+    border-color: #aa7840;
+    color: #ffd7a5;
+}
+
+.filter.active {
+    background: #3f3329;
+    border-color: #d49c5c;
+    color: #ffd7a5;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+/* Сетка */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Карточка */
+.card {
+    position: relative;
+    border-radius: 17px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 3px solid #5d4a36;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.card:hover .image {
+    border-color: #aa7840;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+/* Оверлей с информацией */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: linear-gradient(0deg, rgba(26, 21, 24, 0.95) 0%, transparent);
+    border-radius: 0 0 12px 12px;
+}
+
+/* Карточки которые есть в коллекции - нормальные */
+.card .image {
+    filter: brightness(1);
+    border-color: #5d4a36;
+}
+
+/* Карточки которых нет - сильно отличаются */
+.card--locked {
+    filter: grayscale(0.8) brightness(0.5) contrast(0.8);
+    border-color: #8b4c4c;
+}
+
+.card--locked:hover {
+    filter: grayscale(0.7) brightness(0.6);
+    border-color: #aa7840;
+}
+
+
+
+.price {
+    color: #d49c5c;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .filter {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .overlay {
+        padding: 8px;
+    }
+    
+    .locked-badge {
+        font-size: 10px;
+    }
+}
+
+.price-icon {
+    width: 26px;
+}
+
+.price-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    background: #3f3329;
+    padding: 6px 16px;
+    border-radius: 4px;
+    border: 2px solid #d49c5c;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+}
+
+.card--locked:hover .price-wrapper {
+    border-color: #ffd7a5;
+    box-shadow: 0 0 15px rgba(212, 156, 92, 0.4);
+}
+
+.price-icon {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 5px #d49c5c);
+    animation: coinGlow 2s ease-in-out infinite;
+}
+
+
+/* Оверлей для неоткрытых карт */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(0deg, rgba(26, 21, 24, 0.95) 0%, transparent);
+    border-radius: 0 0 12px 12px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Анимация монетки */
+@keyframes coinGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px #d49c5c);
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px #ffd7a5);
+        transform: scale(1.05);
+    }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .price-wrapper {
+        padding: 4px 12px;
+        gap: 6px;
+    }
+    
+    .price-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .price {
+        font-size: 16px;
+    }
+    
+    .card--locked::before {
+        font-size: 18px;
+        top: 8px;
+        right: 8px;
+        padding: 3px 6px;
+    }
+    
+    .overlay {
+        padding: 10px;
+    }
+}
+
+.value-left-top, .value-right-top {
+    font-size: 18px;
+    position: absolute;
+    color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    -webkit-text-stroke: 1.2px black;
+    font-weight: 800;
+}
+
+.value-left-top--high {
+    left: 11%;
+    top: 8.3%;
+}
+
+.value-left-top--low {
+    left: 13.7%;
+    top: 8.5%;
+}
+
+.value-left-top--very-low {
+    left: 14.5%;
+    top: 7.5%;
+}
+
+.value-right-top--high {
+    right: 10%;
+    top: 8%;
+}
+
+.value-right-top--low {
+    right: 14%;
+    top: 9.2%;
+}
+
+.value-right-top--very-low {
+    right: 15.7%;
+    top: 9.2%;
+}

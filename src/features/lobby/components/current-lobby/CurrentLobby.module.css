@@ -1,36 +1,11 @@
 .container {
     padding: 0;
     font-family: 'Forum', 'Forum', serif;
-    max-width: 800px;
     margin: 0 auto;
     position: relative;
+    max-width: 900px;
 }
 
-/* .container::before {
-    content: '⚔️';
-    position: absolute;
-    top: -30px;
-    left: -30px;
-    font-size: 60px;
-    color: #aa7840;
-    opacity: 0.2;
-    transform: rotate(-15deg);
-    filter: drop-shadow(0 0 20px #d49c5c);
-    animation: emberGlow 3s infinite;
-}
-
-.container::after {
-    content: '🗡️';
-    position: absolute;
-    bottom: -30px;
-    right: -30px;
-    font-size: 60px;
-    color: #aa7840;
-    opacity: 0.2;
-    transform: rotate(15deg);
-    filter: drop-shadow(0 0 20px #d49c5c);
-    animation: emberGlow 3s infinite 1.5s;
-} */
 
 .title {
     font-size: 32px;
@@ -80,62 +55,6 @@
     background: linear-gradient(90deg, #aa7840 0%, transparent 100%);
 }
 
-.lobby-card {
-    padding: 36px;
-    background: #1a1518;
-    background: linear-gradient(145deg, #2a2220 0%, #151013 100%);
-    border-radius: 12px;
-    border: 3px solid #5d4a36;
-    box-shadow: 
-        0 25px 40px rgba(0, 0, 0, 0.9),
-        0 0 0 2px #8b6f4c inset,
-        0 0 50px rgba(0, 0, 0, 0.8);
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    position: relative;
-    margin-top: 24px;
-    backdrop-filter: blur(5px);
-}
-
-.lobby-card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 10%;
-    width: 80%;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        #aa7840, 
-        #d49c5c,
-        #aa7840, 
-        transparent
-    );
-    animation: emberGlow 3s infinite;
-}
-
-.lobby-card::after {
-    content: 'ТЕКУЩЕЕ ЛОББИ';
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2f241b;
-    color: #ffd7a5;
-    padding: 8px 32px;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 600;
-    border: 2px solid #8b6f4c;
-    box-shadow: 
-        0 0 25px rgba(170, 120, 60, 0.4),
-        inset 0 1px 5px rgba(255, 215, 140, 0.2);
-    letter-spacing: 2px;
-    white-space: nowrap;
-    font-family: 'Forum', serif;
-    text-shadow: 0 0 10px #aa7840;
-}
 
 .lobby-header {
     display: flex;
@@ -145,28 +64,17 @@
     gap: 20px;
     margin-top: 8px;
     padding: 0 8px 20px 8px;
-    border-bottom: 2px solid #5d4a36;
     position: relative;
 }
 
-.lobby-header::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 20%;
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        transparent, 
-        #aa7840, 
-        transparent
-    );
-    opacity: 0.5;
-}
 
 .lobby-name {
+    width: 45%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 24px;
     color: #ffd7a5;
     letter-spacing: 1px;
     text-shadow: 0 0 15px #aa7840;
@@ -216,7 +124,7 @@
 .players-list {
     margin-top: 8px;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
     border-radius: 8px;
     border: 2px dashed #5d4a36;
     position: relative;
@@ -269,11 +177,10 @@
         inset 0 2px 8px rgba(0, 0, 0, 0.8),
         0 4px 0 #2a1f18;
     transition: all 0.2s ease;
-    /* min-width: 180px; */
-    /* justify-content: space-between; */
     font-family: 'Forum', serif;
     position: relative;
     overflow: hidden;
+    max-width: 45%;
 }
 
 
@@ -300,21 +207,13 @@
         0 0 20px rgba(170, 120, 60, 0.4);
 }
 
-.player-item.host::after {
-    content: '👑';
-    margin-left: 8px;
-    font-size: 20x;
-    filter: drop-shadow(0 0 8px #d49c5c);
-    animation: emberGlow 2s infinite;
-}
-
 .lobby-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
     margin-top: 16px;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
     border-radius: 8px;
     border: 2px solid #5d4a36;
     justify-content: center;
@@ -466,4 +365,240 @@
 
 .green-button {
 
+}
+
+.lobby-private {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid;
+    font-family: 'Forum', serif;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.lobby-private--yes {
+    background: #33211e;
+    color: #d5a8a8;
+    border-color: #8b4c4c;
+    box-shadow: 0 0 20px rgba(170, 60, 60, 0.4);
+}
+
+.lobby-private--no {
+    background: #1e332c;
+    color: #a8d5c5;
+    border-color: #3d7a63;
+    box-shadow: 0 0 20px rgba(60, 170, 120, 0.4);
+}
+
+.lobby-info {
+    display: flex;
+    flex-direction: row;
+    gap: 12px
+}
+
+.player-item-nickname {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.code-container {
+    padding: 16px 20px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #8b6f4c;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+}
+
+
+.code-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.code-icon {
+    width: 24px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.code-label {
+    flex: 1;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.code-visibility-btn {
+    background: #2f241b;
+    border: 1px solid #5d4a36;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    color: #b89a7a;
+}
+
+.code-visibility-btn:hover {
+    border-color: #aa7840;
+    transform: scale(1.05);
+    color: #ffd7a5;
+    box-shadow: 0 0 10px rgba(170, 120, 60, 0.3);
+}
+
+.code-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.code-value {
+    flex: 1;
+    padding: 8px 12px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    font-family: 'Forum', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-align: center;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.code-copy-btn {
+    padding: 10px 24px;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
+    border-radius: 6px;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.code-copy-btn:hover {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 0 0 20px #aa7840;
+    color: #ffffff;
+}
+
+.code-copy-btn:active {
+    transform: translateY(2px);
+}
+
+.code-copy-btn--success {
+    background: #1e332c;
+    border-color: #3d7a63;
+    color: #a8d5c5;
+}
+
+.code-copy-btn--success:hover {
+    background: #1e332c;
+    border-color: #3d7a63;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Адаптив для блока с кодом */
+@media (max-width: 768px) {
+    .code-container {
+        padding: 12px 16px;
+    }
+    
+    .code-value {
+        font-size: 22px;
+        letter-spacing: 4px;
+        padding: 10px 16px;
+    }
+    
+    .code-copy-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .code-label {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .code-wrapper {
+        flex-direction: column;
+    }
+    
+    .code-value {
+        font-size: 20px;
+        letter-spacing: 3px;
+        width: 100%;
+    }
+    
+    .code-copy-btn {
+        width: 100%;
+    }
+    
+    .code-header {
+        flex-wrap: wrap;
+    }
+}
+
+.lobby-card {
+    padding: 24px;
+    background: #1a1518;
+    background: linear-gradient(145deg, #2a2220 0%, #151013 100%);
+    border-radius: 12px;
+    border: 3px solid #5d4a36;
+    box-shadow: 
+        0 25px 40px rgba(0, 0, 0, 0.9),
+        0 0 0 2px #8b6f4c inset,
+        0 0 50px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    backdrop-filter: blur(5px);
+}
+
+.lobby-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite;
+}
+
+
+.player-item-icon {
+    width: 24px;
 }

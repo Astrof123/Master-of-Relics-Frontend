@@ -1,15 +1,15 @@
 import { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import socketService from '../../socket/socket';
-import { useAppSelector } from '@app/store';
+import { useAppDispatch, useAppSelector } from '@app/store';
 import {
     connectionEstablished,
     connectionLost,
     setError,
 } from '../store/connectSlice';
+import { refreshToken } from '@/features/auth/store/actions';
 
 export const useConnectSocket = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const accessToken = useAppSelector((state) => state.auth.accessToken);
     
 
@@ -50,6 +50,12 @@ export const useConnectSocket = () => {
         const url = 'ws://localhost:3000';
 
         if (accessToken) {
+            socketService.setTokenRefreshCallback(async () => {
+                const data = await dispatch(refreshToken()).unwrap();
+                return data.accessToken;
+            });
+
+
             socketService.connect({
                 url,
                 auth: {

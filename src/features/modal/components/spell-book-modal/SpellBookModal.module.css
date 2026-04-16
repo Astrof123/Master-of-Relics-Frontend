@@ -1,0 +1,684 @@
+/* Оверлей */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 40px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(12px);
+    }
+}
+
+/* Контент */
+.modal-content {
+    max-width: 1200px;
+    width: 100%;
+    animation: scaleIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-body {
+    background: transparent;
+}
+
+/* Книга заклинаний */
+.spellbook-wrapper {
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg, #2a2018 0%, #1a1510 100%);
+    border-radius: 16px;
+    border: 3px solid #8b6f4c;
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.9),
+        0 0 0 2px #5d4a36 inset,
+        0 0 70px rgba(0, 0, 0, 0.9);
+    position: relative;
+}
+
+/* Декоративный переплет сверху */
+.spellbook-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    animation: emberGlow 3s infinite;
+    z-index: 5;
+}
+
+/* Левая страница (шапка) */
+.spellbook-left {
+    border-radius: 16px 16px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #2a2018 0%, #1f1813 100%);
+    position: relative;
+    border-bottom: 2px solid #5d4a36;
+    flex-shrink: 0;
+}
+
+.spellbook-left::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #aa7840, 
+        #d49c5c,
+        #aa7840, 
+        transparent
+    );
+    opacity: 0.5;
+}
+
+.spellbook-img {
+    width: 40px;
+}
+
+.spellbook-right {
+    flex: 1;
+    border-radius: 0px 0px 16px 16px;
+    padding: 24px 28px;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #1f1813 0%, #17120e 100%);
+}
+
+/* Стилизация скроллбара для правой страницы */
+.spellbook-right::-webkit-scrollbar {
+    width: 8px;
+}
+
+.spellbook-right::-webkit-scrollbar-track {
+    background: #2f241b;
+    border-radius: 4px;
+    margin: 8px 0;
+}
+
+.spellbook-right::-webkit-scrollbar-thumb {
+    background: #aa7840;
+    border-radius: 4px;
+    border: 1px solid #8b6f4c;
+}
+
+.spellbook-right::-webkit-scrollbar-thumb:hover {
+    background: #d49c5c;
+}
+
+/* Заголовок книги */
+.spellbook-header {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.spellbook-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 10px #aa7840);
+    animation: bookFloat 3s ease-in-out infinite;
+}
+
+.spellbook-title {
+    color: #ffd7a5;
+    font-size: 22px;
+    font-family: 'Forum', serif;
+    text-shadow: 0 0 15px #aa7840;
+    letter-spacing: 3px;
+}
+
+/* Школы магии - горизонтальные кнопки */
+.schools-container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.school-btn {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.school-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 140, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.school-btn:hover::before {
+    left: 100%;
+}
+
+.school-btn:hover {
+    transform: translateY(-2px);
+    border-color: #aa7840;
+}
+
+.school-btn--active {
+    border-color: #d49c5c;
+    background: #3f3329;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.school-btn--active .school-icon {
+    animation: schoolPulse 2s ease-in-out infinite;
+}
+
+.school-btn--light.school-btn--active {
+    border-color: #FFE098;
+    box-shadow: 0 0 20px rgba(145, 139, 66, 0.3);
+}
+
+
+
+.school-btn--dark.school-btn--active {
+    border-color: #9b59b6;
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+}
+
+.school-btn--destruction.school-btn--active {
+    border-color: #e74c3c;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
+}
+
+.school-icon {
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.school-name {
+    color: #e8d9c0;
+    font-family: 'Forum', serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Сетка заклинаний */
+.spells-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Карточка заклинания */
+.spell-card {
+    position: relative;
+    display: flex;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.spell-card:hover {
+    transform: translateY(-6px);
+}
+
+.spell-image {
+    height: 320px;
+    width: auto;
+    display: block;
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.spell-card:hover .spell-image {
+    border-color: #aa7840;
+    box-shadow: 0 0 25px rgba(170, 120, 60, 0.4);
+}
+
+/* Пустое состояние */
+.empty-spells {
+    width: 100%;
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 2px dashed #5d4a36;
+}
+
+.empty-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-spells p {
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+/* Кнопка закрытия */
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b4c4c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 0 #3d2a26;
+    z-index: 20;
+}
+
+.close-button:hover {
+    border-color: #c45a5a;
+    box-shadow: 0 6px 0 #3d2a26, 0 0 20px #b84c4c;
+    transform: scale(1.05);
+}
+
+.close-button img {
+    width: 20px;
+    filter: brightness(0.8);
+}
+
+
+/* Анимации */
+@keyframes bookFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes schoolPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px #aa7840);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px #d49c5c);
+    }
+}
+
+@keyframes emberGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .spellbook-wrapper {
+        height: 550px;
+    }
+    
+    .spellbook-left {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 20px;
+    }
+    
+    .spellbook-left::after {
+        left: 10%;
+        right: 10%;
+    }
+    
+    .schools-container {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .spell-image {
+        height: 260px;
+    }
+    
+    .spells-grid {
+        gap: 16px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 20px;
+    }
+    
+    .spellbook-wrapper {
+        height: 500px;
+    }
+    
+    .spellbook-left {
+        padding: 10px 16px;
+    }
+    
+    .spellbook-right {
+        padding: 16px;
+    }
+    
+    .spellbook-title {
+        font-size: 18px;
+    }
+    
+    .spellbook-icon {
+        font-size: 24px;
+    }
+    
+    .school-btn {
+        padding: 6px 12px;
+    }
+    
+    .school-icon {
+        font-size: 14px;
+    }
+    
+    .school-name {
+        font-size: 12px;
+    }
+    
+    .spell-image {
+        height: 220px;
+    }
+    
+    .close-button {
+        width: 36px;
+        height: 36px;
+        top: -10px;
+        right: -10px;
+    }
+    
+    .close-button img {
+        width: 16px;
+    }
+    
+    .corner-tl,
+    .corner-tr,
+    .corner-bl,
+    .corner-br {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spellbook-wrapper {
+        height: 450px;
+    }
+    
+    .schools-container {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .school-btn {
+        padding: 4px 10px;
+    }
+    
+    .school-name {
+        font-size: 11px;
+    }
+    
+    .spell-image {
+        height: 180px;
+    }
+    
+    .spells-grid {
+        gap: 12px;
+    }
+    
+    .empty-spells {
+        padding: 30px 16px;
+    }
+    
+    .empty-icon {
+        font-size: 48px;
+    }
+    
+    .empty-spells p {
+        font-size: 14px;
+    }
+}
+
+
+.school-btn--dark {
+    background: linear-gradient(135deg, #a774ffb3, #430572bc);
+}
+
+.school-btn--dark span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.school-btn--light {
+    background: linear-gradient(135deg, #ffe098b3, #ff96b5aa);
+}
+
+.school-btn--light span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.school-btn--destruction {
+    background: linear-gradient(135deg, #e54747c8, #a83832c3);
+    
+}
+
+.school-btn--destruction span {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.spellbook-right--animating {
+    animation: pageFlipOut 0.15s ease-in forwards;
+}
+
+.spellbook-right--animating .spells-grid--exit {
+    animation: contentFadeOut 0.15s ease-out forwards;
+}
+
+.spellbook-right:not(.spellbook-right--animating) {
+    animation: pageFlipIn 0.25s ease-out;
+}
+
+@keyframes pageFlipOut {
+    0% {
+        opacity: 1;
+        transform: rotateX(0deg);
+        transform-origin: top;
+    }
+    100% {
+        opacity: 0;
+        transform: rotateX(-15deg);
+        transform-origin: top;
+    }
+}
+
+@keyframes pageFlipIn {
+    0% {
+        opacity: 0;
+        transform: rotateX(15deg);
+        transform-origin: top;
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+        transform-origin: top;
+    }
+}
+
+@keyframes contentFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* Анимация появления новых заклинаний */
+.spell-card {
+    animation: spellCardEnter 0.3s ease-out backwards;
+}
+
+@keyframes spellCardEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Анимация выхода карточек */
+.spell-card--exit {
+    animation: spellCardExit 0.15s ease-in forwards !important;
+}
+
+@keyframes spellCardExit {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.9);
+    }
+}
+
+.spell-cost {
+    font-size: 20px;
+    position: absolute;
+    color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    -webkit-text-stroke: 1.2px black;
+    font-weight: 800;
+    z-index: 20;
+    left: 13%;
+    top: 9%;
+}
+
+.spell-cost--high {
+    left: 12.75%;
+    top: 9%;
+}
+
+.spell-cost--low {
+    left: 15%;
+    top: 9%;
+}
+
+
+.spell-card--unavailable {
+    filter: grayscale(0.4) brightness(0.7);
+}
+
+.spell-card--unavailable:hover {
+    transform: none;
+}
+
+.spell-card--unavailable .spell-image {
+    border-color: #5d4a36;
+}
+
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: linear-gradient(0deg, rgba(26, 21, 24, 0.95) 0%, transparent);
+    border-radius: 0 0 12px 12px;
+}
+
+.cooldown-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(47, 47, 47, 0.5);
+    padding: 6px 16px;
+    border-radius: 4px;
+    /* border: 2px solid #d49c5c; */
+    border-color: #ff6b4a;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+    text-shadow: 0 0 10px #ff6b4a;
+}
+
+
+.cooldown {
+    color: #ffb0a0;
+    font-weight: 700;
+    font-size: 20px;
+}

@@ -37,6 +37,7 @@ class SocketService {
     
     private statusCallbacks: ((status: SocketStatus) => void)[] = [];
     private errorCallbacks: ((error: Error) => void)[] = [];
+    private tokenRefreshCallback: (() => Promise<string>) | null = null;
     
     private constructor() {}
     
@@ -76,9 +77,10 @@ class SocketService {
         }
     }
     
-    /**
-     * Настройка обработчиков событий Socket.io
-     */
+    setTokenRefreshCallback(callback: () => Promise<string>): void {
+        this.tokenRefreshCallback = callback;
+    }
+
     private setupEventListeners(): void {
         if (!this.socket) return;
         
@@ -127,19 +129,48 @@ class SocketService {
      */
     private handleConnectError(error: Error): void {
         console.error('Socket connection error:', error);
-        this.updateStatus(SOCKETSTATUS.ERROR);
-        this.notifyError(error);
+        
+        // Проверяем, связана ли ошибка с токеном
+        if (error.message.includes('Невалидный токен')) {
+            this.handleTokenRefresh();
+        } else {
+            this.updateStatus(SOCKETSTATUS.ERROR);
+            this.notifyError(error);
+        }
     }
     
-    /**
-     * Обработка общей ошибки
-     */
+    private async handleTokenRefresh(): Promise<void> {
+        if (!this.tokenRefreshCallback) {
+            console.error('No token refresh callback provided');
+            this.updateStatus(SOCKETSTATUS.ERROR);
+            this.notifyError(new Error('Unable to refresh token: no callback provided'));
+            return;
+        }
+        
+        try {
+            // Получаем новый токен
+            const newToken = await this.tokenRefreshCallback();
+            
+            // Обновляем токен в сокете
+            if (this.socket) {
+                this.socket.auth = { 
+                    ...this.socket.auth, 
+                    token: newToken 
+                };
+                
+                this.socket.connect();
+            }
+        } catch (refreshError) {
+            console.error('Failed to refresh token:', refreshError);
+            this.updateStatus(SOCKETSTATUS.ERROR);
+            this.notifyError(new Error('Token refresh failed'));
+        }
+    }
+
     private handleError(error: any): void {
         console.error('Socket error:', error);
         this.notifyError(new Error(error.message || 'Unknown socket error'));
-    }
-    
-
+    }    
     
     emit<E extends keyof ClientToServerEvents>(
         event: E,
@@ -170,9 +201,7 @@ class SocketService {
         this.socket.on(event, callback as any);
     }
     
-    /**
-     * Отписка от события
-     */
+
     off<E extends keyof ServerToClientEvents>(
         event: E,
         callback?: ServerToClientEvents[E]
@@ -180,15 +209,13 @@ class SocketService {
         if (!this.socket) return;
         
         if (callback) {
-        this.socket.off(event, callback as any);
-        } else {
-        this.socket.off(event);
+            this.socket.off(event, callback as any);
+        } 
+        else {
+            this.socket.off(event);
         }
     }
     
-    /**
-     * Отключение от сервера
-     */
     disconnect(): void {
         if (this.socket) {
         this.socket.disconnect();
@@ -198,39 +225,26 @@ class SocketService {
         }
     }
     
-    /**
-     * Обновление статуса и уведомление подписчиков
-     */
     private updateStatus(status: SocketStatus): void {
         this.status = status;
         this.statusCallbacks.forEach(callback => callback(status));
     }
     
-    /**
-     * Уведомление об ошибке
-     */
     private notifyError(error: Error): void {
         this.errorCallbacks.forEach(callback => callback(error));
     }
     
-    /**
-     * Подписка на изменение статуса
-     */
     onStatusChange(callback: (status: SocketStatus) => void): () => void {
         this.statusCallbacks.push(callback);
-        
-        // Возвращаем функцию для отписки
+
         return () => {
-        const index = this.statusCallbacks.indexOf(callback);
-        if (index > -1) {
-            this.statusCallbacks.splice(index, 1);
-        }
+            const index = this.statusCallbacks.indexOf(callback);
+            if (index > -1) {
+                this.statusCallbacks.splice(index, 1);
+            }
         };
     }
     
-    /**
-     * Подписка на ошибки
-     */
     onError(callback: (error: Error) => void): () => void {
         this.errorCallbacks.push(callback);
         
@@ -241,9 +255,7 @@ class SocketService {
         }
         };
     }
-    
-    // =============== Геттеры ===============
-    
+
     getStatus(): SocketStatus {
         return this.status;
     }
@@ -269,5 +281,4 @@ class SocketService {
     }
 }
 
-// Экспортируем Singleton экземпляр
 export default SocketService.getInstance();

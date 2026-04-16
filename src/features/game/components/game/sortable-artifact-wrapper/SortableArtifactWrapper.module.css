@@ -1,0 +1,22 @@
+.artifact-wrapper {
+    display: inline-block;
+    will-change: transform;
+}
+
+.artifact-wrapper--movable {
+    animation: gentlePulse 1.5s ease-in-out infinite;
+    cursor: grab;
+}
+
+
+
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+    }
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 15px 25px rgba(170, 120, 60, 0.4));
+    }
+}

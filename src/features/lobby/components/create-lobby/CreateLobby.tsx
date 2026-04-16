@@ -2,6 +2,7 @@ import { useState, type ChangeEvent } from "react";
 import type { Lobby } from "../../types/lobby";
 import styles from "./CreateLobby.module.css";
 import clsx from "clsx";
+import LockImg from "@assets/icons/lock.png";
 
 interface CreateLobbyProps {
     onCreateLobby: (data: Partial<Lobby>) => void
@@ -9,16 +10,17 @@ interface CreateLobbyProps {
 
 const CreateLobby = (props: CreateLobbyProps) => {
     const [formData, setFormData] = useState({
-        name: ""
+        name: "",
+        isPrivate: false
     })
 
     const [touched, setTouched] = useState(false);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
+        const { name, value, type, checked } = event.target;
         setFormData(prev => ({
             ...prev, 
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }))
     }
 
@@ -36,11 +38,13 @@ const CreateLobby = (props: CreateLobbyProps) => {
         }
 
         props.onCreateLobby({
-            name: formData.name
+            name: formData.name,
+            isPrivate: formData.isPrivate
         });
         setFormData(prev => ({
             ...prev, 
-            ["name"]: ""
+            name: "",
+            isPrivate: false
         }))
         setTouched(false);
     }
@@ -83,6 +87,28 @@ const CreateLobby = (props: CreateLobbyProps) => {
                         Слишком длинное имя (максимум 20 символов)
                     </div>
                 )}
+
+                <label className={clsx(styles.label, styles["checkbox-label"])}>
+                    <div className={styles["checkbox-label-inner-wrapper"]}>
+                        <span className={styles["checkbox-text"]}>
+                            <img className={styles["checkbox-icon"]} src={LockImg} alt="" />
+                            Приватное лобби: 
+                        </span>
+                        <input 
+                            type="checkbox" 
+                            name="isPrivate"
+                            checked={formData.isPrivate}
+                            onChange={handleChange}
+                            className={styles["checkbox-input"]}
+                        />
+                        <span className={styles["checkbox-custom"]}></span>
+                    </div>
+                        <span className={styles["checkbox-description"]}>
+                            {formData.isPrivate ? 
+                                "Лобби будет скрыто от общего списка. Доступ только по коду или по приглашению." : 
+                                "Лобби будет видно всем игрокам."}
+                        </span>
+                </label>
 
                 <button className={styles.button} type="submit">
                     Создать лобби

@@ -3,7 +3,8 @@ import type { EffectType } from "../game/effects";
 import type { Face } from "../game/face";
 import type { RESOURCE } from "../game/resource";
 import type { Skill } from "../game/skill";
-import type { Phase } from "./phase";
+import type { Spell, SPELLTYPE } from "../game/spell";
+import type { MiniPhase, Phase } from "./phase";
 
 export const CONNECTIONGAME  = {
     ONLINE: 'online',
@@ -26,7 +27,8 @@ export const ARTIFACT_STATE  = {
     READY_TO_USE: 'ready_to_use',
     COOLDOWN: 'cooldown',
     STUNNED: 'stunned',
-    ROOTED: 'rooted'
+    ROOTED: 'rooted',
+    BREAKEN: "breaken"
 } as const;
 
 export type ArtifactState  = typeof ARTIFACT_STATE [keyof typeof ARTIFACT_STATE];
@@ -36,6 +38,7 @@ export interface SkillStateType {
     id: Skill;
     description: string;
     possibleTargets: string[][];
+    countAnyTarget: number;
     countTargetEnemy: number;
     countTargetAllies: number;
 }
@@ -61,6 +64,7 @@ export interface ArtifactGameState {
     position: number;
     line: Line;
     effects: EffectType[];
+    skillCost: number | null;
     availableActions: ArtifactAvailableActions
 }
 
@@ -84,9 +88,9 @@ export interface Player {
     },
     artifacts: Record<string, ArtifactGameState>;
     spells: {
-        light: SpellGameState[],
-        dark: SpellGameState[],
-        destruction: SpellGameState[]
+        [SPELLTYPE.LIGHT]: Record<Spell, SpellGameState>,
+        [SPELLTYPE.DARK]: Record<Spell, SpellGameState>,
+        [SPELLTYPE.DESTRUCTION]: Record<Spell, SpellGameState>
     };
     effects: EffectType[];
     isReady: boolean;
@@ -95,7 +99,7 @@ export interface Player {
         pickedArtifact: string|null;
         deck: DeckArtifact[];
     },
-    availableActions: {}
+    temporaryArtifacts: Record<string, ArtifactGameState>;
 }
 
 
@@ -106,14 +110,31 @@ export interface Game {
     currentTurn: number;
     logs: string[];
     players: Record<number, Player>;
+    end: EndState | null;
+    miniPhase: MiniPhase;
+    constants: ConstantsGameState;
+}
+
+export interface ConstantsGameState {
+    maxCountArtifactsOnLine: number;
+}
+
+
+export interface EndState {
+    winner: number | null;
+    winner_prize: number;
+    loser_prize: number;
+    draw_prize: number;
 }
 
 export interface SpellGameState {
     id: string;
+    description: string;
+    cost: number;
     cooldown: boolean;
     canUse: boolean;
-    countTarget: number;
     possibleTargets: string[][];
+    countAnyTarget: number;
     countTargetEnemy: number;
     countTargetAllies: number;
 }
