@@ -1,5 +1,5 @@
 .form {
-    margin: 24px auto;
+    margin: 0px auto;
     padding: 40px;
     background: #1a1518;
     background: linear-gradient(145deg, #2a2220 0%, #151013 100%);
@@ -10,7 +10,7 @@
         0 0 0 2px #8b6f4c inset,
         0 0 50px rgba(0, 0, 0, 0.8);
     position: relative;
-    max-width: 600px;
+    max-width: 800px;
     backdrop-filter: blur(5px);
     overflow: hidden;
 }
@@ -53,7 +53,7 @@
 
 .label {
     display: block;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     font-weight: 600;
     color: #b89a7a;
     font-size: 16px;
@@ -327,4 +327,177 @@
     display: flex;
     flex-direction: row;
     gap: 12px;
+}
+
+/* Секция таймеров */
+.timers-section {
+    margin: 20px 0 24px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 2px solid #5d4a36;
+    animation: fadeIn 0.3s ease;
+}
+
+.timers-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #5d4a36;
+}
+
+.timers-icon {
+    font-size: 20px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.timers-title {
+    font-size: 16px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+}
+
+/* Группа таймера */
+.timer-group {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.timer-group:hover {
+    background: rgba(0, 0, 0, 0.35);
+    border-left: 3px solid #aa7840;
+    padding-left: 13px;
+}
+
+.timer-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.timer-label-text {
+    font-size: 17px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #b89a7a;
+}
+
+.timer-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 4px;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+.timer-input-wrapper:focus-within {
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.timer-input {
+    width: 70px;
+    background: transparent;
+    border: none;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+}
+
+.timer-input::-webkit-inner-spin-button,
+.timer-input::-webkit-outer-spin-button {
+    opacity: 0.5;
+    background: #8b6f4c;
+}
+
+.timer-unit {
+    font-size: 12px;
+    font-family: 'Forum', serif;
+    color: #8b6f4c;
+    font-weight: 600;
+}
+
+.timer-hint {
+    font-size: 14   px;
+    font-family: 'Forum', serif;
+    color: #8b6f4c;
+    font-style: italic;
+    margin-top: 6px;
+    padding-left: 8px;
+    border-left: 2px solid #5d4a36;
+}
+
+/* Адаптивность для таймеров */
+@media (max-width: 768px) {
+    .timers-section {
+        padding: 12px;
+    }
+    
+    .timer-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .timer-input-wrapper {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .timer-input {
+        width: 100px;
+    }
+    
+    .timer-group {
+        padding: 10px;
+    }
+    
+    .timers-header {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timers-section {
+        padding: 10px;
+    }
+    
+    .timer-input {
+        width: 80px;
+        font-size: 14px;
+    }
+    
+    .timer-label-text {
+        font-size: 13px;
+    }
+    
+    .timer-hint {
+        font-size: 10px;
+    }
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

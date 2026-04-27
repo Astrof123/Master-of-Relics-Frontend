@@ -7,7 +7,7 @@ export const SocketLayout = () => {
 
     useEffect(() => {
         connect();
-    }, [connect]);
+    }, [connect, ]);
 
     return (
         <>

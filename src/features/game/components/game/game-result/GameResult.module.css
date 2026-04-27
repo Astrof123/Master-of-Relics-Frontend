@@ -1,0 +1,274 @@
+.endgame-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+.endgame-result {
+    box-sizing: border-box;
+    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 12px;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 800;
+    border-radius: 8px;
+    animation: resultAppear 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.endgame-result::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: borderGlow 2s infinite;
+}
+
+.endgame-result::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: borderGlow 2s infinite 1s;
+}
+
+.result-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 10px currentColor);
+    animation: iconBounce 0.6s ease-out;
+}
+
+.result-text {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px currentColor;
+}
+
+/* Победа */
+.result-win {
+    color: #ffd700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.result-win .result-icon {
+    animation: winFloat 2s ease-in-out infinite;
+}
+
+/* Поражение */
+.result-lose {
+    color: #8b4c4c;
+    background: linear-gradient(135deg, rgba(139, 76, 76, 0.15), rgba(139, 76, 76, 0.05));
+    border: 2px solid #8b4c4c;
+    box-shadow: 0 0 30px rgba(139, 76, 76, 0.3);
+}
+
+.result-lose .result-icon {
+    animation: loseShake 3s ease-in-out infinite;
+}
+
+/* Ничья */
+.result-draw {
+    color: #b89a7a;
+    background: linear-gradient(135deg, rgba(184, 154, 122, 0.15), rgba(184, 154, 122, 0.05));
+    border: 2px solid #b89a7a;
+    box-shadow: 0 0 30px rgba(184, 154, 122, 0.3);
+}
+
+.result-draw .result-icon {
+    animation: drawPulse 2s ease-in-out infinite;
+}
+
+/* Стили для награды */
+.endgame-prize {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 30px;
+    animation: prizeAppear 0.6s ease-out 0.2s both;
+    backdrop-filter: blur(4px);
+    height: 90%;
+}
+
+.prize-icon {
+    font-size: 24px;
+    animation: coinSpin 1s ease-out 0.5s both;
+}
+
+.prize-text {
+    letter-spacing: 1px;
+}
+
+.prize-win {
+    color: #ffd700;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ffd700;
+}
+
+.prize-lose {
+    color: #b89a7a;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #b89a7a;
+}
+
+.prize-draw {
+    color: #8b6f4c;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #8b6f4c;
+}
+
+/* Анимации */
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes prizeAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes iconBounce {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes coinSpin {
+    from {
+        transform: rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(360deg) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes winFloat {
+    0%, 100% {
+        transform: translateY(0);
+        filter: drop-shadow(0 0 5px #ffd700);
+    }
+    50% {
+        transform: translateY(-5px);
+        filter: drop-shadow(0 0 15px #ffd700);
+    }
+}
+
+@keyframes loseShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes drawPulse {
+    0%, 100% {
+        opacity: 0.7;
+        filter: drop-shadow(0 0 5px #b89a7a);
+    }
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 15px #b89a7a);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .endgame-result {
+        font-size: 22px;
+        padding: 8px 24px;
+    }
+    
+    .result-icon {
+        font-size: 28px;
+    }
+    
+    .endgame-prize {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+    
+    .prize-icon {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .endgame-result {
+        font-size: 18px;
+        padding: 6px 16px;
+    }
+    
+    .result-icon {
+        font-size: 24px;
+    }
+    
+    .endgame-prize {
+        font-size: 14px;
+        padding: 6px 16px;
+    }
+    
+    .prize-icon {
+        font-size: 18px;
+    }
+}
+
+.prize-img {
+    width: 32px;
+}

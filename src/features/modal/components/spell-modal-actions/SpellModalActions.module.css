@@ -145,28 +145,6 @@
     background: linear-gradient(145deg, #7a3d6a, #241f1b);
 }
 
-.action--skill {
-    background: linear-gradient(145deg, #FF2600, #241f1b);
-    border-color: #d49c5c;
-    color: #ffd7a5;
-}
-
-.action--skill:hover:not(:disabled) {
-    border-color: #ffd7a5;
-    box-shadow: 0 7px 0 #1a1518, 0 0 30px #d49c5c;
-}
-
-.action--extra {
-    background: linear-gradient(145deg, #FFB948, #241f1b);
-    border-color: #ffd7a5;
-}
-/* 
-.action--extra:hover:not(:disabled) {
-    border-color: #7ed957;
-    box-shadow: 0 7px 0 #1a1518, 0 0 30px #3da075;
-    color: #e0fff0;
-} */
-
 @keyframes rotate {
     from {
         transform: rotate(0deg);

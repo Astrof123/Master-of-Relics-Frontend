@@ -1,16 +1,31 @@
-import { useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/app/store";
 import styles from "./DraftedArtifacts.module.css"
 import { useNavigate } from "react-router-dom";
 import DraftNet from "../draft-net/DraftNet";
 import { useDraftSocket } from "@/features/game/hooks/useDraftSocket";
+import { useGameSocket } from "@/features/game/hooks/useGameSocket";
+import { GameTimer } from "../../common/game-timer/GameTimer";
+import { setLeaveLobby } from "@/features/lobby/store/lobbySlice";
 
 function DraftedArtifacts() {
     const gameState = useAppSelector((state) => state.game.gameState);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { toggleReadyDraft } = useDraftSocket();
+    const { giveUp } = useGameSocket();
 
     if (gameState === null) {
         return null;
+    }
+
+    const handleGiveUp = async () => {
+        if (gameState.end !== null) {
+            console.log("Игра окончена")
+            return;
+        }
+
+        await giveUp(gameState.id);
+
     }
 
     const endChoice = async () => {
@@ -18,7 +33,20 @@ function DraftedArtifacts() {
             console.log("Вы не выбрали артефакт!")
             return;
         }
+
+        if (gameState.end !== null) {
+            console.log("Игра окончена")
+            return;
+        }
+
         await toggleReadyDraft(gameState.id);
+    }
+
+    const exitMenuClick = () => {
+        if (gameState.end) {
+            dispatch(setLeaveLobby())
+            navigate("/")
+        }
     }
 
     return (
@@ -26,9 +54,16 @@ function DraftedArtifacts() {
             <button 
                 className={styles["exit-button"]} 
                 type="button" 
-                onClick={() => navigate("/")}
+                onClick={exitMenuClick}
             >
-                Покинуть
+                Выйти в главное меню
+            </button>
+            <button 
+                className={styles["exit-button"]} 
+                type="button" 
+                onClick={handleGiveUp}
+            >
+                Сдаться
             </button>
             <div className={styles["net-container"]}>
                 <DraftNet 
@@ -51,7 +86,7 @@ function DraftedArtifacts() {
                         onClick={endChoice} 
                         type="button"
                     >
-                        Выбрать
+                        Закончить выбор
                     </button>
                 )}
             </div>

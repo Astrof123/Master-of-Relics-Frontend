@@ -203,16 +203,11 @@
 }
 
 
-/* .players-status {
-    user-select: none;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 16px;
-    border: 2px solid #5d4a36;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-} */
+.players-status {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
 
 
 .players-status p {

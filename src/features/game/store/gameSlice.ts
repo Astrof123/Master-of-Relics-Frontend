@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { LINE, type ArtifactGameState, type ConnectionGame } from '../types/state/game';
 import type { GameForClient } from '../types/state/game-for-client';
+import type { TimerSyncData } from '../types/socket/game-socket-data-responses';
 
 interface ReorderArtifactsPayload {
     front: string[];
@@ -13,20 +14,30 @@ interface GameSocketState {
     gameState: GameForClient|null;
     playersOnline: Record<string, ConnectionGame>;
     isMoving: boolean;
-    movedArtifact: string | null
+    movedArtifact: string | null;
+    timer: TimerSyncData | null;
 }
 
 const initialState: GameSocketState = {
     gameState: null,
     playersOnline: {},
     isMoving: false,
-    movedArtifact: null
+    movedArtifact: null,
+    timer: null
 };
 
 const gameSocketSlice = createSlice({
     name: 'gameSocket',
     initialState,
     reducers: {
+        setTimer: (state, action: PayloadAction<TimerSyncData | null>) => {
+            state.timer = action.payload;
+        },
+        setTimerRemaining: (state, action: PayloadAction<number>) => {
+            if (state.timer) {
+                state.timer.remaining = action.payload;
+            }
+        },
         setGameState: (state, action: PayloadAction<GameForClient>) => {
             state.gameState = action.payload;
             console.log(action.payload)
@@ -102,7 +113,9 @@ export const {
     reorderArtifacts,
     changeLine,
     activateMoving,
-    deactivateMoving
+    deactivateMoving,
+    setTimer,
+    setTimerRemaining
 } = gameSocketSlice.actions;
 
 export default gameSocketSlice.reducer;

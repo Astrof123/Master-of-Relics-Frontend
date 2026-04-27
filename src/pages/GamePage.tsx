@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/app/store";
 import DraftScreen from "@/features/game/components/draft/draft-screen/DraftScreen";
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
 import { useGameSocketProvider } from "@/features/game/hooks/useGameSocketProvider";
@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import clsx from "clsx";
 import { PHASE } from "@/features/game/types/state/phase";
 import GameScreen from "@/features/game/components/game/game-screen/GameScreen";
+import { TimerService } from "@/features/game/helpers/timerHelper";
 
 
 function GamePage() {
@@ -14,6 +15,11 @@ function GamePage() {
     const gameState = useAppSelector((state) => state.game.gameState);
     const {} = useGameSocketProvider();
     const isConnected = useAppSelector((state) => state.connectSocket.isConnected)
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        TimerService.getInstance().init(dispatch);
+    }, [dispatch]);
 
     const { 
         joinGame
@@ -39,7 +45,7 @@ function GamePage() {
             {gameState.phase === PHASE.BATTLE && (
                 <GameScreen />
             )}
-
+            
         </div>
     );
 }

@@ -9,6 +9,7 @@ interface AuthState {
     accessToken: string | null;
     isLoading: boolean;
     error: string | null;
+	// isLogout: boolean;
 }
 
 
@@ -17,6 +18,7 @@ const initialState: AuthState = {
     accessToken: null,
     isLoading: false,
     error: null,
+	// isLogout: false,
 };
 
 
@@ -51,7 +53,6 @@ const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
   				state.error = action.payload as string || 'Не удалось зарегистрироваться';
-				console.log(state.error);
 			})
 			.addCase(refreshToken.pending, (state) => {
 				state.isLoading = true;
@@ -74,6 +75,8 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.accessToken = null;
 				state.user = null;
+				// state.isLogout
+				
 			})
 			.addCase(logout.rejected, (state, action) => {
 				state.isLoading = false;
@@ -89,7 +92,7 @@ const authSlice = createSlice({
 			})
 			.addCase(me.rejected, (state, action) => {
 				state.isLoading = false;
-  				state.error = action.payload as string || 'Не удалось выйти из системы';
+  				state.error = action.payload as string || 'Не удалось получить данные о себе';
 			})
 	},
 });

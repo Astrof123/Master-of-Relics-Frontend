@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { AuthResponse, LoginCredentials, RegisterData, User } from '../types/responses';
 import { api } from '@/shared/api/client';
-
+import socketService from '../../socket/socket';
 
 const AUTH_ENDPOINTS = {
     LOGIN: "/auth/login",
@@ -56,6 +56,8 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 			withAuth: true,
 			retryOnUnauthorized: true
 		});
+
+		socketService.disconnect();
 
 		return response.data;
 	}

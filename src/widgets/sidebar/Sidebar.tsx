@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import styles from './Sidebar.module.css';
-import { NavLink } from 'react-router-dom'; // Изменено с Link на NavLink
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import type { RootState } from '@/app/store';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,7 @@ import Dagger from '@assets/icons/dagger.png';
 import Coin from '@assets/icons/coin.png';
 
 const Sidebar = () => {
-    const { user, handleMe, handleLogout } = useAuth();
+    const { user, handleMe } = useAuth();
     const isConnected = useSelector((state: RootState) => state.connectSocket.isConnected);
     const currentLobby = useSelector((state: RootState) => state.lobby.currentLobby)
     
@@ -21,15 +21,15 @@ const Sidebar = () => {
         return isActive ? clsx(styles.active) : '';
     };
 
-
-
     return (
         <aside className={styles.sidebar}>
             <div className={styles.user}>
                 <div className={styles['user-info']}>
                     <div className={styles["user-name-wrapper"]}>
                         <img className={styles["user-name-decoration"]} src={Dagger} alt="" />
-                        <span className={styles['user-name']}>{user!.nickname.length > 20 ? user!.nickname.slice(0, 16) + "..." : user!.nickname}</span>
+                        {user && (
+                            <span className={styles['user-name']}>{user.nickname.length > 20 ? user.nickname.slice(0, 16) + "..." : user!.nickname}</span>
+                        )}
                     </div>
 
                     <span className={styles['user-gold']}>
@@ -86,12 +86,12 @@ const Sidebar = () => {
                 >
                     Коллекция
                 </NavLink>
-                <button
-                    onClick={handleLogout}
-                    className={styles.logout}
+                <NavLink 
+                    to={`/profile/${user?.id}`}
+                    className={getActiveClass}
                 >
-                    Выйти из аккаунта
-                </button>
+                    Профиль
+                </NavLink>
             </nav>
         </aside>
     );

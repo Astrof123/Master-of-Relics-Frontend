@@ -104,7 +104,7 @@
 }
 
 .card--locked:hover {
-    filter: grayscale(0.7) brightness(0.6);
+    /* filter: grayscale(0.7) brightness(0.6); */
     border-color: #aa7840;
 }
 

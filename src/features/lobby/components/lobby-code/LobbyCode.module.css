@@ -1,0 +1,157 @@
+.code-container {
+    padding: 16px 20px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #8b6f4c;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+    width: 40%;
+}
+
+
+.code-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.code-icon {
+    width: 24px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.code-label {
+    flex: 1;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.code-visibility-btn {
+    background: #2f241b;
+    border: 1px solid #5d4a36;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    color: #b89a7a;
+}
+
+.code-visibility-btn:hover {
+    border-color: #aa7840;
+    transform: scale(1.05);
+    color: #ffd7a5;
+    box-shadow: 0 0 10px rgba(170, 120, 60, 0.3);
+}
+
+.code-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.code-value {
+    flex: 1;
+    padding: 8px 12px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    font-family: 'Forum', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-align: center;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.code-copy-btn {
+    padding: 10px 24px;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
+    border-radius: 6px;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.code-copy-btn:hover {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 0 0 20px #aa7840;
+    color: #ffffff;
+}
+
+.code-copy-btn:active {
+    transform: translateY(2px);
+}
+
+.code-copy-btn--success {
+    background: #1e332c;
+    border-color: #3d7a63;
+    color: #a8d5c5;
+}
+
+.code-copy-btn--success:hover {
+    background: #1e332c;
+    border-color: #3d7a63;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Адаптив для блока с кодом */
+@media (max-width: 768px) {
+    .code-container {
+        padding: 12px 16px;
+    }
+    
+    .code-value {
+        font-size: 22px;
+        letter-spacing: 4px;
+        padding: 10px 16px;
+    }
+    
+    .code-copy-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .code-label {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .code-wrapper {
+        flex-direction: column;
+    }
+    
+    .code-value {
+        font-size: 20px;
+        letter-spacing: 3px;
+        width: 100%;
+    }
+    
+    .code-copy-btn {
+        width: 100%;
+    }
+    
+    .code-header {
+        flex-wrap: wrap;
+    }
+}

@@ -1,0 +1,21 @@
+.timer-icon {
+    width: 26px;
+}
+
+.timer-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.timer {
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffd7a5;
+    user-select: none;
+    font-family: 'Forum', serif;
+    text-shadow: 0 0 15px #aa7840;
+    letter-spacing: 1px;
+    width: 45px;
+}

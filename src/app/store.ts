@@ -8,6 +8,7 @@ import choiceReducer from '@/features/game/store/choiceSlice';
 import animationReducer from '@/features/game/store/animationSlice';
 import collectionReducer from '@/features/collection/store/collectionSlice';
 import controlReducer from '@/features/game/store/controlSlice';
+import profileReducer from '@/features/profile/store/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
@@ -20,7 +21,8 @@ export const store = configureStore({
         choice: choiceReducer,
         animation: animationReducer,
         collection: collectionReducer,
-        control: controlReducer
+        control: controlReducer,
+        profile: profileReducer
     },
 });
 

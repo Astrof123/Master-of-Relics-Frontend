@@ -10,6 +10,7 @@ import { CONNECTIONGAME, type DeckArtifact } from "@/features/game/types/state/g
 import type { ModalDraftDetails } from "@/features/modal/types/details";
 import SwordsImg from "@assets/icons/two-swords.png";
 import WaitImg from "@assets/icons/wait.png";
+import { GameTimer } from "../../common/game-timer/GameTimer";
 
 function DraftArtifacts() {
     const playersOnline = useAppSelector((state) => state.game.playersOnline);
@@ -54,9 +55,6 @@ function DraftArtifacts() {
                             <div key={playerOnline[0]} className={styles["player-connection"]}>
                                 <span className={styles["player-name"]}>{playerOnline[0]}</span>
                                 <div className={styles["player-connection-status-wrapper"]}>
-                                    <span className={styles["connection-status"]}>
-                                        {playerOnline[1] === CONNECTIONGAME.ONLINE ? "🟢" : "🔴"}
-                                    </span>
                                     {playerOnline[0] === gameState!.player.name && (
                                         gameState!.player.isReady ? (
                                             <span>Выбрал ✅</span>
@@ -89,6 +87,7 @@ function DraftArtifacts() {
                             </div>                
                         ))}
                     </div>
+                    <GameTimer />
                 </div>   
                 <button type="button" onClick={() => setIsYourDeck(!isYourDeck)}>
                     {isYourDeck ? "Колода соперника" : "Своя колода"}

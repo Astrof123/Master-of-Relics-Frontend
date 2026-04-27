@@ -1,0 +1,78 @@
+.stats-section {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-family: 'Forum', serif;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #5d4a36;
+}
+
+.title-icon {
+    width: 25px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: #2f241b;
+    border: 1px solid #5d4a36;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.stat-value {
+    display: block;
+    font-size: 36px;
+    font-family: 'Forum', serif;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 18px;
+    font-family: 'Forum', serif;
+    color: #b89a7a;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .stat-value {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

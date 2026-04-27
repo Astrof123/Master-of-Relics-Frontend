@@ -14,6 +14,7 @@ interface DraftDeckProps {
 
 const DraftDeck = (props: DraftDeckProps) => {
     const pickedArtifact = useAppSelector(state => state.game.gameState?.player.draft.pickedArtifact)
+    const gameState = useAppSelector(state => state.game.gameState)
 
     const artifactStyle = (artifactId: string) => {
         const stylesList = [styles.artifact]
@@ -28,31 +29,35 @@ const DraftDeck = (props: DraftDeckProps) => {
     return (
         <div className={clsx(styles.deck, !props.isYour && styles.isYour)}>
             <h3>{props.isYour ? "Ваша колода:" : "Колода соперника:"}</h3>
-            {props.deck.map((artifact, index) => {
-                const [valueLeftTopStyles, valueRightTopStyles] = GameHelper.getStylesForCornerValues(styles, artifact.maxHp, artifact.skillCost, true);
+            {gameState?.end !== null ? (
+                <h1>Игра окончена, {gameState?.end.winner === gameState?.player.id ? "противник сдался" : "вы сдались"}</h1>
+            ) : (
+                props.deck.map((artifact, index) => {
+                    const [valueLeftTopStyles, valueRightTopStyles] = GameHelper.getStylesForCornerValues(styles, artifact.maxHp, artifact.skillCost, true);
 
-                return (
-                    <div
-                        key={index + "draft"} 
-                        onClick={() => props.onHandleCardClick({ id: artifact.artifactId, img: ARTIFACTS[artifact.artifactId].imgCardNoStats }, artifact)}
-                        className={clsx(artifactStyle(artifact.artifactId))}>
-                        <img
-                            src={ARTIFACTS[artifact.artifactId].imgBattle} 
-                            alt={ARTIFACTS[artifact.artifactId].name}
-                            
-                            title={ARTIFACTS[artifact.artifactId].name}
-                        />
-                        <span 
-                            className={clsx(valueLeftTopStyles)}>
-                                {artifact.maxHp}
-                        </span>
-                        <span 
-                            className={clsx(valueRightTopStyles)}>
-                                {artifact.skillCost}
-                        </span>
-                    </div>
-                )
-            })}
+                    return (
+                        <div
+                            key={index + "draft"} 
+                            onClick={() => props.onHandleCardClick({ id: artifact.artifactId, img: ARTIFACTS[artifact.artifactId].imgCardNoStats }, artifact)}
+                            className={clsx(artifactStyle(artifact.artifactId))}>
+                            <img
+                                src={ARTIFACTS[artifact.artifactId].imgBattle} 
+                                alt={ARTIFACTS[artifact.artifactId].name}
+                                
+                                title={ARTIFACTS[artifact.artifactId].name}
+                            />
+                            <span 
+                                className={clsx(valueLeftTopStyles)}>
+                                    {artifact.maxHp}
+                            </span>
+                            <span 
+                                className={clsx(valueRightTopStyles)}>
+                                    {artifact.skillCost}
+                            </span>
+                        </div>
+                    )
+                })
+            )}
         </div>
     )
 }

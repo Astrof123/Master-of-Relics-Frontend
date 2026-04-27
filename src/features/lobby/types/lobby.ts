@@ -14,6 +14,10 @@ export interface Lobby {
     code: string | null;
     isPrivate: boolean;
     options: {
+        withTimers: boolean;
+        timerTurn: number | null;
+        timerDraft: number | null;
+        timerMovement: number | null;
         mode: GameModeType
     }
 }

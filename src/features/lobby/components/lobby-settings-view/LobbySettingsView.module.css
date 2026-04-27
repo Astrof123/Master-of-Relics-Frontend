@@ -1,0 +1,353 @@
+
+/* Секция таймеров */
+.timers-section {
+    padding: 8px;
+    /* background: rgba(0, 0, 0, 0.3); */
+    border-radius: 8px;
+    /* border: 2px solid #5d4a36; */
+    animation: fadeIn 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.timers-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #5d4a36;
+}
+
+.timers-icon {
+    font-size: 20px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.timers-title {
+    font-size: 16px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+}
+
+/* Группа таймера */
+.timer-group {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+
+}
+
+.timer-group:hover {
+    background: rgba(0, 0, 0, 0.35);
+    /* border-left: 3px solid #aa7840; */
+    padding-left: 13px;
+}
+
+.timer-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+
+}
+
+.timer-label-text {
+    font-size: 17px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #b89a7a;
+}
+
+.timer-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 4px;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+.timer-input-wrapper:focus-within {
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.timer-input {
+    width: 70px;
+    background: transparent;
+    border: none;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+}
+
+.timer-input::-webkit-inner-spin-button,
+.timer-input::-webkit-outer-spin-button {
+    opacity: 0.5;
+    background: #8b6f4c;
+}
+
+.timer-unit {
+    font-size: 12px;
+    font-family: 'Forum', serif;
+    color: #8b6f4c;
+    font-weight: 600;
+}
+
+.timer-hint {
+    font-size: 14   px;
+    font-family: 'Forum', serif;
+    color: #8b6f4c;
+    font-style: italic;
+    margin-top: 6px;
+    padding-left: 8px;
+    border-left: 2px solid #5d4a36;
+}
+
+/* Адаптивность для таймеров */
+@media (max-width: 768px) {
+    .timers-section {
+        padding: 12px;
+    }
+    
+    .timer-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .timer-input-wrapper {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .timer-input {
+        width: 100px;
+    }
+    
+    .timer-group {
+        padding: 10px;
+    }
+    
+    .timers-header {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timers-section {
+        padding: 10px;
+    }
+    
+    .timer-input {
+        width: 80px;
+        font-size: 14px;
+    }
+    
+    .timer-label-text {
+        font-size: 13px;
+    }
+    
+    .timer-hint {
+        font-size: 10px;
+    }
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkbox-label {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 12px;
+    cursor: pointer;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid #5d4a36;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label:hover {
+    border-color: #aa7840;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.checkbox-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e8d9c0;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.checkbox-icon {
+    width: 20px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+/* Скрываем стандартный чекбокс */
+.checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Кастомный чекбокс */
+.checkbox-custom {
+    width: 24px;
+    height: 24px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+    background: #3f3329;
+    border-color: #d49c5c;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.checkbox-input:checked + .checkbox-custom::after {
+    content: '✓';
+    color: #ffd7a5;
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 0 0 5px #aa7840;
+}
+
+.checkbox-label:hover .checkbox-custom {
+    border-color: #aa7840;
+}
+
+.checkbox-description {
+    font-size: 14px;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-style: italic;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.checkbox-input:checked ~ .checkbox-description {
+    color: #ffd7a5;
+    text-shadow: 0 0 5px #aa7840;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .checkbox-label {
+        flex-wrap: wrap;
+        padding: 12px;
+    }
+    
+    .checkbox-description {
+        margin-left: 0;
+        width: 100%;
+        padding-left: 32px;
+    }
+    
+    .checkbox-text {
+        font-size: 14px;
+    }
+}
+
+.checkbox-label-inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.button {
+    padding: 16px 16px;
+    background: #2f241b;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    color: #ffd7a5;
+    border: 2px solid #8b6f4c;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Forum', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 5px black;
+    box-shadow: 
+        0 6px 0 #2a1f18,
+        0 0 20px rgba(170, 120, 60, 0.2);
+    /* width: 100%; */
+    position: relative;
+    overflow: hidden;
+}
+
+
+.button:hover {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 
+        0 8px 0 #2a1f18,
+        0 0 16px #aa7840;
+    color: #ffffff;
+}
+
+.button:active {
+    transform: translateY(4px);
+    box-shadow: 
+        0 2px 0 #2a1f18,
+        0 0 30px #aa7840;
+}
+
+.options-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.timer-input:disabled {
+    filter: brightness(0.4);
+}
+
+.checkbox-input:disabled {
+    filter: brightness(0);
+}
+
+.timer-text {
+    font-size: 16px;
+    font-weight: 600;
+}

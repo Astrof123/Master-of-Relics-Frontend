@@ -1,7 +1,7 @@
 import type { EffectType } from "../game/effects";
 import type { Face } from "../game/face";
 import type { RESOURCE } from "../game/resource";
-import type { ArtifactState, ConnectionGame, ConstantsGameState, DeckArtifact, EndState, Line, Player } from "./game";
+import type { ArtifactState, ConnectionGame, ConstantsGameState, DeckArtifact, EndState, Line, LogState, Player } from "./game";
 import type { MiniPhase, Phase } from "./phase";
 
 
@@ -37,6 +37,7 @@ export interface EnemyForClient {
     draft: {
         deck: DeckArtifact[];
     }
+    offerDraw: boolean;
 }
 
 
@@ -45,7 +46,7 @@ export interface GameForClient {
     phase: Phase;
     name: string;
     currentTurn: number;
-    logs: string[];
+    logs: LogState[];
     player: Player;
     enemy: EnemyForClient;
     end: EndState | null;

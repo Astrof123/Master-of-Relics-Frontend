@@ -3,6 +3,7 @@ import type { Lobby } from "../../types/lobby";
 import styles from "./CreateLobby.module.css";
 import clsx from "clsx";
 import LockImg from "@assets/icons/lock.png";
+import TimerImg from "@assets/icons/wait.png";
 
 interface CreateLobbyProps {
     onCreateLobby: (data: Partial<Lobby>) => void
@@ -11,7 +12,11 @@ interface CreateLobbyProps {
 const CreateLobby = (props: CreateLobbyProps) => {
     const [formData, setFormData] = useState({
         name: "",
-        isPrivate: false
+        isPrivate: false,
+        useTimers: false,
+        turnTime: 30,
+        movementTime: 60,
+        draftTime: 40
     })
 
     const [touched, setTouched] = useState(false);
@@ -39,12 +44,24 @@ const CreateLobby = (props: CreateLobbyProps) => {
 
         props.onCreateLobby({
             name: formData.name,
-            isPrivate: formData.isPrivate
+            isPrivate: formData.isPrivate,
+            options: {
+                withTimers: formData.useTimers,
+                timerDraft: formData.draftTime,
+                timerMovement: formData.movementTime,
+                timerTurn: formData.turnTime,
+                mode: "classic"
+            }
         });
+        
         setFormData(prev => ({
             ...prev, 
             name: "",
-            isPrivate: false
+            isPrivate: false,
+            useTimers: false,
+            turnTime: 60,
+            movementTime: 45,
+            draftTime: 45
         }))
         setTouched(false);
     }
@@ -88,11 +105,12 @@ const CreateLobby = (props: CreateLobbyProps) => {
                     </div>
                 )}
 
+                {/* Приватное лобби */}
                 <label className={clsx(styles.label, styles["checkbox-label"])}>
                     <div className={styles["checkbox-label-inner-wrapper"]}>
                         <span className={styles["checkbox-text"]}>
                             <img className={styles["checkbox-icon"]} src={LockImg} alt="" />
-                            Приватное лобби: 
+                            Приватное лобби
                         </span>
                         <input 
                             type="checkbox" 
@@ -103,12 +121,111 @@ const CreateLobby = (props: CreateLobbyProps) => {
                         />
                         <span className={styles["checkbox-custom"]}></span>
                     </div>
-                        <span className={styles["checkbox-description"]}>
-                            {formData.isPrivate ? 
-                                "Лобби будет скрыто от общего списка. Доступ только по коду или по приглашению." : 
-                                "Лобби будет видно всем игрокам."}
-                        </span>
+                    <span className={styles["checkbox-description"]}>
+                        {formData.isPrivate ? 
+                            "Лобби будет скрыто от общего списка. Доступ только по коду или по приглашению." : 
+                            "Лобби будет видно всем игрокам."}
+                    </span>
                 </label>
+
+                {/* Таймеры */}
+                <label className={clsx(styles.label, styles["checkbox-label"])}>
+                    <div className={styles["checkbox-label-inner-wrapper"]}>
+                        <span className={styles["checkbox-text"]}>
+                            <img className={styles["checkbox-icon"]} src={TimerImg} alt="" />
+                            Игра с таймерами
+                        </span>
+                        <input 
+                            type="checkbox" 
+                            name="useTimers"
+                            checked={formData.useTimers}
+                            onChange={handleChange}
+                            className={styles["checkbox-input"]}
+                        />
+                        <span className={styles["checkbox-custom"]}></span>
+                    </div>
+                    <span className={styles["checkbox-description"]}>
+                        {formData.useTimers ? 
+                            "Время на ходы будет ограничено." : 
+                            "Игра без ограничения времени."}
+                    </span>
+                </label>
+
+                {/* Настройки таймеров (показываются только если useTimers = true) */}
+                {formData.useTimers && (
+                    <div className={styles["timers-section"]}>
+                        <div className={styles["timers-header"]}>
+                            <span className={styles["timers-icon"]}>⏱️</span>
+                            <span className={styles["timers-title"]}>Настройка времени</span>
+                        </div>
+                        
+                        <div className={styles["timer-group"]}>
+                            <label className={styles["timer-label"]}>
+                                <span className={styles["timer-label-text"]}>Время на ход</span>
+                                <div className={styles["timer-input-wrapper"]}>
+                                    <input 
+                                        type="number" 
+                                        name="turnTime"
+                                        value={formData.turnTime}
+                                        onChange={handleChange}
+                                        min={15}
+                                        max={300}
+                                        step={5}
+                                        className={styles["timer-input"]}
+                                    />
+                                    <span className={styles["timer-unit"]}>сек</span>
+                                </div>
+                            </label>
+                            <div className={styles["timer-hint"]}>
+                                Ограничение времени на один ход (15-300 секунд)
+                            </div>
+                        </div>
+
+                        <div className={styles["timer-group"]}>
+                            <label className={styles["timer-label"]}>
+                                <span className={styles["timer-label-text"]}>Время на расстановку</span>
+                                <div className={styles["timer-input-wrapper"]}>
+                                    <input 
+                                        type="number" 
+                                        name="movementTime"
+                                        value={formData.movementTime}
+                                        onChange={handleChange}
+                                        min={15}
+                                        max={300}
+                                        step={5}
+                                        className={styles["timer-input"]}
+                                    />
+                                    <span className={styles["timer-unit"]}>сек</span>
+                                </div>
+                            </label>
+                            <div className={styles["timer-hint"]}>
+                                Ограничение времени на фазу расстановки артефактов (15-300 секунд)
+                            </div>
+                        </div>
+
+                        <div className={styles["timer-group"]}>
+                            <label className={styles["timer-label"]}>
+                                <span className={styles["timer-label-text"]}>Время на выбор карты (драфт)</span>
+                                <div className={styles["timer-input-wrapper"]}>
+                                    <input 
+                                        type="number" 
+                                        name="draftTime"
+                                        value={formData.draftTime}
+                                        onChange={handleChange}
+                                        min={15}
+                                        max={300}
+                                        step={5}
+                                        className={styles["timer-input"]}
+                                    />
+                                    <span className={styles["timer-unit"]}>сек</span>
+                                </div>
+                            </label>
+                            <div className={styles["timer-hint"]}>
+                                Ограничение времени на выбор артефакта (15-300 секунд)
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <button className={styles.button} type="submit">
                     Создать лобби

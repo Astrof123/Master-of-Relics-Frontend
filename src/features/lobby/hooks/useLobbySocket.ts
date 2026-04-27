@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import socketService from '../../socket/socket';
 import { useAppSelector } from '@app/store';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
-import type { JoinHallData, StartGameData } from '../types/lobby-socket-data-responses';
+import type { FriendForInvite, JoinHallData, LobbyInvitation, StartGameData } from '../types/lobby-socket-data-responses';
 import type { Lobby } from '../types/lobby';
 import { LOBBY_EVENT_NAME } from '../types/lobby-events-name';
-import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby } from '../store/lobbySlice';
+import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby, setOnlinePlayers, setInvitations, setFriendsForInvite } from '../store/lobbySlice';
 import { useNavigate } from 'react-router-dom';
 import { GAME_EVENT_NAME } from '@/features/game/types/socket/game-events-name';
+import type { CreateLobbyData, InviteFriendData, UpdateOptionsLobbyData } from '../types/lobby-socket-data-requests';
 
 
 export const useLobbySocket = () => {
@@ -26,6 +27,9 @@ export const useLobbySocket = () => {
             if (response.success) {
                 dispatch(setJoinedHall(true));
                 dispatch(setLobbies(response.data.lobbies))
+                dispatch(setOnlinePlayers(response.data.onlinePlayers))
+                console.log("Получены приглашения", response.data.invitations)
+                dispatch(setInvitations(response.data.invitations))
                 if (response.data.currentLobby !== null) {
                     dispatch(setCurrentLobby(response.data.currentLobby))
                 }
@@ -36,7 +40,7 @@ export const useLobbySocket = () => {
     }, [isConnected]);
     
 
-    const createLobby = useCallback((data: Partial<Lobby>) => {
+    const createLobby = useCallback((data: CreateLobbyData) => {
         if (!isConnected) {
             return;
         }
@@ -95,6 +99,20 @@ export const useLobbySocket = () => {
         });
     }, [isConnected]);
 
+    const joinLobbyByInvitation = useCallback((invitationId: string) => {
+        if (!isConnected) {
+            return;
+        }
+        socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY_BY_INVITATION, invitationId, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+                console.log(response.message);
+                navigate("/my-lobby")
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
     const deleteLobby = useCallback((lobbyId: string) => {
         if (!isConnected) {
             return;
@@ -139,6 +157,55 @@ export const useLobbySocket = () => {
         });
     }, [isConnected]);
 
+    const inviteFriend = useCallback((data: InviteFriendData) => {
+        return new Promise<void>((resolve, reject) => {
+            socketService.emit(LOBBY_EVENT_NAME.INVITE_FRIEND, data, (response: SocketCallbackResponse<null>) => {
+                if (response.success) {
+                    console.log(response.message);
+                    resolve();
+                } else {
+                    console.error('Ошибка:', response.message);
+                    reject(new Error(response.message));
+                }
+            });
+        });
+    }, [isConnected]);
+
+    const declineInvitation = useCallback((data: LobbyInvitation) => {
+        socketService.emit(LOBBY_EVENT_NAME.DECLINE_INVITATION, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+                console.log(response.message);
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const getFriendsForInvite = useCallback(() => {
+        socketService.emit(LOBBY_EVENT_NAME.GET_FRIENDS_FOR_INVITE, null, (response: SocketCallbackResponse<FriendForInvite[]>) => {
+            if (response.success) {
+                dispatch(setFriendsForInvite(response.data))
+                console.log(response.message);
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
+    const updateOptionsLobby = useCallback((data: UpdateOptionsLobbyData) => {
+        if (!isConnected) {
+            return;
+        }
+
+        socketService.emit(LOBBY_EVENT_NAME.UPDATE_OPTIONS, data, (response: SocketCallbackResponse<null>) => {
+            if (response.success) {
+                // navigate("/my-lobby")
+            } else {
+                console.error('Ошибка:', response.message);
+            }
+        });
+    }, [isConnected]);
+
     const enterGame = useCallback((gameId: string) => {
         navigate(`/game/${gameId}`)
     }, [isConnected]);
@@ -152,6 +219,11 @@ export const useLobbySocket = () => {
         toggleReadyLobby,
         startGame,
         enterGame,
-        joinLobbyByCode
+        joinLobbyByCode,
+        inviteFriend,
+        declineInvitation,
+        getFriendsForInvite,
+        joinLobbyByInvitation,
+        updateOptionsLobby
     };
 };

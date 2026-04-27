@@ -1,0 +1,232 @@
+.offers-section {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.offers-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d49c5c, #ffd7a5, #d49c5c, transparent);
+    animation: emberGlow 3s infinite;
+}
+
+.offers-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-family: 'Forum', serif;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #5d4a36;
+}
+
+.offers-title .title-icon {
+    font-size: 24px;
+}
+
+.offers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.offer-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    animation: slideIn 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateX(4px);
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.offer-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.offer-avatar {
+    width: 48px;
+    height: 48px;
+    background: #1a1518;
+    border: 2px solid #8b6f4c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.2s ease;
+}
+
+.offer-avatar img {
+    width: 30px;
+}
+
+.offer-card:hover .offer-avatar {
+    border-color: #aa7840;
+    box-shadow: 0 0 10px rgba(170, 120, 60, 0.3);
+}
+
+.offer-nickname {
+    font-size: 18px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #ffd7a5;
+    text-shadow: 0 0 5px #aa7840;
+}
+
+.offer-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.offer-buttons button {
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid;
+    background: #2f241b;
+}
+
+.offer-accept {
+    background: linear-gradient(145deg, #2f3329, #1a241b);
+    border-color: #3d7a63;
+    color: #a8d5c5;
+}
+
+.offer-accept:hover {
+    transform: translateY(-2px);
+    border-color: #7ed957;
+    box-shadow: 0 0 20px #3da075;
+    color: #e0fff0;
+}
+
+.offer-decline {
+    background: linear-gradient(145deg, #33211e, #251b18);
+    border-color: #8b4c4c;
+    color: #d5a8a8;
+}
+
+.offer-decline:hover {
+    transform: translateY(-2px);
+    border-color: #ff6b4a;
+    box-shadow: 0 0 20px #b84c4c;
+    color: #ffc0c0;
+}
+
+.empty-offers {
+    text-align: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 2px dashed #5d4a36;
+}
+
+.empty-offers .empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.empty-offers p {
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивность для заявок */
+@media (max-width: 768px) {
+    .offers-section {
+        padding: 20px;
+    }
+    
+    .offer-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+    }
+    
+    .offer-info {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .offer-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .offer-buttons button {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .offers-title {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .offers-section {
+        padding: 16px;
+    }
+    
+    .offer-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .offer-buttons button {
+        width: 100%;
+    }
+    
+    .offer-nickname {
+        font-size: 16px;
+    }
+}
+
+@keyframes emberGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}

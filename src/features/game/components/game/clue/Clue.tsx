@@ -5,12 +5,17 @@ import styles from "./Clue.module.css";
 import { useDispatch } from "react-redux";
 import { setDefault } from "@/features/game/store/choiceSlice";
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
-import type { ReactNode } from "react";
-import Coin from "@assets/icons/coin.png";
 import { MINIPHASE } from "@/features/game/types/state/phase";
 import type { ExtraActionData } from "@/features/action/types/action-evens-data";
 import { EXTRA_ACTION } from "@/features/action/types/action";
 import { deactivateMoving } from "@/features/game/store/gameSlice";
+import SettingsImg from "@assets/icons/settings.png";
+import GameResult from "../game-result/GameResult";
+import { useState } from "react";
+import LogsImg from "@assets/icons/logs.png";
+import SettingsModal from "../settings-modal/SettingsModal";
+import LogsModal from "../logs-modal/LogsModal";
+import { GameTimer } from "../../common/game-timer/GameTimer";
 
 interface ClueProps {
     gameState: GameForClient
@@ -23,6 +28,8 @@ const Clue = (props: ClueProps) => {
     const choiceState = useAppSelector(state => state.choice);
     const isMoving = useAppSelector(state => state.game.isMoving);
     const movedArtifact = useAppSelector(state => state.game.movedArtifact);
+    const [showSettings, setShowSettings] = useState(false);
+    const [showLogs, setShowLogs] = useState(false);
 
     if (props.gameState.miniPhase === MINIPHASE.MOVEMENT) {
         message = props.gameState.player.isReady ? "Ждите пока закончит противник..." : "Расположите ваши артефакты...";
@@ -155,55 +162,16 @@ const Clue = (props: ClueProps) => {
         extraAction(data);
     }
 
-    const endGameRender = (): ReactNode => {
-        let result;
-        let prize;
-        let resultClass = "";
-        let prizeClass = "";
-
-        if (props.gameState.end!.winner === null) {
-            result = "Ничья";
-            prize = props.gameState.end!.draw_prize;
-            resultClass = "result-draw";
-            prizeClass = "prize-draw";
-        }
-        else {
-            if (props.gameState.end!.winner === props.gameState.player.id) {
-                result = "Победа";
-                prize = props.gameState.end!.winner_prize;
-                resultClass = "result-win";
-                prizeClass = "prize-win";
-            }
-            else {
-                result = "Поражение";
-                prize = props.gameState.end!.loser_prize;                
-                resultClass = "result-lose";
-                prizeClass = "prize-lose";
-            }
-        }
-
-        return (
-            <div className={styles["endgame-container"]}>
-                <div className={clsx(styles["endgame-result"], styles[resultClass])}>
-                    <span className={styles["result-icon"]}>
-                        {result === "Победа" && "🏆"}
-                        {result === "Поражение" && "💀"}
-                        {result === "Ничья" && "🤝"}
-                    </span>
-                    <span className={styles["result-text"]}>{result}</span>
-                </div>
-                <div className={clsx(styles["endgame-prize"], styles[prizeClass])}>
-                    <img className={clsx(styles["prize-img"])} src={Coin} alt="" />
-                    <span className={styles["prize-text"]}>Вы получили {prize} золота</span>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className={clsx(styles["clue"])}>
+            <div onClick={() => setShowLogs(!showLogs)} className={clsx(styles["logs-wrapper"])}>
+                <img 
+                    className={clsx(styles["logs"])} 
+                    src={LogsImg} 
+                />
+            </div>
             {props.gameState.end ? (
-                endGameRender()
+                <GameResult gameState={props.gameState}/>
             ) : (
                 <>
                     <span>{message}</span>
@@ -220,6 +188,26 @@ const Clue = (props: ClueProps) => {
                         </div>
                     )}
                 </>
+            )}
+            <div className={clsx(styles["clue-end"])}>
+                <GameTimer />
+                <div onClick={() => setShowSettings(!showSettings)} className={clsx(styles["settings-wrapper"])}>
+                    <img 
+                        className={clsx(styles["settings"])} 
+                        src={SettingsImg} 
+                    />
+                    {props.gameState.enemy.offerDraw && (
+                        <div className={clsx(styles["draw-icon"])}></div>
+                    )}
+                </div>
+            </div>
+
+            {showSettings && (
+                <SettingsModal gameState={props.gameState} />
+            )}
+
+            {showLogs && (
+                <LogsModal gameState={props.gameState} />
             )}
         </div>
     )

@@ -1,6 +1,7 @@
 import type { ExtraActionState } from "../../../action/types/action";
 import type { EffectType } from "../game/effects";
 import type { Face } from "../game/face";
+import type { LogType } from "../game/log";
 import type { RESOURCE } from "../game/resource";
 import type { Skill } from "../game/skill";
 import type { Spell, SPELLTYPE } from "../game/spell";
@@ -65,7 +66,10 @@ export interface ArtifactGameState {
     line: Line;
     effects: EffectType[];
     skillCost: number | null;
-    availableActions: ArtifactAvailableActions
+    availableActions: ArtifactAvailableActions;
+    extraData: {
+        lastStateBeforeRoot: ArtifactState;
+    }
 }
 
 export interface DeckArtifact {
@@ -100,6 +104,10 @@ export interface Player {
         deck: DeckArtifact[];
     },
     temporaryArtifacts: Record<string, ArtifactGameState>;
+    offerDraw: boolean;
+    extraData: {
+        skippedMoves: number;
+    }
 }
 
 
@@ -108,7 +116,7 @@ export interface Game {
     phase: Phase;
     name: string;
     currentTurn: number;
-    logs: string[];
+    logs: LogState[];
     players: Record<number, Player>;
     end: EndState | null;
     miniPhase: MiniPhase;
@@ -117,6 +125,9 @@ export interface Game {
 
 export interface ConstantsGameState {
     maxCountArtifactsOnLine: number;
+    timerDraft: number | null;
+    timerMovement: number | null;
+    timerTurn: number | null;
 }
 
 
@@ -137,4 +148,9 @@ export interface SpellGameState {
     countAnyTarget: number;
     countTargetEnemy: number;
     countTargetAllies: number;
+}
+
+export interface LogState {
+    text: string;
+    type: LogType;
 }

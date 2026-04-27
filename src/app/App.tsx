@@ -6,6 +6,7 @@ import { LobbyLayout } from './router/LobbyLayout';
 import { ProtectedRoute } from './router/ProtectedRoute';
 import CollectionPage from '@/pages/collection-page/CollectionPage';
 import LoadingPage from '@/pages/LoadingPage';
+import ProfilePage from '@/pages/profile-page/ProfilePage';
 
 
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
@@ -27,7 +28,8 @@ function App() {
                                     <Route path="/" element={<MainPage />} />
                                     <Route path="/create" element={<CreateLobbyPage />} />
                                     <Route path="/my-lobby" element={<LobbyPage />} />
-                                    <Route path="/collection" element={<CollectionPage />} />   
+                                    <Route path="/collection" element={<CollectionPage />} />
+                                    <Route path="/profile/:id" element={<ProfilePage />} />   
                                 </Route>
                                 <Route path="/game/:id" element={<GamePage />} />
                             </Route>                        
