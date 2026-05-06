@@ -1,7 +1,7 @@
 import type { CardForView } from '@/features/game/types/card';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import type { ModalBattleDetails } from '../../types/details';
-import { ARTIFACT_STATE, LINE } from '@/features/game/types/state/game';
+import { ARTIFACT_STATE, LINE, type Line } from '@/features/game/types/state/game';
 import clsx from 'clsx';
 import styles from "./BattleModalActions.module.css";
 import { useAction } from '@/features/action/hooks/useAction';
@@ -68,8 +68,12 @@ const BattleModalActions = ({ details, onClose }: BattleModalActionsProps) => {
         );
     }
 
-    const otherLine = gameState!.player.temporaryArtifacts[details.artifactGameId].line === LINE.FRONT ? LINE.BACK : LINE.FRONT;
-    const countArtifactsOtherLine = Object.values(gameState!.player.temporaryArtifacts).filter(a => a.line === otherLine).length;
+    let otherLine: Line; 
+    let countArtifactsOtherLine: number;
+    if (gameState?.miniPhase === MINIPHASE.MOVEMENT || details.artifactGameId == movedArtifact) {
+        otherLine = gameState!.player.temporaryArtifacts[details.artifactGameId].line === LINE.FRONT ? LINE.BACK : LINE.FRONT;
+        countArtifactsOtherLine = Object.values(gameState!.player.temporaryArtifacts).filter(a => a.line === otherLine).length;
+    }
 
     return (
         <>
@@ -80,7 +84,7 @@ const BattleModalActions = ({ details, onClose }: BattleModalActionsProps) => {
                 {(gameState?.miniPhase === MINIPHASE.MOVEMENT || details.artifactGameId == movedArtifact) && (
                     <button 
                         onClick={handleChangeLine}
-                        disabled={countArtifactsOtherLine >= gameState!.constants.maxCountArtifactsOnLine || gameState!.player.isReady}
+                        disabled={countArtifactsOtherLine! >= gameState!.constants.maxCountArtifactsOnLine || gameState!.player.isReady}
                         className={clsx(styles.action)}
                     >
                         Сменить линию

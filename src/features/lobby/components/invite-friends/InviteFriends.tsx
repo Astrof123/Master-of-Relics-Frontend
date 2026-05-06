@@ -22,7 +22,7 @@ const InviteFriends = (props: InviteFriendsProps) => {
         getFriendsForInvite();
     }, [])
     
-    const handleInviteFriendClick = async (e: MouseEvent<HTMLButtonElement>, friendId: number) => {
+    const handleInviteFriendClick = async (e: MouseEvent<HTMLButtonElement>, friendId: string) => {
         e.preventDefault();
         e.stopPropagation();
         await inviteFriend({lobbyId: props.lobbyId, friendId});

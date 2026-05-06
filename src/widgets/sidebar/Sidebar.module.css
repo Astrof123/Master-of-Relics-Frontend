@@ -12,7 +12,7 @@
     border-right: 3px solid #5d4a36;
     border-left: 3px solid #2f241b;
     padding: 28px 20px;
-    gap: 32px;
+    gap: 16px;
     position: relative;
     z-index: 10;
     font-family: 'Forum', serif;
@@ -96,7 +96,7 @@
     letter-spacing: 1px;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
     position: relative;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -203,7 +203,7 @@
 .nav a {
     color: #e8d9c0;
     text-decoration: none;
-    padding: 16px 24px;
+    padding: 14px 24px;
     border-radius: 4px;
     transition: all 0.2s ease;
     font-weight: 600;
@@ -272,7 +272,7 @@
     color: #ffd7a5;
 }
 
-.logout {
+.nav-button {
     color: #e8d9c0;
     text-decoration: none;
     padding: 16px 24px;
@@ -292,7 +292,7 @@
     text-shadow: 0 2px 3px black;
 }
 
-.logout:hover {
+.nav-button:hover {
     background: #332b26;
     border-color: #8b6f4c;
     transform: translateX(8px);
@@ -300,7 +300,7 @@
     color: #ffd7a5;
 }
 
-.logout::before {
+.nav-button::before {
     content: '❖';
     position: absolute;
     left: -8px;
@@ -313,11 +313,11 @@
     text-shadow: 0 0 10px #d49c5c;
 }
 
-.logout:hover::before {
+.nav-button:hover::before {
     opacity: 1;
 }
 
-.logout::after {
+.nav-button::after {
     content: '';
     position: absolute;
     right: 16px;
@@ -330,15 +330,30 @@
     transition: opacity 0.2s ease;
 }
 
-.logout:hover::after {
+.nav-button:hover::after {
     opacity: 0.9;
 }
 
-.logout.active {
+.nav-button.active {
     background: #33221a;
     border-color: #b89a7a;
     box-shadow: 
         inset 0 2px 10px rgba(170, 120, 60, 0.2),
         0 0 25px rgba(170, 120, 60, 0.4);
     color: #ffd7a5;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background: #2f241b;
+    border: 3px solid #8b6f4c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar img {
+    width: 30px;
 }

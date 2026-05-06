@@ -1,19 +1,22 @@
+import type { User } from "@/features/auth/types/responses";
+
 export interface UserProfile {
-    id: number;
+    id: string;
     nickname: string;
     isOnline: boolean;
     relationship: Relationship;
-    relationshipInitiator: number | null;
+    relationshipInitiator: string | null;
     friends: Friend[];
     stats: Stats;
     isReported: boolean;
     offersFriendship: OfferFriendship[] | null; 
+    isBanned: boolean; 
 }
 
 export interface Friend {
     id: number;
     nickname: string;
-    friendId: number;
+    friendId: string;
     isOnline: boolean;
 }
 
@@ -34,5 +37,26 @@ export type Relationship  = typeof RELATIONSHIP [keyof typeof RELATIONSHIP];
 export interface OfferFriendship {
     id: number;
     nickname: string;
-    requesterId: number;
+    requesterId: string;
+}
+
+export class ReportResponseData {
+    id!: number;
+    text!: string;
+    reportType!: string;
+    reportedUserId!: string;
+    reportedUser!: User;
+    requesterUserId!: string;
+    requesterUser!: User;
+    createdAt!: Date;
+    isProcessed!: boolean;
+}
+
+
+export class GetReportsResponseDto {
+    data!: ReportResponseData[];
+    total!: number;
+    page!: number;
+    limit!: number;
+    totalPages!: number;
 }

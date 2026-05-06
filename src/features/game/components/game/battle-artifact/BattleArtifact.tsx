@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import styles from "./BattleArtifact.module.css";
 import { FACES } from '@/features/game/constants/faces';
 import { useMemo } from 'react';
-import { useModal } from '@/features/modal/hooks/useModal';
+import { useCardModal } from '@/features/modal/hooks/useCardModal';
 import { useAppSelector } from '@/app/store';
-import { MODALTYPE, type OpenModalData } from '@/features/modal/types/modal';
+import { CARD_MODAL_TYPE, type OpenCardModalData } from '@/features/modal/types/modal';
 import { useArtifactAnimations } from '@/features/game/hooks/useArtifactAnimations';
 import { useArtifactSelection } from '@/features/game/hooks/useArtifactSelection';
 import { useArtifactState } from '@/features/game/hooks/useArtifactState';
@@ -22,7 +22,7 @@ interface BattleArtifactProps {
 }
 
 const BattleArtifact = (props: BattleArtifactProps) => {
-    const { openModal } = useModal();
+    const { openCardModal } = useCardModal();
     const gameState = useAppSelector(state => state.game.gameState);
     const animations = useAppSelector(state => state.animation.animations);
     const typeIndex = props.isYour ? 0 : 1;
@@ -54,15 +54,15 @@ const BattleArtifact = (props: BattleArtifactProps) => {
             gameState: gameState!
         };
 
-        const data: OpenModalData = {
+        const data: OpenCardModalData = {
             details: details,
-            modalType: MODALTYPE.BATTLE,
+            modalType: CARD_MODAL_TYPE.BATTLE,
             valueLeftTop: props.artifact.maxHp,
             valueRightTop: props.artifact.skillCost,
             isArtifact: true
         }
 
-        openModal(data);
+        openCardModal(data);
     };
 
     const artifactStyles = [styles.artifact];

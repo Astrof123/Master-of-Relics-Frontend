@@ -400,3 +400,15 @@
         font-size: 11px;
     }
 }
+
+.profile-id {
+    user-select: text;
+    margin-left: 24px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #8b6f4c;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}

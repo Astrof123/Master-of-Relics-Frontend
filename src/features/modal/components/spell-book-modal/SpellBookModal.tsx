@@ -9,9 +9,9 @@ import { SPELLTYPE } from "@/features/game/types/game/spell";
 import type { SpellType } from "@/features/game/types/game/spell";
 import type { SpellGameState } from "@/features/game/types/state/game";
 import SpellBookImg from "@assets/icons/spellbook.png";
-import { useModal } from "../../hooks/useModal";
+import { useCardModal } from "../../hooks/useCardModal";
 import type { ModalSpellDetails } from "../../types/details";
-import { MODALTYPE, type OpenModalData } from "../../types/modal";
+import { CARD_MODAL_TYPE, type OpenCardModalData } from "../../types/modal";
 
 interface SpellBookModalProps {
     isOpen: boolean;
@@ -23,7 +23,7 @@ const SpellBookModal = (props: SpellBookModalProps) => {
     const gameState = useAppSelector(state => state.game.gameState);
     const [activeSchool, setActiveSchool] = useState<SpellType>(SPELLTYPE.LIGHT);
     const [isAnimating, setIsAnimating] = useState(false);
-    const { openModal } = useModal();
+    const { openCardModal } = useCardModal();
     
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -65,16 +65,16 @@ const SpellBookModal = (props: SpellBookModalProps) => {
             gameState: gameState!
         }
 
-        const data: OpenModalData = {
+        const data: OpenCardModalData = {
             details: details,
-            modalType: MODALTYPE.SPELL,
+            modalType: CARD_MODAL_TYPE.SPELL,
             valueLeftTop: spell.cost,
             valueRightTop: null,
             isArtifact: false
         }
 
-        openModal(data);
-    }, [openModal]);
+        openCardModal(data);
+    }, [openCardModal]);
 
     if (!props.isOpen || !spells) {
         return null;

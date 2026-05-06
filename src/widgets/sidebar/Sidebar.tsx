@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import styles from './Sidebar.module.css';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import type { RootState } from '@/app/store';
 import { useSelector } from 'react-redux';
-import Dagger from '@assets/icons/dagger.png';
 import Coin from '@assets/icons/coin.png';
+import UserImg from "@assets/icons/user2.png";
+import Logo from "@assets/icons/logo.png"
 
 const Sidebar = () => {
     const { user, handleMe } = useAuth();
     const isConnected = useSelector((state: RootState) => state.connectSocket.isConnected);
     const currentLobby = useSelector((state: RootState) => state.lobby.currentLobby)
+    const [isAdminMode, setIsAdminMode] = useState(false);
     
     useEffect(() => {
         handleMe();
@@ -23,10 +25,15 @@ const Sidebar = () => {
 
     return (
         <aside className={styles.sidebar}>
+            {/* <div className={styles["logo-wrapper"]}>
+                <img src={Logo} alt="" className={styles.logo} />
+            </div> */}
             <div className={styles.user}>
                 <div className={styles['user-info']}>
                     <div className={styles["user-name-wrapper"]}>
-                        <img className={styles["user-name-decoration"]} src={Dagger} alt="" />
+                    <div className={styles["avatar"]}>
+                        <img src={UserImg} alt="" />
+                    </div>
                         {user && (
                             <span className={styles['user-name']}>{user.nickname.length > 20 ? user.nickname.slice(0, 16) + "..." : user!.nickname}</span>
                         )}
@@ -43,56 +50,94 @@ const Sidebar = () => {
                         styles['status-badge'],
                         isConnected ? styles['status-online'] : styles['status-offline']
                     )}>
-                        {isConnected ? '✅ Подключено' : '❌ Отключено'}
+                        {isConnected ? 'Подключено' : 'Отключено'}
                     </span>
                 </div>
                 
             </div>
-            <nav className={styles.nav}>
-                <NavLink 
-                    to="/" 
-                    className={getActiveClass}
-                    end
-                >
-                    Список лобби
-                </NavLink>
-                
-                {currentLobby === null ? (
+            {isAdminMode ? (
+                <nav className={styles.nav}>
                     <NavLink 
-                        to="/create" 
+                        to="/admin/reports" 
+                        className={getActiveClass}
+                        end
+                    >
+                        Жалобы
+                    </NavLink>
+                    <NavLink 
+                        to="/admin/invite-codes" 
                         className={getActiveClass}
                     >
-                        Создать лобби
+                        Инвайт коды
                     </NavLink>
-                ) : (
                     <NavLink 
-                        to="/my-lobby" 
+                        to="/admin/users" 
                         className={getActiveClass}
                     >
-                        Ваше лобби
+                        Пользователи
                     </NavLink>
-                )}
-                
-                <NavLink 
-                    to="/knowledge" 
-                    className={getActiveClass}
-                >
-                    База знаний
-                </NavLink>
-                
-                <NavLink 
-                    to="/collection" 
-                    className={getActiveClass}
-                >
-                    Коллекция
-                </NavLink>
-                <NavLink 
-                    to={`/profile/${user?.id}`}
-                    className={getActiveClass}
-                >
-                    Профиль
-                </NavLink>
-            </nav>
+                    <button
+                        className={styles["nav-button"]}
+                        onClick={() => setIsAdminMode(false)}
+                    >
+                        Режим пользователя
+                    </button>
+                </nav>
+            ) : (
+                <nav className={styles.nav}>
+                    <NavLink 
+                        to="/" 
+                        className={getActiveClass}
+                        end
+                    >
+                        Список лобби
+                    </NavLink>
+                    
+                    {currentLobby === null ? (
+                        <NavLink 
+                            to="/create" 
+                            className={getActiveClass}
+                        >
+                            Создать лобби
+                        </NavLink>
+                    ) : (
+                        <NavLink 
+                            to="/my-lobby" 
+                            className={getActiveClass}
+                        >
+                            Ваше лобби
+                        </NavLink>
+                    )}
+                    
+                    <NavLink 
+                        to="/knowledge" 
+                        className={getActiveClass}
+                    >
+                        База знаний
+                    </NavLink>
+                    
+                    <NavLink 
+                        to="/collection" 
+                        className={getActiveClass}
+                    >
+                        Коллекция
+                    </NavLink>
+                    <NavLink 
+                        to={`/profile/${user?.id}`}
+                        className={getActiveClass}
+                    >
+                        Профиль
+                    </NavLink>
+                    {user?.isAdmin && (
+                        <button
+                            onClick={() => setIsAdminMode(true)}
+                            className={styles["nav-button"]}
+                        >
+                            Админ режим
+                        </button>
+                    )}
+                </nav>
+            )}
         </aside>
     );
 };

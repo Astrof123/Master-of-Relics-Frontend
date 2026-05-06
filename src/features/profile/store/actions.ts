@@ -1,19 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '@/shared/api/client';
-import type { UserProfile } from '../types/responses';
-import type { FindFriendsData } from '../types/requests';
+import type { GetReportsResponseDto, ReportResponseData, UserProfile } from '../types/responses';
+import type { BanUserData, FindFriendsData, GetReportsData, SendReportUserData, UnbanUserData } from '../types/requests';
 import type { User } from '@/features/auth/types/responses';
 
 const PROFILE_ENDPOINTS = {
     PROFILE: "users/profile",
-	FRIENDSHIP_ACCEPT: "users/friendship/accept",
-	FRIENDSHIP_OFFER: "users/friendship/offer",
-	FRIENDSHIP_DECLINE: "users/friendship/decline",
-	FRIENDSHIP_BREAKOFF: "users/friendship/breakoff",
-	FIND_FRIENDS: "users/friendship"
-} as const
+	FRIENDSHIP_ACCEPT: "users/friendships/accept",
+	FRIENDSHIP_OFFER: "users/friendships/offer",
+	FRIENDSHIP_DECLINE: "users/friendships/decline",
+	FRIENDSHIP_BREAKOFF: "users/friendships/breakoff",
+	FIND_FRIENDS: "users/friendships",
+	SEND_REPORT: "users/reports",
+	GET_REPORTS: "users/reports",
+	BAN_USER: "users/ban",
+	UNBAN_USER: "users/unban",
+}
 
-export const getProfile = createAsyncThunk('profile', async (id: number, { rejectWithValue }) => {
+export const getProfile = createAsyncThunk('profile', async (id: string, { rejectWithValue }) => {
 	try {
 		const response = await api.get<UserProfile>(PROFILE_ENDPOINTS.PROFILE + `/${id}`, {
 			withAuth: true,
@@ -31,7 +35,7 @@ export const getProfile = createAsyncThunk('profile', async (id: number, { rejec
 	}
 });
 
-export const offerFriendship = createAsyncThunk('offerFriendship', async (id: number, { rejectWithValue }) => {
+export const offerFriendship = createAsyncThunk('offerFriendship', async (id: string, { rejectWithValue }) => {
 	try {
 		const response = await api.post(PROFILE_ENDPOINTS.FRIENDSHIP_OFFER + `/${id}`, {}, {
 			withAuth: true,
@@ -49,7 +53,7 @@ export const offerFriendship = createAsyncThunk('offerFriendship', async (id: nu
 	}
 });
 
-export const acceptFriendship = createAsyncThunk('acceptFriendship', async (id: number, { rejectWithValue }) => {
+export const acceptFriendship = createAsyncThunk('acceptFriendship', async (id: string, { rejectWithValue }) => {
 	try {
 		const response = await api.post(PROFILE_ENDPOINTS.FRIENDSHIP_ACCEPT + `/${id}`, {}, {
 			withAuth: true,
@@ -67,7 +71,7 @@ export const acceptFriendship = createAsyncThunk('acceptFriendship', async (id: 
 	}
 });
 
-export const declineFriendship = createAsyncThunk('declineFriendship', async (id: number, { rejectWithValue }) => {
+export const declineFriendship = createAsyncThunk('declineFriendship', async (id: string, { rejectWithValue }) => {
 	try {
 		const response = await api.post(PROFILE_ENDPOINTS.FRIENDSHIP_DECLINE + `/${id}`, {}, {
 			withAuth: true,
@@ -85,7 +89,7 @@ export const declineFriendship = createAsyncThunk('declineFriendship', async (id
 	}
 });
 
-export const breakoffFriendship = createAsyncThunk('breakoffFriendship', async (id: number, { rejectWithValue }) => {
+export const breakoffFriendship = createAsyncThunk('breakoffFriendship', async (id: string, { rejectWithValue }) => {
 	try {
 		const response = await api.post(PROFILE_ENDPOINTS.FRIENDSHIP_BREAKOFF + `/${id}`, {}, {
 			withAuth: true,
@@ -118,5 +122,82 @@ export const findFriends = createAsyncThunk('findFriends', async (data: FindFrie
 		}
 		
 		return rejectWithValue('Не удалось получить список пользователей для дружбы');
+	}
+});
+
+export const sendReport = createAsyncThunk('sendReport', async (data: SendReportUserData, { rejectWithValue }) => {
+	try {
+		const response = await api.post(PROFILE_ENDPOINTS.SEND_REPORT, data, {
+			withAuth: true,
+			retryOnUnauthorized: true
+		});
+
+		return response.data;
+	}
+	catch (error: any) {
+		if (error.response?.data?.message) {
+			return rejectWithValue(error.response.data.message)
+		}
+		
+		return rejectWithValue('Не удалось отправить жалобу');
+	}
+});
+
+export const getReports = createAsyncThunk('getReports', async (data: GetReportsData, { rejectWithValue }) => {
+	try {
+
+		const response = await api.get<GetReportsResponseDto>(PROFILE_ENDPOINTS.GET_REPORTS, {
+			withAuth: true,
+			retryOnUnauthorized: true,
+			params: data
+		});
+
+		return response.data;
+	}
+	catch (error: any) {
+		if (error.response?.data?.message) {
+			return rejectWithValue(error.response.data.message)
+		}
+		
+		return rejectWithValue('Не удалось получить жалобы');
+	}
+});
+
+export const banUser = createAsyncThunk('banUser', async (data: BanUserData, { rejectWithValue }) => {
+	try {
+
+		const response = await api.post(PROFILE_ENDPOINTS.BAN_USER, data, {
+			withAuth: true,
+			retryOnUnauthorized: true
+		});
+
+		return response.data;
+	}
+	catch (error: any) {
+		if (error.response?.data?.message) {
+			return rejectWithValue(error.response.data.message)
+		}
+		
+		return rejectWithValue('Не удалось забанить игрока');
+	}
+});
+
+
+export const unbanUser = createAsyncThunk('unbanUser', async (data: UnbanUserData, { rejectWithValue }) => {
+	try {
+
+		const response = await api.post(PROFILE_ENDPOINTS.UNBAN_USER, data, {
+			withAuth: true,
+			retryOnUnauthorized: true
+		});
+
+		return response.data;
+	}
+	catch (error: any) {
+		if (error.response?.data?.message) {
+			return rejectWithValue(error.response.data.message)
+		}
+		
+		return rejectWithValue('Не удалось разбанить игрока');
 	}
 });

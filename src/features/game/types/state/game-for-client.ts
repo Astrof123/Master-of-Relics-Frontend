@@ -19,7 +19,7 @@ export interface EnemyArtifact {
 }
 
 export interface EnemyForClient {
-    id: number;
+    id: string;
     name: string;
     connection: ConnectionGame;
     hero: string;
@@ -45,7 +45,7 @@ export interface GameForClient {
     id: string;
     phase: Phase;
     name: string;
-    currentTurn: number;
+    currentTurn: string;
     logs: LogState[];
     player: Player;
     enemy: EnemyForClient;

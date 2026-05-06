@@ -25,11 +25,21 @@ const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        offeredFriendship: (state, action: PayloadAction<number>) => {
+        offeredFriendship: (state, action: PayloadAction<string>) => {
             state.usersForFriendship = state.usersForFriendship.filter(user => user.id !== action.payload);
         },
         clearUsersForFriendship: (state) => {
             state.usersForFriendship = [];
+        },
+        setIsReported: (state, action: PayloadAction<boolean>) => {
+			if (state.profile) {
+				state.profile.isReported = action.payload;
+			}
+        },
+        setIsBanned: (state, action: PayloadAction<boolean>) => {
+			if (state.profile) {
+				state.profile.isBanned = action.payload;
+			}
         },
     },
 	extraReducers: (builder) => {
@@ -107,7 +117,9 @@ const profileSlice = createSlice({
 
 export const {
 	offeredFriendship,
-	clearUsersForFriendship
+	clearUsersForFriendship,
+	setIsReported,
+	setIsBanned
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

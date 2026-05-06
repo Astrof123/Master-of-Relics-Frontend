@@ -21,20 +21,20 @@
     background: #2f241b;
 }
 
-.friend-btn {
+.friend-btn, .unban-btn {
     background: linear-gradient(145deg, #2f3329, #1a241b);
     border-color: #3d7a63;
     color: #a8d5c5;
 }
 
-.friend-btn:hover {
+.friend-btn:hover, .unban-btn:hover {
     transform: translateY(-2px);
     border-color: #7ed957;
     box-shadow: 0 0 20px #3da075;
     color: #e0fff0;
 }
 
-.friend-btn-pending {
+.friend-btn-pending, .unban-btn-pending {
     background: linear-gradient(145deg, #332f29, #241f1b);
     border-color: #8b6f4c;
     color: #b89a7a;
@@ -55,19 +55,19 @@
     color: #ffc0c0;
 }
 
-.report-btn {
+.report-btn, .ban-btn {
     background: linear-gradient(145deg, #33211e, #251b18);
     border-color: #8b4c4c;
     color: #d5a8a8;
 }
 
-.report-btn:hover {
+.report-btn:hover, .ban-btn:hover {
     transform: translateY(-2px);
     border-color: #ff6b4a;
     box-shadow: 0 0 20px #b84c4c;
 }
 
-.report-btn-disabled {
+.report-btn-disabled, .ban-btn-disabled {
     background: linear-gradient(145deg, #2a2220, #1a1518);
     border-color: #5d4a36;
     color: #8b6f4c;

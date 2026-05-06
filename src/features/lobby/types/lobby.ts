@@ -9,7 +9,7 @@ export interface LobbyPlayer {
 export interface Lobby {
     id: string,
     name: string,
-    players: Record<number, LobbyPlayer>,
+    players: Record<string, LobbyPlayer>,
     state: LobbyStateType,
     code: string | null;
     isPrivate: boolean;

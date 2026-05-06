@@ -43,10 +43,8 @@ function DraftedArtifacts() {
     }
 
     const exitMenuClick = () => {
-        if (gameState.end) {
-            dispatch(setLeaveLobby())
-            navigate("/")
-        }
+        dispatch(setLeaveLobby())
+        navigate("/")
     }
 
     return (

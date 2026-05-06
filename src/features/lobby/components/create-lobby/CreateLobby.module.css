@@ -501,3 +501,67 @@
         transform: translateY(0);
     }
 }
+
+/* Disabled состояние для кнопки создания лобби */
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+    transform: none !important;
+    animation: none !important;
+    box-shadow: 0 4px 0 #2a1f18 !important;
+}
+
+.button:disabled::before {
+    opacity: 0 !important;
+    animation: none !important;
+}
+
+.button:disabled:hover {
+    transform: none !important;
+    border-color: #8b6f4c !important;
+    box-shadow: 0 4px 0 #2a1f18 !important;
+    color: #ffd7a5 !important;
+}
+
+/* Disabled для инпутов */
+.input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+}
+
+.input:disabled:hover {
+    border-color: #5d4a36;
+    background: #2f241b;
+}
+
+/* Disabled для чекбоксов */
+.checkbox-input:disabled + .checkbox-custom {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+}
+
+.checkbox-input:disabled ~ .checkbox-description {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Disabled для таймеров */
+.timer-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+}
+
+.timer-input-wrapper:has(.timer-input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}

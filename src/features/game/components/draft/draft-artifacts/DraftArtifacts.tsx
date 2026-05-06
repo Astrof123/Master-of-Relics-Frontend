@@ -4,13 +4,11 @@ import { useAppSelector } from "@/app/store";
 import { useCallback, useState } from "react";
 import type { CardForView } from "../../../types/card";
 import DraftDeck from "../draft-deck/DraftDeck";
-import { useModal } from "@/features/modal/hooks/useModal";
-import { MODALTYPE, type OpenModalData } from "@/features/modal/types/modal";
-import { CONNECTIONGAME, type DeckArtifact } from "@/features/game/types/state/game";
+import { CARD_MODAL_TYPE, type OpenCardModalData } from "@/features/modal/types/modal";
+import { type DeckArtifact } from "@/features/game/types/state/game";
 import type { ModalDraftDetails } from "@/features/modal/types/details";
-import SwordsImg from "@assets/icons/two-swords.png";
-import WaitImg from "@assets/icons/wait.png";
 import { GameTimer } from "../../common/game-timer/GameTimer";
+import { useCardModal } from "@/features/modal/hooks/useCardModal";
 
 function DraftArtifacts() {
     const playersOnline = useAppSelector((state) => state.game.playersOnline);
@@ -18,7 +16,7 @@ function DraftArtifacts() {
     const [isYourDeck, setIsYourDeck] = useState(true);
     const gameId = useAppSelector(state => state.game.gameState?.id);
     
-    const { openModal } = useModal();
+    const { openCardModal } = useCardModal();
 
     const deckPlayer = useAppSelector(state => state.game.gameState?.player.draft.deck);
     const deckEnemy = useAppSelector(state => state.game.gameState?.enemy.draft.deck);
@@ -34,16 +32,16 @@ function DraftArtifacts() {
             cardForView: card
         }
 
-        const data: OpenModalData = {
+        const data: OpenCardModalData = {
             details: details,
-            modalType: MODALTYPE.DRAFT,
+            modalType: CARD_MODAL_TYPE.DRAFT,
             valueLeftTop: cardInfo.maxHp,
             valueRightTop: cardInfo.skillCost,
             isArtifact: true
         }
 
-        openModal(data);
-    }, [openModal, isYourDeck, gameId]);
+        openCardModal(data);
+    }, [openCardModal, isYourDeck, gameId]);
 
     return (  
         <div className={clsx(styles["draft-artifacts-wrapper"])}>
@@ -87,7 +85,9 @@ function DraftArtifacts() {
                             </div>                
                         ))}
                     </div>
-                    <GameTimer />
+                    {gameState?.constants.timerDraft !== null && (
+                        <GameTimer />
+                    )}
                 </div>   
                 <button type="button" onClick={() => setIsYourDeck(!isYourDeck)}>
                     {isYourDeck ? "Колода соперника" : "Своя колода"}

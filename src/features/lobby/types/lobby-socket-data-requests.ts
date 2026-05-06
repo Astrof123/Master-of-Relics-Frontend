@@ -1,6 +1,6 @@
 export interface InviteFriendData {
     lobbyId: string;
-    friendId: number;
+    friendId: string;
 }
 
 export interface UpdateOptionsLobbyData {

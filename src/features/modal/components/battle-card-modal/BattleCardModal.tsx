@@ -74,8 +74,8 @@ const BattleCardModal = (props: BattleCardModalProps) => {
                                             className={clsx(styles.buff, styles["buff--positive"])}  
                                         />
                                     </div>
-                                    {artifactEffects.map((effect) => (
-                                        <div key={effect.id} title={EFFECTS[effect.id].title} className={clsx(styles["buff-wrapper"])}>
+                                    {artifactEffects.map((effect, index) => (
+                                        <div key={effect.id + index} title={EFFECTS[effect.id].title} className={clsx(styles["buff-wrapper"])}>
                                             <span>{effect.number}</span>
                                             <img
                                                 src={EFFECTS[effect.id].img} 

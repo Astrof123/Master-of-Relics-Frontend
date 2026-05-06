@@ -9,8 +9,8 @@ import type {
 interface OfferFriendshipListProps {
     isOwnProfile: boolean;
     profile: UserProfile;
-    onHandleAcceptFriendClick: (e: MouseEvent<HTMLButtonElement>,friendId: number) => Promise<void>;
-    onHandleDeclineFriendClick: (e: MouseEvent<HTMLButtonElement>,friendId: number) => Promise<void>;
+    onHandleAcceptFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
+    onHandleDeclineFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
 }
 
 const OfferFriendshipList = (props: OfferFriendshipListProps) => {

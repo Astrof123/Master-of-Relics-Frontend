@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { LINE, type ArtifactGameState, type ConnectionGame } from '../types/state/game';
 import type { GameForClient } from '../types/state/game-for-client';
 import type { TimerSyncData } from '../types/socket/game-socket-data-responses';
+import { MINIPHASE } from '../types/state/phase';
 
 interface ReorderArtifactsPayload {
     front: string[];
@@ -39,8 +40,16 @@ const gameSocketSlice = createSlice({
             }
         },
         setGameState: (state, action: PayloadAction<GameForClient>) => {
-            state.gameState = action.payload;
             console.log(action.payload)
+            let oldTemporaryArtifacts;
+            if (action.payload.player.temporaryArtifacts && !action.payload.player.isReady && state.gameState?.miniPhase === MINIPHASE.MOVEMENT) {
+                oldTemporaryArtifacts = JSON.parse(JSON.stringify(state.gameState?.player.temporaryArtifacts));
+            }
+            state.gameState = action.payload;
+            if (oldTemporaryArtifacts) {
+                state.gameState.player.temporaryArtifacts = oldTemporaryArtifacts;
+            }
+            
         },
         setPlayersOnline: (state, action: PayloadAction<Record<string, ConnectionGame>>) => {
             state.playersOnline = action.payload;

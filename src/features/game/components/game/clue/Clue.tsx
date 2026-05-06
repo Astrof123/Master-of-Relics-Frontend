@@ -190,7 +190,9 @@ const Clue = (props: ClueProps) => {
                 </>
             )}
             <div className={clsx(styles["clue-end"])}>
-                <GameTimer />
+                {props.gameState?.constants.timerTurn !== null && !props.gameState.end && (
+                    <GameTimer />
+                )}
                 <div onClick={() => setShowSettings(!showSettings)} className={clsx(styles["settings-wrapper"])}>
                     <img 
                         className={clsx(styles["settings"])} 

@@ -22,8 +22,8 @@ const MovableBattlePlayerArtifacts = (props: BattlePlayerArtifactsProps) => {
     const allArtifacts = props.artifacts as ArtifactGameState[];
     
     const { frontLineArtifacts, backLineArtifacts } = useMemo(() => ({
-        frontLineArtifacts: allArtifacts.filter(artifact => artifact.line === LINE.FRONT),
-        backLineArtifacts: allArtifacts.filter(artifact => artifact.line === LINE.BACK),
+        frontLineArtifacts: allArtifacts.filter(artifact => artifact.line === LINE.FRONT).sort((a1, a2) => a1.position - a2.position),
+        backLineArtifacts: allArtifacts.filter(artifact => artifact.line === LINE.BACK).sort((a1, a2) => a1.position - a2.position),
     }), [allArtifacts]);
 
     const [localOrder, setLocalOrder] = useState<ArtifactsOrder>(() => ({

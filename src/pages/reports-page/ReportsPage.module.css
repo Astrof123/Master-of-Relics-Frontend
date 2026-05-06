@@ -1,0 +1,1106 @@
+.reports-container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Forum', serif;
+}
+
+/* Заголовок */
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #5d4a36;
+    position: relative;
+}
+
+.reports-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(90deg, #aa7840, transparent);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 10px #aa7840);
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 15px #aa7840;
+    margin: 0;
+}
+
+/* Поиск */
+.search-wrapper {
+    position: relative;
+}
+
+.search-input {
+    padding: 12px 16px 12px 16px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 8px;
+    color: #e8d9c0;
+    font-family: 'Forum', serif;
+    font-size: 15px;
+    width: 280px;
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.search-input::placeholder {
+    color: #8b6f4c;
+    font-style: italic;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #8b6f4c;
+    pointer-events: none;
+}
+
+/* Таблица */
+.reports-table {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 130px 1fr 160px 160px 110px 30px;
+    background: #2f241b;
+    border-bottom: 2px solid #5d4a36;
+    padding: 14px 20px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 5px #aa7840;
+    letter-spacing: 1px;
+    gap: 16px;
+}
+
+.table-body {
+    /* max-height: 600px; */
+    /* overflow-y: auto; */
+}
+
+/* Стилизация скроллбара */
+.table-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-body::-webkit-scrollbar-track {
+    background: #2f241b;
+    border-radius: 4px;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+    background: #aa7840;
+    border-radius: 4px;
+    border: 1px solid #8b6f4c;
+}
+
+/* Строка жалобы */
+.report-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 160px 160px 110px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #5d4a36;
+    transition: all 0.2s ease;
+    align-items: center;
+    gap: 16px;
+}
+
+.report-row:hover {
+    background: rgba(170, 120, 60, 0.1);
+}
+
+/* Бейдж типа жалобы */
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+    user-select: none;
+}
+
+.type-icon {
+    font-size: 14px;
+}
+
+.type-obstruction {
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid #e74c3c;
+    color: #ffb0a0;
+}
+
+.type-insult {
+    background: rgba(155, 89, 182, 0.2);
+    border: 1px solid #9b59b6;
+    color: #d5a8ff;
+}
+
+.type-offensive-nickname {
+    background: rgba(241, 196, 15, 0.2);
+    border: 1px solid #f1c40f;
+    color: #dfaf21;
+}
+
+.type-other {
+    background: rgba(170, 120, 60, 0.2);
+    border: 1px solid #aa7840;
+    color: #ffd7a5;
+}
+
+/* Текст жалобы */
+.report-text {
+    color: #e8d9c0;
+    font-size: 16px;
+    line-height: 1.4;
+    display: block;
+}
+
+/* Ссылка на пользователя */
+.user-link {
+    display: flex;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex-direction: column;
+}
+
+.user-link:hover {
+    transform: translateX(4px);
+}
+
+.user-link:hover .user-name {
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+}
+
+.user-avatar {
+    font-size: 20px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.user-name {
+    color: #b89a7a;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Дата */
+.date {
+    color: #8b6f4c;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 24px 0 16px;
+}
+
+.page-btn {
+    padding: 10px 24px;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b6f4c;
+    border-radius: 6px;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(.disabled) {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 0 0 20px #aa7840;
+    color: #ffffff;
+}
+
+.page-btn.disabled,
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.page-info {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    background: #2f241b;
+    padding: 6px 16px;
+    border-radius: 30px;
+    border: 1px solid #5d4a36;
+}
+
+.page-current {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+}
+
+.page-separator {
+    font-size: 16px;
+    color: #8b6f4c;
+}
+
+.page-total {
+    font-size: 16px;
+    color: #b89a7a;
+}
+
+/* Статистика */
+.stats {
+    user-select: none;
+    text-align: right;
+    font-size: 14px;
+    color: #b89a7a;
+    padding-top: 12px;
+    font-weight: 600;
+    border-top: 1px solid #5d4a36;
+}
+
+.stats-value {
+    font-weight: 700;
+    color: #ffd7a5;
+    font-size: 18px;
+    margin-left: 8px;
+    text-shadow: 0 0 5px #aa7840;
+}
+
+/* Загрузка */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 80px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border-radius: 12px;
+    border: 2px solid #5d4a36;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #5d4a36;
+    border-top-color: #aa7840;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading span {
+    color: #b89a7a;
+    font-size: 18px;
+}
+
+/* Пустое состояние */
+.empty-state {
+    text-align: center;
+    padding: 80px 40px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border-radius: 12px;
+    border: 2px dashed #5d4a36;
+}
+
+.empty-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    color: #b89a7a;
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.empty-hint {
+    font-size: 13px;
+    color: #8b6f4c;
+    font-style: italic;
+}
+
+
+/* Анимации */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 1100px) {
+    .table-header,
+    .report-row {
+        grid-template-columns: 110px 1fr 140px 140px 100px;
+    }
+    
+    .col-type,
+    .col-reported,
+    .col-requester,
+    .col-date {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 900px) {
+    .reports-container {
+        padding: 16px;
+    }
+    
+    .table-header,
+    .report-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px 16px;
+    }
+    
+    .table-header {
+        display: none;
+    }
+    
+    .report-row {
+        margin-bottom: 12px;
+        border: 1px solid #5d4a36;
+        border-radius: 8px;
+    }
+    
+    .col-type::before,
+    .col-text::before,
+    .col-reported::before,
+    .col-requester::before,
+    .col-date::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ffd7a5;
+        min-width: 100px;
+    }
+    
+    .report-row > div {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .header-title {
+        font-size: 24px;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .search-wrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header-title {
+        font-size: 20px;
+    }
+    
+    .header-icon {
+        font-size: 28px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .page-btn {
+        padding: 6px 16px;
+        font-size: 12px;
+    }
+    
+    .type-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .user-name {
+        font-size: 13px;
+    }
+    
+    .report-text {
+        font-size: 13px;
+    }
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-toggle {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b6f4c;
+    border-radius: 6px;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-toggle:hover {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 0 0 20px #aa7840;
+    color: #ffffff;
+}
+
+/* Панель фильтров */
+.filters-panel {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    animation: fadeIn 0.3s ease;
+    align-items: flex-start
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #b89a7a;
+}
+
+.filter-icon {
+    font-size: 16px;
+}
+
+.filter-input {
+    padding: 10px 14px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    color: #e8d9c0;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.filter-input::placeholder {
+    color: #8b6f4c;
+    font-style: italic;
+}
+
+.filter-input-date {
+    padding: 10px 14px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    color: #e8d9c0;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.filter-input-date:focus {
+    outline: none;
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.filter-input-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.6) sepia(1) saturate(5) hue-rotate(360deg);
+    opacity: 0.7;
+}
+
+.reset-filters {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #33211e, #251b18);
+    border: 2px solid #8b4c4c;
+    border-radius: 6px;
+    color: #d5a8a8;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reset-filters:hover {
+    transform: translateY(-2px);
+    border-color: #ff6b4a;
+    box-shadow: 0 0 20px #b84c4c;
+    color: #ffc0c0;
+}
+
+/* ID пользователя */
+.user-id {
+    font-size: 15px;
+    font-weight: 600;
+    color: #8b6f4c;
+}
+
+.filter-badge {
+    font-size: 14px;
+    color: #d49c5c;
+    margin-left: 12px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* Адаптивность для фильтров */
+@media (max-width: 768px) {
+    .filters-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .reset-filters {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .header-actions {
+        width: 100%;
+    }
+    
+    .filter-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .filters-panel {
+        padding: 16px;
+    }
+    
+    .filter-label {
+        font-size: 13px;
+    }
+    
+    .filter-input,
+    .filter-input-date {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+    
+    .reset-filters {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Обертка для строки с раскрывающимся контентом */
+.report-wrapper {
+    border-bottom: 1px solid #5d4a36;
+}
+
+.report-wrapper:last-child {
+    border-bottom: none;
+}
+
+/* Строка жалобы с курсором */
+.report-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 160px 160px 110px 30px;
+    padding: 14px 20px;
+    transition: all 0.2s ease;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.report-row:hover {
+    background: rgba(170, 120, 60, 0.1);
+}
+
+.report-row--expanded {
+    background: rgba(170, 120, 60, 0.15);
+}
+
+/* Иконка раскрытия */
+.expand-icon {
+    color: #aa7840;
+    font-size: 12px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Раскрытый контент */
+.expanded-content {
+    padding: 16px 20px 20px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid #5d4a36;
+    animation: expandFade 0.2s ease;
+}
+
+.full-text-label {
+    font-size: 14px;
+    color: #b89a7a;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.full-text {
+    font-size: 17px;
+    color: #e8d9c0;
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* Анимация раскрытия */
+@keyframes expandFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Обновленные стили для .report-row (убираем старый border-bottom) */
+.report-row {
+    /* border-bottom удален, теперь он на .report-wrapper */
+}
+
+/* Адаптивность для раскрытия */
+@media (max-width: 900px) {
+    .report-row {
+        grid-template-columns: 1fr 30px;
+        gap: 8px;
+    }
+    
+    .expand-icon {
+        grid-row: span 5;
+        align-self: center;
+    }
+    
+    .expanded-content {
+        margin-top: 8px;
+    }
+}
+
+/* Добавить в конец файла */
+
+/* Статус жалобы */
+.col-status {
+    min-width: 130px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.status-processed {
+    background: rgba(60, 170, 120, 0.2);
+    border: 1px solid #3d7a63;
+    color: #a8d5c5;
+}
+
+.status-unprocessed {
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid #e74c3c;
+    color: #ffb0a0;
+}
+
+/* Кнопки фильтра статуса */
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.status-filter-btn {
+    padding: 8px 16px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 6px;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.status-filter-btn:hover {
+    border-color: #aa7840;
+    color: #ffd7a5;
+}
+
+.status-filter-btn--active {
+    background: #3f3329;
+    border-color: #d49c5c;
+    color: #ffd7a5;
+    box-shadow: 0 0 10px rgba(170, 120, 60, 0.3);
+}
+
+/* Обновленные стили для таблицы с новым столбцом */
+.table-header {
+    display: grid;
+    grid-template-columns: 150px 1fr 160px 160px 110px 130px 30px;
+    background: #2f241b;
+    border-bottom: 2px solid #5d4a36;
+    padding: 14px 20px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 5px #aa7840;
+    letter-spacing: 1px;
+    gap: 16px;
+}
+
+.report-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 160px 160px 110px 130px 30px;
+    padding: 14px 20px;
+    transition: all 0.2s ease;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+/* Адаптивность для нового столбца */
+@media (max-width: 1200px) {
+    .table-header,
+    .report-row {
+        grid-template-columns: 120px 1fr 140px 140px 100px 120px 30px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .table-header,
+    .report-row {
+        grid-template-columns: 110px 1fr 140px 140px 100px 110px 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    .table-header {
+        display: none;
+    }
+    
+    .report-row {
+        grid-template-columns: 1fr 30px;
+        gap: 8px;
+    }
+    
+    .col-status::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ffd7a5;
+        min-width: 100px;
+    }
+    
+    .expand-icon {
+        grid-row: span 6;
+        align-self: center;
+    }
+}
+
+/* Обновленный адаптив для фильтров */
+@media (max-width: 768px) {
+    .filter-buttons {
+        width: 100%;
+    }
+    
+    .status-filter-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+.filter-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-button-extra-div {
+    height: 22px;
+}
+
+/* Добавить/обновить эти стили в конце файла */
+
+/* Ограничения для никнеймов и ID */
+.user-link {
+    display: flex;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.user-link:hover {
+    transform: translateX(4px);
+}
+
+.user-link:hover .user-name {
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+}
+
+.user-name {
+    color: #b89a7a;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    display: inline-block;
+}
+
+.user-id {
+    font-size: 12px;
+    font-weight: 600;
+    color: #8b6f4c;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    display: inline-block;
+}
+
+/* Текст жалобы */
+.report-text {
+    color: #e8d9c0;
+    font-size: 15px;
+    line-height: 1.4;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+/* Бейдж типа жалобы */
+.type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Статус бейдж */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+/* Дата */
+.date {
+    color: #8b6f4c;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Полный текст в раскрытом блоке */
+.full-text {
+    font-size: 16px;
+    color: #e8d9c0;
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .report-text {
+        max-width: 300px;
+    }
+    
+    .user-name {
+        max-width: 120px;
+        font-size: 14px;
+    }
+    
+    .user-id {
+        max-width: 80px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .report-text {
+        max-width: 250px;
+    }
+    
+    .user-name {
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 900px) {
+    .report-text {
+        max-width: 100%;
+        white-space: normal;
+    }
+    
+    .user-name {
+        max-width: 150px;
+        white-space: normal;
+    }
+    
+    .user-id {
+        max-width: 100%;
+        white-space: normal;
+    }
+    
+    .type-badge,
+    .status-badge {
+        white-space: normal;
+        word-break: keep-all;
+    }
+}
+
+@media (max-width: 768px) {
+    .report-text {
+        font-size: 14px;
+    }
+    
+    .user-name {
+        font-size: 14px;
+        max-width: 120px;
+    }
+    
+    .full-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .report-text {
+        font-size: 13px;
+    }
+    
+    .user-name {
+        font-size: 13px;
+        max-width: 100px;
+    }
+    
+    .type-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .status-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .full-text {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,511 @@
+.deck-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Forum', serif;
+}
+
+/* Заголовок */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 15px #aa7840;
+    margin-bottom: 28px;
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #5d4a36;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(90deg, #aa7840, transparent);
+}
+
+/* Табы для переключения колод */
+.deck-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.deck-tab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: linear-gradient(145deg, #2f2824, #1a1518);
+    border: 2px solid #5d4a36;
+    border-radius: 8px;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.deck-tab:hover {
+    transform: translateY(-2px);
+    border-color: #aa7840;
+    color: #ffd7a5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.deck-tab--selected {
+    background: #3f3329;
+    border-color: #d49c5c;
+    color: #ffd7a5;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.deck-tab-name {
+    font-size: 16px;
+}
+
+.active-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: #1e332c;
+    border: 1px solid #3d7a63;
+    border-radius: 20px;
+    color: #a8d5c5;
+}
+
+/* Контент колоды */
+.deck-content {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    padding: 24px;
+    animation: fadeIn 0.3s ease;
+}
+
+.deck-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #5d4a36;
+}
+
+.deck-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.deck-name {
+    font-size: 22px;
+    font-family: 'Forum', serif;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    margin: 0;
+}
+
+.active-deck-badge {
+    padding: 6px 14px;
+    background: #1e332c;
+    border: 1px solid #3d7a63;
+    border-radius: 20px;
+    color: #a8d5c5;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.activate-btn {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #2f3329, #1a241b);
+    border: 2px solid #3d7a63;
+    border-radius: 6px;
+    color: #a8d5c5;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.activate-btn:hover {
+    transform: translateY(-2px);
+    border-color: #7ed957;
+    box-shadow: 0 0 20px #3da075;
+    color: #e0fff0;
+}
+
+/* Сетка карт */
+.cards-grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    gap: 12px;
+}
+
+/* Карточка */
+.card {
+    position: relative;
+    border-radius: 17px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 3px solid #5d4a36;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.card:hover .image {
+    border-color: #aa7840;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.value-left-top, .value-right-top {
+    font-size: 18px;
+    position: absolute;
+    color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    -webkit-text-stroke: 1px black;
+    font-weight: 800;
+    user-select: none;
+}
+
+.value-left-top--high {
+    left: 12.5%;
+    bottom: 18.5%;
+}
+
+.value-left-top--low {
+    left: 15.5%;
+    bottom: 18.5%;
+}
+
+.value-left-top--very-low {
+    left: 17%;
+    bottom: 18.5%;
+}
+
+.value-right-top--high {
+    right: 12%;
+    bottom: 15%;
+}
+
+.value-right-top--low {
+    right: 13.2%;
+    bottom: 15.5%;
+}
+
+.value-right-top--very-low {
+    right: 15.5%;
+    bottom: 15%;
+}
+
+/* Загрузка */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 80px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border-radius: 12px;
+    border: 2px solid #5d4a36;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #5d4a36;
+    border-top-color: #aa7840;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading span {
+    color: #b89a7a;
+    font-size: 18px;
+}
+
+/* Пустое состояние */
+.empty {
+    text-align: center;
+    padding: 80px 40px;
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border-radius: 12px;
+    border: 2px dashed #5d4a36;
+}
+
+.empty-icon {
+    font-size: 64px;
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty p {
+    color: #b89a7a;
+    font-size: 18px;
+}
+
+/* Анимации */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .deck-container {
+        padding: 16px;
+    }
+    
+    .cards-grid {
+        gap: 12px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .deck-name {
+        font-size: 18px;
+    }
+    
+    .deck-tab {
+        padding: 8px 16px;
+    }
+    
+    .deck-tab-name {
+        font-size: 14px;
+    }
+    
+    .active-badge {
+        font-size: 10px;
+        padding: 2px 8px;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .deck-container {
+        padding: 12px;
+    }
+    
+    .deck-content {
+        padding: 16px;
+    }
+    
+    .deck-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .activate-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .deck-tabs {
+        gap: 10px;
+    }
+    
+    .deck-tab {
+        padding: 6px 12px;
+    }
+    
+    .deck-tab-name {
+        font-size: 12px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 8px;
+    }
+    
+}
+
+/* Кнопки редактирования */
+.deck-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.edit-btn {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #3f3329, #241e1b);
+    border: 2px solid #8b6f4c;
+    border-radius: 6px;
+    color: #ffd7a5;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    border-color: #d49c5c;
+    box-shadow: 0 0 20px #aa7840;
+    color: #ffffff;
+}
+
+.cancel-btn {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #33211e, #251b18);
+    border: 2px solid #8b4c4c;
+    border-radius: 6px;
+    color: #d5a8a8;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+    transform: translateY(-2px);
+    border-color: #ff6b4a;
+    box-shadow: 0 0 20px #b84c4c;
+    color: #ffc0c0;
+}
+
+.confirm-btn {
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #2f3329, #1a241b);
+    border: 2px solid #3d7a63;
+    border-radius: 6px;
+    color: #a8d5c5;
+    font-family: 'Forum', serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.confirm-btn:hover {
+    transform: translateY(-2px);
+    border-color: #7ed957;
+    box-shadow: 0 0 20px #3da075;
+    color: #e0fff0;
+}
+
+/* Режим редактирования карточек */
+.card--editable {
+    position: relative;
+    cursor: pointer;
+}
+
+.edit-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 12px;
+}
+
+.card--editable:hover .edit-overlay {
+    opacity: 1;
+}
+
+.edit-icon {
+    width: 30px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.edit-text {
+    font-size: 14px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #ffd7a5;
+    text-shadow: 0 0 5px #aa7840;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .deck-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .edit-btn,
+    .cancel-btn,
+    .confirm-btn {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .edit-icon {
+        font-size: 22px;
+    }
+    
+    .edit-text {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-icon {
+        font-size: 18px;
+    }
+    
+    .edit-text {
+        font-size: 10px;
+    }
+}

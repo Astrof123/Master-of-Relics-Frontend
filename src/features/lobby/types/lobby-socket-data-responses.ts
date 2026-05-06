@@ -18,14 +18,14 @@ export interface GetLobbyListData {
 export interface LobbyInvitation {
     id: string;
     lobbyId: string,
-    addresseeId: number,
+    addresseeId: string,
     requesterNickname: string;
 }
 
 export interface FriendForInvite {
     isOnline: boolean;
     friendNickname: string;
-    friendId: number;
+    friendId: string;
     status: InviteStatus;
 }
 

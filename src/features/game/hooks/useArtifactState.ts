@@ -11,6 +11,8 @@ export const useArtifactState = (state: ArtifactState) => {
                 return { className: 'state--stunned', name: 'Оглушен' };
             case ARTIFACT_STATE.ROOTED:
                 return { className: 'state--rooted', name: 'Оцепенение' };
+            case ARTIFACT_STATE.DREAM:
+                return { className: 'state--dreamed', name: 'Во сне' };
             case ARTIFACT_STATE.BREAKEN:
                 return { className: 'state--breaken', name: 'Сломан' };
             default:

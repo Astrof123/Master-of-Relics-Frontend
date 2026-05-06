@@ -1,15 +1,18 @@
 import { useState, type ChangeEvent } from "react";
-import type { Lobby } from "../../types/lobby";
 import styles from "./CreateLobby.module.css";
 import clsx from "clsx";
 import LockImg from "@assets/icons/lock.png";
 import TimerImg from "@assets/icons/wait.png";
+import type { CreateLobbyData } from "../../types/lobby-socket-data-requests";
+import { useAppSelector } from "@/app/store";
 
 interface CreateLobbyProps {
-    onCreateLobby: (data: Partial<Lobby>) => void
+    onCreateLobby: (data: CreateLobbyData) => void
 }
 
 const CreateLobby = (props: CreateLobbyProps) => {
+    const user = useAppSelector((state) => state.auth.user);
+    const isBanned = !!user?.bannedUntil && new Date(user.bannedUntil) > new Date();
     const [formData, setFormData] = useState({
         name: "",
         isPrivate: false,
@@ -45,13 +48,10 @@ const CreateLobby = (props: CreateLobbyProps) => {
         props.onCreateLobby({
             name: formData.name,
             isPrivate: formData.isPrivate,
-            options: {
-                withTimers: formData.useTimers,
-                timerDraft: formData.draftTime,
-                timerMovement: formData.movementTime,
-                timerTurn: formData.turnTime,
-                mode: "classic"
-            }
+            withTimers: formData.useTimers,
+            timerDraft: formData.draftTime,
+            timerMovement: formData.movementTime,
+            timerTurn: formData.turnTime
         });
         
         setFormData(prev => ({
@@ -90,6 +90,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                         minLength={3}
                         maxLength={20}
                         required
+                        disabled={isBanned}
                     />
                 </label>
                 
@@ -118,6 +119,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                             checked={formData.isPrivate}
                             onChange={handleChange}
                             className={styles["checkbox-input"]}
+                            disabled={isBanned}
                         />
                         <span className={styles["checkbox-custom"]}></span>
                     </div>
@@ -141,6 +143,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                             checked={formData.useTimers}
                             onChange={handleChange}
                             className={styles["checkbox-input"]}
+                            disabled={isBanned}
                         />
                         <span className={styles["checkbox-custom"]}></span>
                     </div>
@@ -172,6 +175,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                                         max={300}
                                         step={5}
                                         className={styles["timer-input"]}
+                                        disabled={isBanned}
                                     />
                                     <span className={styles["timer-unit"]}>сек</span>
                                 </div>
@@ -194,6 +198,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                                         max={300}
                                         step={5}
                                         className={styles["timer-input"]}
+                                        disabled={isBanned}
                                     />
                                     <span className={styles["timer-unit"]}>сек</span>
                                 </div>
@@ -216,6 +221,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                                         max={300}
                                         step={5}
                                         className={styles["timer-input"]}
+                                        disabled={isBanned}
                                     />
                                     <span className={styles["timer-unit"]}>сек</span>
                                 </div>
@@ -227,7 +233,7 @@ const CreateLobby = (props: CreateLobbyProps) => {
                     </div>
                 )}
 
-                <button className={styles.button} type="submit">
+                <button disabled={isBanned} className={styles.button} type="submit">
                     Создать лобби
                 </button>
             </form>

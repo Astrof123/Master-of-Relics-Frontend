@@ -3,10 +3,10 @@ import styles from "./DraftNet.module.css"
 import { ARTIFACTS } from "../../../constants/artifacts";
 import type { ArtifactGameState } from "../../../types/state/game";
 import type { EnemyArtifact } from "../../../types/state/game-for-client";
-import { useModal } from "@/features/modal/hooks/useModal";
 import type { CardForView } from "@/features/game/types/card";
-import { MODALTYPE, type OpenModalData } from "@/features/modal/types/modal";
+import { CARD_MODAL_TYPE, type OpenCardModalData } from "@/features/modal/types/modal";
 import type { ModalShowDetails } from "@/features/modal/types/details";
+import  { useCardModal } from "@/features/modal/hooks/useCardModal";
 
 interface DraftNetProps {
     playerArtifacts: Record<string, ArtifactGameState>;
@@ -14,22 +14,22 @@ interface DraftNetProps {
 }
 
 const DraftNet = (props: DraftNetProps) => {
-    const { openModal } = useModal();
+    const { openCardModal } = useCardModal();
 
     const handleShowCard = (card: CardForView, cardInfo: ArtifactGameState | EnemyArtifact) => {
         const details: ModalShowDetails = {
             cardForView: card
         }
         
-        const data: OpenModalData = {
+        const data: OpenCardModalData = {
             details: details,
-            modalType: MODALTYPE.SHOW,
+            modalType: CARD_MODAL_TYPE.SHOW,
             valueLeftTop: cardInfo.maxHp,
             valueRightTop: cardInfo.skillCost,
             isArtifact: true
         }
 
-        openModal(data)
+        openCardModal(data)
     }
 
     const net = [];

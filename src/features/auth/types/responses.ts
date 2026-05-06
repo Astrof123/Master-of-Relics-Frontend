@@ -1,7 +1,12 @@
 export interface User {
-    id: number;
+    id: string;
     nickname: string;
     gold: number;
+    friendCode: string;
+    isAdmin: boolean;
+    isSuperAdmin: boolean;
+    bannedUntil: Date | null;
+    banReason: string | null;
 }
 
 

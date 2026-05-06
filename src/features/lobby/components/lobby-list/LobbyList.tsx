@@ -15,7 +15,8 @@ const LobbyList = (props: LobbyListProps) => {
     const user = useAppSelector((state) => state.auth.user);
     const isJoinedHall = useAppSelector((state) => state.lobby.isJoinedHall);
     const lobbies = useAppSelector((state) => state.lobby.lobbies);
-    
+    const isBanned = !!user?.bannedUntil && new Date(user.bannedUntil) > new Date();
+
     const { joinLobby } = useLobbySocket();
 
     const getStateClass = (state: string) => {
@@ -30,7 +31,7 @@ const LobbyList = (props: LobbyListProps) => {
     };
 
     const renderButtons = (lobby: Lobby) => {
-        if (user === null || lobby.isPrivate) return null;
+        if (user === null || lobby.isPrivate || isBanned) return null;
 
         const playerLobby = lobby.players[user.id];
         const canJoin = !playerLobby && Object.keys(lobby.players).length < 2;

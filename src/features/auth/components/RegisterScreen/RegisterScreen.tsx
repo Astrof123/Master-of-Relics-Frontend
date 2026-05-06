@@ -45,12 +45,8 @@ function RegisterScreen() {
         if (code.length < 4) {
             return "Инвайт-код должен содержать минимум 4 символа";
         }
-        if (code.length > 50) {
-            return "Инвайт-код не должен превышать 50 символов";
-        }
-        const codeRegex = /^[a-zA-Z0-9-]+$/;
-        if (!codeRegex.test(code)) {
-            return "Инвайт-код может содержать только английские буквы, цифры и дефисы";
+        if (code.length > 36) {
+            return "Инвайт-код не должен превышать 36 символов";
         }
         return "";
     }
@@ -379,7 +375,7 @@ function RegisterScreen() {
                 )}
                 
                 <Link to="/login" className="auth-link">
-                    Уже есть доступ к подземелью
+                    Уже есть доступ
                 </Link>
             </div>
         </div>

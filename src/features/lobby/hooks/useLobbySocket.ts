@@ -28,7 +28,6 @@ export const useLobbySocket = () => {
                 dispatch(setJoinedHall(true));
                 dispatch(setLobbies(response.data.lobbies))
                 dispatch(setOnlinePlayers(response.data.onlinePlayers))
-                console.log("Получены приглашения", response.data.invitations)
                 dispatch(setInvitations(response.data.invitations))
                 if (response.data.currentLobby !== null) {
                     dispatch(setCurrentLobby(response.data.currentLobby))
@@ -161,7 +160,6 @@ export const useLobbySocket = () => {
         return new Promise<void>((resolve, reject) => {
             socketService.emit(LOBBY_EVENT_NAME.INVITE_FRIEND, data, (response: SocketCallbackResponse<null>) => {
                 if (response.success) {
-                    console.log(response.message);
                     resolve();
                 } else {
                     console.error('Ошибка:', response.message);

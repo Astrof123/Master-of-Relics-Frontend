@@ -29,7 +29,9 @@ export const ARTIFACT_STATE  = {
     COOLDOWN: 'cooldown',
     STUNNED: 'stunned',
     ROOTED: 'rooted',
-    BREAKEN: "breaken"
+    BREAKEN: "breaken",
+    DREAM: "dream",
+    DESTROYED: "destroyed"
 } as const;
 
 export type ArtifactState  = typeof ARTIFACT_STATE [keyof typeof ARTIFACT_STATE];
@@ -79,7 +81,7 @@ export interface DeckArtifact {
 }
 
 export interface Player {
-    id: number;
+    id: string;
     name: string;
     connection: ConnectionGame;
     hero: string;
@@ -115,9 +117,9 @@ export interface Game {
     id: string;
     phase: Phase;
     name: string;
-    currentTurn: number;
+    currentTurn: string;
     logs: LogState[];
-    players: Record<number, Player>;
+    players: Record<string, Player>;
     end: EndState | null;
     miniPhase: MiniPhase;
     constants: ConstantsGameState;
@@ -132,7 +134,7 @@ export interface ConstantsGameState {
 
 
 export interface EndState {
-    winner: number | null;
+    winner: string | null;
     winner_prize: number;
     loser_prize: number;
     draw_prize: number;

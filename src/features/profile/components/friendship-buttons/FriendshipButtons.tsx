@@ -3,19 +3,71 @@ import { RELATIONSHIP, type UserProfile } from "../../types/responses";
 import type { 
     MouseEvent
 } from 'react';
+import { useGeneralModal } from "@/features/modal/hooks/useGeneralModal";
+import { GENERAL_MODAL_TYPE, type OpenGeneralModalData } from "@/features/modal/types/modal";
+import type { ModalBanDetails, ModalReportDetails } from "@/features/modal/types/details";
+import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useProfile } from "../../hooks/useProfile";
+import type { UnbanUserData } from "../../types/requests";
+import { setIsBanned } from "../../store/profileSlice";
 
 interface FriendshipButtonsProps {
-    profileUserId: number;
+    profileUserId: string;
     isOwnProfile: boolean;
     isLoading: boolean;
     profile: UserProfile;
-    onHandleAddFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: number) => Promise<void>;
-    onHandleAcceptFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: number) => Promise<void>;
-    onHandleDeclineFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: number) => Promise<void>;
-    onHandleRemoveFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: number) => Promise<void>;
+    onHandleAddFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
+    onHandleAcceptFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
+    onHandleDeclineFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
+    onHandleRemoveFriendClick: (e: MouseEvent<HTMLButtonElement>, friendId: string) => Promise<void>;
 }
 
 const FriendshipButtons = (props: FriendshipButtonsProps) => {
+    const { openGeneralModal } = useGeneralModal();
+    const { handleUnbanUser } = useProfile();
+    const user = useAppSelector(state => state.auth.user);
+    const dispatch = useAppDispatch();
+    
+    const handleReportClick = () => {
+        const details: ModalReportDetails = {
+            reportedUserId: props.profileUserId
+        }
+
+        const data: OpenGeneralModalData = {
+            details: details,
+            modalType: GENERAL_MODAL_TYPE.REPORT
+        }
+
+        openGeneralModal(data);
+    }
+
+    const handleBanClick = () => {
+        const details: ModalBanDetails = {
+            bannedUserId: props.profileUserId
+        }
+
+        const data: OpenGeneralModalData = {
+            details: details,
+            modalType: GENERAL_MODAL_TYPE.BAN
+        }
+
+        openGeneralModal(data);
+    }
+
+    const handleUnbanClick = async () => {
+        const data: UnbanUserData = {
+            bannedUserId: props.profileUserId
+        }
+
+        try {
+            await handleUnbanUser(data).unwrap();
+            dispatch(setIsBanned(false));
+        }
+        catch {
+
+        }
+    }
+
     return (
         !props.isOwnProfile && (
             props.isLoading ? (
@@ -67,11 +119,27 @@ const FriendshipButtons = (props: FriendshipButtonsProps) => {
                     ) : (
                         <button 
                             className={styles["report-btn"]}
-                            // onClick={() => setShowReportModal(true)}
+                            onClick={handleReportClick}
                         >
                             Пожаловаться
                         </button>
                     )}
+
+                    {(user && user.isAdmin) && (
+                        props.profile.isBanned ? (
+                            <button onClick={handleUnbanClick} className={styles["unban-btn"]}>
+                                Разбанить
+                            </button>
+                        ) : (
+                            <button 
+                                className={styles["ban-btn"]}
+                                onClick={handleBanClick}
+                            >
+                                Забанить
+                            </button>
+                        )
+                    )}
+
                 </div>
             )
         )

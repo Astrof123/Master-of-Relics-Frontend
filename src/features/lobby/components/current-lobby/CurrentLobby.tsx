@@ -94,7 +94,7 @@ function CurrentLobby() {
                                         player.isHost && styles["host"]
                                     )}
                                 >
-                                    <span className={clsx(styles["player-item-nickname"])}>{player.nickname}</span>
+                                    <span className={clsx(styles["player-item-nickname"])}>{player.nickname.length > 20 ? player.nickname.slice(0, 17) + "..." : player.nickname}</span>
                                     {currentLobby.state === LOBBYSTATETYPE.WAITING && (
                                         <img src={player.isReady ? SwordsImg : WaitImg} className={clsx(styles["player-item-icon"])}/>
                                     )}

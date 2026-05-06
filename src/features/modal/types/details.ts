@@ -31,4 +31,19 @@ export interface ModalSpellDetails {
     gameState: GameForClient;
 }
 
-export type ModalsDetails = ModalDraftDetails | ModalBattleDetails | ModalCollectionDetails | ModalShowDetails | null;
+export type CardModalsDetails = ModalDraftDetails | ModalBattleDetails | ModalCollectionDetails | ModalShowDetails | null;
+
+export interface ModalReportDetails {
+    reportedUserId: string;
+}
+
+export interface ModalBanDetails {
+    bannedUserId: string;
+}
+
+export interface ModalReplaceCardDetails {
+    replacedCardId: number;
+    deckId: number;
+}
+
+export type GeneralModalsDetails = ModalReportDetails | ModalBanDetails | ModalReplaceCardDetails | null;

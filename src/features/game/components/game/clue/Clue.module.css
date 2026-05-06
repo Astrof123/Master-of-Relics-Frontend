@@ -248,3 +248,13 @@
     align-items: center;
     gap: 16px;
 }
+
+.draw-icon {
+    background-color: #ff6b4a;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    border-radius: 50%;
+}

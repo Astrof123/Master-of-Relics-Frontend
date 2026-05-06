@@ -131,7 +131,7 @@ function LoginScreen() {
         <div className="auth-container">
             <div className="auth-form">
                 <h1 className="auth-title">
-                    Вход в подземелье
+                    Вход
                     <div className="auth-title-border"></div>
                 </h1>
                                 
@@ -200,7 +200,7 @@ function LoginScreen() {
                                 Вход...
                             </>
                         ) : (
-                            "Войти в подземелье"
+                            "Войти"
                         )}
                     </button>
                 </form>
