@@ -19,6 +19,7 @@ import Mage from "@assets/icons/mage.png";
 import GreenHeart from "@assets/icons/green-love.png";
 import Wings from "@assets/icons/wings.png";
 import DeckPanel from "@/features/collection/components/deck-panel/DeckPanel";
+import { toast } from "sonner";
 
 const ARTIFACT_TYPE_NAMING: Record<ArtifactType, { name: string; icon: string; order: number }> = {
     [ARTIFACT_TYPE.DEFENDER]: { name: "Защита", icon: Shield, order: 1 },
@@ -36,7 +37,9 @@ function CollectionPage() {
     const { openCardModal } = useCardModal();
 
     useEffect(() => {
-        handleGetOwnCollection();
+        handleGetOwnCollection().catch(() => {
+            toast.error('Не удалось загрузить коллекцию');
+        });
     }, []);
 
     const filteredCards = () => {
@@ -51,12 +54,10 @@ function CollectionPage() {
     const groupCardsByType = (cards: CardData[]) => {
         const groups: Record<ArtifactType, { owned: CardData[]; locked: CardData[] }> = {} as Record<ArtifactType, { owned: CardData[]; locked: CardData[] }>;
         
-        // Инициализируем группы
         Object.values(ARTIFACT_TYPE).forEach(type => {
             groups[type as ArtifactType] = { owned: [], locked: [] };
         });
         
-        // Распределяем карты по группам и статусу
         cards.forEach(card => {
             const targetGroup = groups[card.type] || groups[ARTIFACT_TYPE.GENERAL];
             if (card.hasCard) {
@@ -93,7 +94,6 @@ function CollectionPage() {
 
     const filteredGroupedCards = groupCardsByType(filteredCards());
     
-    // Сортируем группы по порядку и объединяем owned + locked
     const sortedGroups = Object.entries(filteredGroupedCards)
         .sort((a, b) => {
             const orderA = ARTIFACT_TYPE_NAMING[a[0] as ArtifactType]?.order || 999;

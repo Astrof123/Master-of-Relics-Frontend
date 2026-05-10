@@ -314,6 +314,7 @@
 }
 
 .user-name {
+    overflow: hidden;
     color: #b89a7a;
     font-size: 14px;
     font-weight: 600;

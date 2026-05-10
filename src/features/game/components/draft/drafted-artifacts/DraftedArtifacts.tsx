@@ -6,6 +6,7 @@ import { useDraftSocket } from "@/features/game/hooks/useDraftSocket";
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
 import { GameTimer } from "../../common/game-timer/GameTimer";
 import { setLeaveLobby } from "@/features/lobby/store/lobbySlice";
+import { toast } from "sonner";
 
 function DraftedArtifacts() {
     const gameState = useAppSelector((state) => state.game.gameState);
@@ -20,7 +21,7 @@ function DraftedArtifacts() {
 
     const handleGiveUp = async () => {
         if (gameState.end !== null) {
-            console.log("Игра окончена")
+            toast.info("Игра окончена");
             return;
         }
 
@@ -30,12 +31,12 @@ function DraftedArtifacts() {
 
     const endChoice = async () => {
         if (gameState.player.draft.pickedArtifact === null) {
-            console.log("Вы не выбрали артефакт!")
+            toast.warning("Вы не выбрали артефакт!");
             return;
         }
 
         if (gameState.end !== null) {
-            console.log("Игра окончена")
+            toast.info("Игра окончена");
             return;
         }
 

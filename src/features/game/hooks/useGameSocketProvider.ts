@@ -10,6 +10,7 @@ import { ACTION_EVENT_NAME } from '../../action/types/action-events-name';
 import type { AnimationData } from '../types/game/animation';
 import { pushAnimation } from '../store/animationSlice';
 import { useAppSelector } from '@/app/store';
+import { toast } from 'sonner';
 
 export const useGameSocketProvider = () => {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export const useGameSocketProvider = () => {
 
                 console.log('Получено новое состояние игры:', response.data.gameState);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isMoving]);
@@ -42,8 +43,10 @@ export const useGameSocketProvider = () => {
 
         const handleNewNotification = (data: GameNotificationData) => {
             if (data.receiverId === gameState?.player.id) {
-                console.log(data.text);
-                // ДОБАВИТЬ ТОАСТ!!!
+                toast.info(data.text, {
+                    duration: 5000,
+                    position: 'top-center',
+                });
             }
         };
 

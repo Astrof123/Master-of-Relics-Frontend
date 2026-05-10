@@ -10,6 +10,9 @@
     padding-bottom: 8px
 }
 
+.actions {
+    width: 380px;
+}
 
 .button-wrapper {
     display: flex;
@@ -32,25 +35,11 @@
     padding-bottom: 12px;
 }
 
-.button-wrapper h2::before {
-    content: '⚔️';
-    margin-right: 12px;
-    font-size: 24px;
-    filter: drop-shadow(0 0 8px #aa7840);
-}
-
-.button-wrapper h2::after {
-    content: '⚔️';
-    margin-left: 12px;
-    font-size: 24px;
-    filter: drop-shadow(0 0 8px #aa7840);
-}
-
 .button-wrapper button {
 
 }
 
-.button-wrapper button::before {
+/* .button-wrapper button::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -61,16 +50,16 @@
     animation: rotate 20s linear infinite;
     opacity: 0;
     transition: opacity 0.3s ease;
-}
+} */
 
-.button-wrapper button:hover:not(:disabled) {
+/* .button-wrapper button:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: 0 7px 0 #1a1518;
 }
 
 .button-wrapper button:hover:not(:disabled)::before {
     opacity: 1;
-}
+} */
 
 .button-wrapper button:active:not(:disabled) {
     transform: translateY(1px);
@@ -106,7 +95,7 @@
     overflow: hidden;
 }
 
-.button-wrapper span::before {
+/* .button-wrapper span::before {
     content: '⚠️';
     margin-right: 8px;
     font-size: 16px;
@@ -122,7 +111,7 @@
     height: 200%;
     background: radial-gradient(circle, rgba(255, 107, 74, 0.1) 0%, transparent 70%);
     animation: rotate 15s linear infinite;
-}
+} */
 
 .action {
     width: 100%;
@@ -132,27 +121,27 @@
     font-weight: 700;
     font-family: 'Forum', serif;
     border: 2px solid;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     box-shadow: 0 4px 0 #1a1518;
     transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: #2f241b;
     color: #ffd7a5;
     position: relative;
     background: linear-gradient(145deg, #7a3d6a, #241f1b);
 }
 
-@keyframes rotate {
+/* @keyframes rotate {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
     }
-}
+} */
 
 /* Адаптивность */
 @media (max-width: 768px) {

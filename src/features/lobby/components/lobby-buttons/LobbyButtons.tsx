@@ -82,12 +82,6 @@ const LobbyButtons = (props: LobbyButtonsProps) => {
             </button>
         )
     }
-
-    // buttons.push(
-    //     <button className={clsx(styles["red-button"])} key={props.lobby.id + "delete"} onClick={() => deleteLobby(props.lobby.id)} type='button'>
-    //         Удалить лобби
-    //     </button>
-    // )
     return <div className={styles["lobby-actions"]}>{buttons}</div>;
 }
 

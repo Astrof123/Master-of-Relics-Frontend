@@ -84,53 +84,36 @@ class SocketService {
     private setupEventListeners(): void {
         if (!this.socket) return;
         
-        // Системные события
         this.socket.on('connect', this.handleConnect.bind(this));
         this.socket.on('disconnect', this.handleDisconnect.bind(this));
         this.socket.on('connect_error', this.handleConnectError.bind(this));
         this.socket.on('error', this.handleError.bind(this));
-        
-        // Серверные события (будем добавлять позже через on() метод)
     }
     
-    /**
-     * Обработка успешного подключения
-     */
     private handleConnect(): void {
         console.log('Socket connected with ID:', this.socket?.id);
         this.updateStatus(SOCKETSTATUS.CONNECTED);
         
-        
-        // Устанавливаем текущего пользователя
         this.currentUser = {
         socketId: this.socket?.id || '',
-        userId: '', // Будет установлен после аутентификации
+        userId: '',
         username: ''
         };
     }
     
-    /**
-     * Обработка отключения
-     */
     private handleDisconnect(reason: string): void {
         console.log('Socket disconnected:', reason);
         this.updateStatus(SOCKETSTATUS.DISCONNECTED);
         this.currentRooms.clear();
         
-        // Автоматическое переподключение обрабатывается Socket.io
         if (reason === 'io server disconnect') {
-        // Сервер принудительно отключил
         this.socket?.connect();
         }
     }
     
-    /**
-     * Обработка ошибки подключения
-     */
     private handleConnectError(error: Error): void {
         console.error('Socket connection error:', error);
-        
-        // Проверяем, связана ли ошибка с токеном
+
         if (error.message.includes('Невалидный токен')) {
             this.handleTokenRefresh();
         } else {
@@ -148,10 +131,8 @@ class SocketService {
         }
         
         try {
-            // Получаем новый токен
             const newToken = await this.tokenRefreshCallback();
             
-            // Обновляем токен в сокете
             if (this.socket) {
                 this.socket.auth = { 
                     ...this.socket.auth, 

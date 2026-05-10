@@ -9,7 +9,6 @@ interface AuthState {
     accessToken: string | null;
     isLoading: boolean;
     error: string | null;
-	// isLogout: boolean;
 }
 
 
@@ -18,7 +17,6 @@ const initialState: AuthState = {
     accessToken: null,
     isLoading: false,
     error: null,
-	// isLogout: false,
 };
 
 
@@ -75,7 +73,6 @@ const authSlice = createSlice({
 				state.isLoading = false;
 				state.accessToken = null;
 				state.user = null;
-				// state.isLogout
 				
 			})
 			.addCase(logout.rejected, (state, action) => {

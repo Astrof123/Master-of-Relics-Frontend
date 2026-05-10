@@ -56,7 +56,7 @@ const BanModalContent = (props: BanModalProps) => {
         }
 
         try {
-            await handleBanUser(data).unwrap();
+            await handleBanUser(data);
             props.onClose();
             dispatch(setIsBanned(true));
         } catch (err) {

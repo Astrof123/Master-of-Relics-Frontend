@@ -60,7 +60,7 @@ const FriendshipButtons = (props: FriendshipButtonsProps) => {
         }
 
         try {
-            await handleUnbanUser(data).unwrap();
+            await handleUnbanUser(data);
             dispatch(setIsBanned(false));
         }
         catch {

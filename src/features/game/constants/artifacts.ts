@@ -29,6 +29,7 @@ import PlunderImg from "@assets/artifacts-img/Plunder.svg";
 import DivineStaffImg from "@assets/artifacts-img/DivineStaff.svg";
 import ReaperImg from "@assets/artifacts-img/Reaper.svg";
 import BoneKnifeImg from "@assets/artifacts-img/BoneKnife.svg";
+import DestructionShardImg from "@assets/artifacts-img/DestructionShard.svg";
 
 import ArcaneShieldImgBattle from "@assets/artifacts-battle/ArcaneShield.svg";
 import SwiftBootsImgBattle from "@assets/artifacts-battle/SwiftBoots.svg";
@@ -58,8 +59,8 @@ import PlunderImgBattle from "@assets/artifacts-battle/Plunder.svg";
 import DivineStaffImgBattle from "@assets/artifacts-battle/DivineStaff.svg";
 import ReaperImgBattle from "@assets/artifacts-battle/Reaper.svg";
 import BoneKnifeImgBattle from "@assets/artifacts-battle/BoneKnife.svg";
+import DestructionShardImgBattle from "@assets/artifacts-battle/DestructionShard.svg";
 
-// Импорты для карточек без статов
 import ArcaneShieldImgCardNoHp from "@assets/artifacts-card-without-stats/ArcaneShield.svg";
 import SwiftBootsImgCardNoHp from "@assets/artifacts-card-without-stats/SwiftBoots.svg";
 import RootGraspImgCardNoHp from "@assets/artifacts-card-without-stats/RootGrasp.svg";
@@ -88,6 +89,7 @@ import PlunderImgCardNoHp from "@assets/artifacts-card-without-stats/Plunder.svg
 import DivineStaffImgCardNoHp from "@assets/artifacts-card-without-stats/DivineStaff.svg";
 import ReaperImgCardNoHp from "@assets/artifacts-card-without-stats/Reaper.svg";
 import BoneKnifeImgCardNoHp from "@assets/artifacts-card-without-stats/BoneKnife.svg";
+import DestructionShardImgCardNoHp from "@assets/artifacts-card-without-stats/DestructionShard.svg";
 
 export const ARTIFACTS: Record<string, ArtifactDataType> = {
     [ARTIFACT.ARCANE_SHIELD]: {
@@ -285,5 +287,12 @@ export const ARTIFACTS: Record<string, ArtifactDataType> = {
         img: BoneKnifeImg,
         imgBattle: BoneKnifeImgBattle,
         imgCardNoStats: BoneKnifeImgCardNoHp,
+    },
+    [ARTIFACT.DESTRUCTION_SHARD]: {
+        id: ARTIFACT.DESTRUCTION_SHARD,
+        name: "Destruction Shard",
+        img: DestructionShardImg,
+        imgBattle: DestructionShardImgBattle,
+        imgCardNoStats: DestructionShardImgCardNoHp,
     },
 };

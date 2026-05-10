@@ -13,6 +13,7 @@ import type { ModalReplaceCardDetails, ModalShowDetails } from "@/features/modal
 import { useCardModal } from "@/features/modal/hooks/useCardModal";
 import { useGeneralModal } from "@/features/modal/hooks/useGeneralModal";
 import ReplaceImg from "@assets/icons/replace.png";
+import { toast } from "sonner";
 
 function DeckPanel() {
     const dispatch = useAppDispatch();
@@ -24,14 +25,12 @@ function DeckPanel() {
     const { openCardModal } = useCardModal();
     const { openGeneralModal } = useGeneralModal();
 
-    // Определяем displayData до всех useEffect
     const displayData = isEditing && temporaryDeckData ? temporaryDeckData : decks;
 
     useEffect(() => {
         dispatch(getDecks());
     }, [dispatch]);
 
-    // Автоматический выбор активной колоды при загрузке данных
     useEffect(() => {
         if (!displayData) return;
         
@@ -48,8 +47,9 @@ function DeckPanel() {
             await dispatch(changeActiveDeck({ deckId })).unwrap();
             dispatch(changeActiveDeckAfterResponse(deckId));
             setSelectedDeckId(deckId);
-        } catch {
-            // ошибка
+        } 
+        catch (error: any) {
+            toast.error(error.message || 'Не удалось сменить активную колоду');
         }
     };
 
@@ -63,7 +63,6 @@ function DeckPanel() {
         const activeDeck = temporaryDeckData.decks.find(deck => deck.isActive);
         if (!activeDeck) return;
         
-        // Сортируем карты по позиции перед отправкой
         const sortedCards = [...activeDeck.cards].sort((a, b) => (a.position || 0) - (b.position || 0));
         
         const cardsForRequest = sortedCards.map((card, index) => ({
@@ -75,8 +74,9 @@ function DeckPanel() {
             await dispatch(changeDeckCards({ deckId: activeDeck.id, cards: cardsForRequest })).unwrap();
             await dispatch(getDecks());
             dispatch(setIsEditing(false));
-        } catch (error) {
-            console.error('Ошибка при сохранении колоды:', error);
+        } 
+        catch (error: any) {
+            toast.error(error.message || 'Ошибка при сохранении колоды');
         }
     };
 
@@ -114,7 +114,6 @@ function DeckPanel() {
         }
     }, [isEditing, openCardModal, openGeneralModal]);
 
-    // Функция для сортировки карт по позиции
     const sortCardsByPosition = (cards: CardData[]) => {
         return [...cards].sort((a, b) => (a.position || 0) - (b.position || 0));
     };
@@ -139,7 +138,6 @@ function DeckPanel() {
     const sortedDecks = [...displayData.decks].sort((a, b) => a.indexNumber - b.indexNumber);
     const selectedDeck = sortedDecks.find(deck => deck.id === selectedDeckId);
     
-    // Сортируем карты выбранной колоды по позиции
     const sortedCards = selectedDeck ? sortCardsByPosition(selectedDeck.cards) : [];
 
     return (

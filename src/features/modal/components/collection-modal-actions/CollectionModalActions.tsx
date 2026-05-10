@@ -41,7 +41,7 @@ const CollectionModalActions = ({ card, details, onClose }: CollectionModalActio
                         <div className={styles["insufficient-funds"]}>
                             Недостаточно золота для покупки
                         </div>
-                    )}      
+                    )}
                 </>
             )}
         </div>

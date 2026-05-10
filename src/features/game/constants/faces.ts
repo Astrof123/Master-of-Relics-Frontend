@@ -1,6 +1,5 @@
 import { FACE, type Face, type FaceDataType } from "../types/game/face";
 
-// Существующие импорты
 import THREE_SWORD_IMG from "@assets/faces/sword_x3.svg";
 import TWO_SWORD_IMG from "@assets/faces/sword_x2.svg";
 import THREE_DARK_MANA_IMG from "@assets/faces/dark_mana_x3.svg";
@@ -25,6 +24,7 @@ import ONE_RAGE_TWO_DARK_MANA_IMG from "@assets/faces/one_rage_two_dark_mana.svg
 import ONE_SWORD_ONE_DARK_MANA_IMG from "@assets/faces/one_sword_one_dark_mana.svg";
 import ONE_SWORD_ONE_DESTRUCTION_MANA_IMG from "@assets/faces/one_sword_one_destruction_mana.svg";
 import ONE_SWORD_ONE_LIGHT_MANA_IMG from "@assets/faces/one_sword_one_light_mana.svg";
+import RAGE_X1_IMG from "@assets/faces/rage_x1.svg";
 import RAGE_X2_IMG from "@assets/faces/rage_x2.svg";
 import TARGET_X2_IMG from "@assets/faces/target_x2.svg";
 import TWO_LIGHT_MANA_ONE_TARGET_IMG from "@assets/faces/two_light_mana_one_target.svg";
@@ -33,7 +33,7 @@ import TWO_TARGET_ONE_LIGHT_MANA_IMG from "@assets/faces/two_target_one_light_ma
 
 import ONE_AGILITY_ONE_TARGET_IMG from "@assets/faces/one_agility_one_target.svg";
 import ONE_RAGE_ONE_TARGET_IMG from "@assets/faces/one_rage_one_target.svg";
-import ONE_DESTRUCTION_MANA_IMG from "@assets/faces/one_destruction_mana.svg";
+// import ONE_DESTRUCTION_MANA_IMG from "@assets/faces/one_destruction_mana.svg";
 import ONE_SWORD_ONE_RAGE_IMG from "@assets/faces/one_sword_one_rage.svg";
 import ONE_SWORD_ONE_AGILITY_IMG from "@assets/faces/one_sword_one_agility.svg";
 import ONE_TARGET_ONE_DESTRUCTION_MANA_IMG from "@assets/faces/one_target_one_destruction_mana.svg";
@@ -52,10 +52,10 @@ export const FACES: Record<Face, FaceDataType> = {
     //     id: FACE.LIGHT_MANA,
     //     img: LIGHT_MANA_X2_IMG,
     // },
-    // [FACE.RAGE]: {
-    //     id: FACE.RAGE,
-    //     img: RAGE_X2_IMG,
-    // },
+    [FACE.RAGE]: {
+        id: FACE.RAGE,
+        img: RAGE_X1_IMG,
+    },
     // [FACE.DARK_MANA]: {
     //     id: FACE.DARK_MANA,
     //     img: DARK_MANA_X2_IMG,

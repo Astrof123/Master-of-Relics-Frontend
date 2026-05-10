@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState, type ChangeEvent } from "react";
 import clsx from "clsx";
+import { toast } from "sonner";
 
 function LoginScreen() {
     const { error, isLoading, accessToken, handleLogin } = useAuth();
@@ -33,16 +34,16 @@ function LoginScreen() {
         if (!login.trim()) {
             return "Логин не может быть пустым";
         }
-        if (login.length < 4) {
-            return "Логин должен содержать минимум 4 символа";
-        }
+        // if (login.length < 4) {
+        //     return "Логин должен содержать минимум 4 символа";
+        // }
         if (login.length > 30) {
             return "Логин не должен превышать 30 символов";
         }
-        const loginRegex = /^[a-zA-Z0-9_-]+$/;
-        if (!loginRegex.test(login)) {
-            return "Логин может содержать только буквы, цифры, дефисы и подчеркивания";
-        }
+        // const loginRegex = /^[a-zA-Z0-9_-]+$/;
+        // if (!loginRegex.test(login)) {
+        //     return "Логин может содержать только буквы, цифры, дефисы и подчеркивания";
+        // }
         return "";
     }
 
@@ -50,9 +51,9 @@ function LoginScreen() {
         if (!password) {
             return "Пароль не может быть пустым";
         }
-        if (password.length < 6) {
-            return "Пароль должен содержать минимум 6 символов";
-        }
+        // if (password.length < 6) {
+        //     return "Пароль должен содержать минимум 6 символов";
+        // }
         if (password.length > 50) {
             return "Пароль не должен превышать 50 символов";
         }
@@ -184,9 +185,9 @@ function LoginScreen() {
                                 {validationErrors.password}
                             </div>
                         )}
-                        <div className="auth-hint">
+                        {/* <div className="auth-hint">
                             Пароль должен содержать буквы или цифры, минимум 6 символов
-                        </div>
+                        </div> */}
                     </div>
 
                     <button 

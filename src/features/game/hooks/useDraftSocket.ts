@@ -6,6 +6,7 @@ import type { SocketCallbackResponse } from "@/features/socket/types/response";
 import { setDraftedArtifact } from "../store/gameSlice";
 import { DRAFT_EVENT_NAME } from "../types/draft/draft-events-name";
 import type { PickArtifactData } from "../types/draft/draft-evens-data";
+import { toast } from "sonner";
 
 export const useDraftSocket = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const useDraftSocket = () => {
 
     const pickArtifact = useCallback((gameId: string, pickedArtifactId: string) => {
         if (!isConnected) {
-            console.warn('Нельзя выбрать артефакт: нет подключения');
+            toast.warning('Нельзя выбрать артефакт: нет подключения');
             return;
         }
 
@@ -26,7 +27,7 @@ export const useDraftSocket = () => {
             if (response.success) {
                 dispatch(setDraftedArtifact(pickedArtifactId));
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -42,7 +43,7 @@ export const useDraftSocket = () => {
             if (response.success) {
                 
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);

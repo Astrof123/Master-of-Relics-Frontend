@@ -24,7 +24,7 @@
     border-radius: 8px;
     animation: resultAppear 0.5s ease-out;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .endgame-result::before {
@@ -50,7 +50,7 @@
 }
 
 .result-icon {
-    font-size: 32px;
+    width: 36px;
     filter: drop-shadow(0 0 10px currentColor);
     animation: iconBounce 0.6s ease-out;
 }
@@ -191,7 +191,7 @@
         filter: drop-shadow(0 0 5px #ffd700);
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-3px);
         filter: drop-shadow(0 0 15px #ffd700);
     }
 }

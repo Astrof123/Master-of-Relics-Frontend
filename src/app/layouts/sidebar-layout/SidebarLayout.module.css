@@ -89,7 +89,6 @@
     }
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     .content {
         margin: 16px;

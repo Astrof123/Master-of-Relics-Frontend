@@ -10,6 +10,7 @@ import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby, setOnlinePla
 import { useNavigate } from 'react-router-dom';
 import { GAME_EVENT_NAME } from '@/features/game/types/socket/game-events-name';
 import type { CreateLobbyData, InviteFriendData, UpdateOptionsLobbyData } from '../types/lobby-socket-data-requests';
+import { toast } from 'sonner';
 
 
 export const useLobbySocket = () => {
@@ -33,7 +34,8 @@ export const useLobbySocket = () => {
                     dispatch(setCurrentLobby(response.data.currentLobby))
                 }
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -46,9 +48,11 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.CREATE_LOBBY, data, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
+                toast.success(response.message);
                 navigate("/my-lobby")
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -61,10 +65,11 @@ export const useLobbySocket = () => {
 
         socketService.emit(GAME_EVENT_NAME.CREATE_GAME, lobbyId, (response: SocketCallbackResponse<StartGameData>) => {
             if (response.success) {
-                console.log(response.message);
+                toast.success(response.message);
                 navigate(`/game/${response.data.gameId}`)
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -76,10 +81,11 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY, lobbyId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
+                toast.success(response.message);
                 navigate("/my-lobby")
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -90,10 +96,10 @@ export const useLobbySocket = () => {
         }
         socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY_BY_CODE, code, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
+                toast.success(response.message);
                 navigate("/my-lobby")
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -104,10 +110,10 @@ export const useLobbySocket = () => {
         }
         socketService.emit(LOBBY_EVENT_NAME.JOIN_LOBBY_BY_INVITATION, invitationId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
+                toast.success(response.message);
                 navigate("/my-lobby")
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -119,9 +125,9 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.DELETE_LOBBY, lobbyId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
+                toast.success(response.message);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -133,11 +139,10 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.LEAVE_LOBBY, lobbyId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
                 dispatch(setLeaveLobby());
                 navigate("/")
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -149,9 +154,8 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.TOGGLE_READY_LOBBY, lobbyId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -162,7 +166,7 @@ export const useLobbySocket = () => {
                 if (response.success) {
                     resolve();
                 } else {
-                    console.error('Ошибка:', response.message);
+                    toast.error(response.message);
                     reject(new Error(response.message));
                 }
             });
@@ -172,9 +176,8 @@ export const useLobbySocket = () => {
     const declineInvitation = useCallback((data: LobbyInvitation) => {
         socketService.emit(LOBBY_EVENT_NAME.DECLINE_INVITATION, data, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                console.log(response.message);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -183,9 +186,8 @@ export const useLobbySocket = () => {
         socketService.emit(LOBBY_EVENT_NAME.GET_FRIENDS_FOR_INVITE, null, (response: SocketCallbackResponse<FriendForInvite[]>) => {
             if (response.success) {
                 dispatch(setFriendsForInvite(response.data))
-                console.log(response.message);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -197,9 +199,9 @@ export const useLobbySocket = () => {
 
         socketService.emit(LOBBY_EVENT_NAME.UPDATE_OPTIONS, data, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                // navigate("/my-lobby")
+                toast.success(response.message);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);

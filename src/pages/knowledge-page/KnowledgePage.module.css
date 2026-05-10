@@ -1,0 +1,331 @@
+.knowledge-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Forum', serif;
+}
+
+/* Заголовок */
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 15px #aa7840;
+    margin-bottom: 28px;
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #5d4a36;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(90deg, #aa7840, transparent);
+}
+
+/* Табы */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(145deg, #2f2824, #1a1518);
+    border: 2px solid #5d4a36;
+    border-radius: 8px;
+    color: #b89a7a;
+    font-family: 'Forum', serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+    border-color: #aa7840;
+    color: #ffd7a5;
+}
+
+.tab--active {
+    background: #3f3329;
+    border-color: #d49c5c;
+    color: #ffd7a5;
+    box-shadow: 0 0 20px rgba(170, 120, 60, 0.3);
+}
+
+.tab-icon {
+    width: 22px;
+    /* filter: drop-shadow(0 0 5px #aa7840); */
+}
+
+.tab-name {
+    font-size: 16px;
+}
+
+/* Контент */
+.content {
+    animation: fadeIn 0.3s ease;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Карточки */
+.card {
+    background: linear-gradient(145deg, #2a2220 0%, #1a1518 100%);
+    border: 2px solid #5d4a36;
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    border-color: #aa7840;
+    box-shadow: 0 5px 20px rgba(170, 120, 60, 0.2);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #5d4a36;
+}
+
+.card-icon {
+    width: 25px;
+    filter: drop-shadow(0 0 5px #aa7840);
+}
+
+.card-header h2 {
+    font-size: 22px;
+    font-family: 'Forum', serif;
+    font-weight: 700;
+    color: #ffd7a5;
+    text-shadow: 0 0 10px #aa7840;
+    margin: 0;
+}
+
+.card p {
+    color: #e8d9c0;
+    font-size: 17px;
+    line-height: 1.5;
+    margin: 12px 0;
+}
+
+.card ul, .card ol {
+    color: #e8d9c0;
+    font-size: 17px;
+    line-height: 1.6;
+    padding-left: 24px;
+    margin: 12px 0;
+}
+
+.card li {
+    margin: 8px 0;
+}
+
+.card strong {
+    color: #ffd7a5;
+}
+
+/* Подразделы */
+.sub-section {
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 1px dashed #5d4a36;
+}
+
+.sub-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.sub-section h3 {
+    font-size: 18px;
+    font-family: 'Forum', serif;
+    font-weight: 600;
+    color: #b89a7a;
+    margin-bottom: 10px;
+}
+
+/* Примечания */
+.note {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 16px;
+    border-radius: 8px;
+    border-left: 3px solid #aa7840;
+    font-style: italic;
+    color: #b89a7a !important;
+}
+
+.highlight {
+    color: #d49c5c;
+}
+
+/* Сетка символов */
+.symbols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.symbol-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #2f241b;
+    border: 2px solid #5d4a36;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.symbol-card:hover {
+    transform: translateY(-2px);
+    border-color: #aa7840;
+    box-shadow: 0 0 15px rgba(170, 120, 60, 0.3);
+}
+
+.symbol-icon {
+    min-width: 50px;
+    width: 50px;
+    filter: drop-shadow(0 0 5px #aa7840);
+    text-align: center;
+}
+
+.symbol-info h4 {
+    font-size: 18px;
+    font-family: 'Forum', serif;
+    font-weight: 700;
+    color: #ffd7a5;
+    margin: 0 0 6px 0;
+}
+
+.symbol-info p {
+    font-size: 15px;
+    color: #b89a7a;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.symbol-info strong {
+    color: #d49c5c;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .knowledge-container {
+        padding: 16px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .tab {
+        padding: 8px 16px;
+    }
+    
+    .tab-name {
+        font-size: 14px;
+    }
+    
+    .tab-icon {
+        font-size: 18px;
+    }
+    
+    .card-header h2 {
+        font-size: 18px;
+    }
+    
+    .card-icon {
+        font-size: 24px;
+    }
+    
+    .card {
+        padding: 18px;
+    }
+    
+    .card p, .card ul, .card ol {
+        font-size: 14px;
+    }
+    
+    .symbols-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .symbol-card {
+        padding: 12px;
+    }
+    
+    .symbol-icon {
+        font-size: 28px;
+        min-width: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .knowledge-container {
+        padding: 12px;
+    }
+    
+    .title {
+        font-size: 20px;
+    }
+    
+    .tabs {
+        gap: 10px;
+    }
+    
+    .tab {
+        padding: 6px 12px;
+    }
+    
+    .tab-name {
+        font-size: 12px;
+    }
+    
+    .card-header h2 {
+        font-size: 16px;
+    }
+    
+    .sub-section h3 {
+        font-size: 16px;
+    }
+    
+    .card p, .card ul, .card ol {
+        font-size: 13px;
+    }
+}

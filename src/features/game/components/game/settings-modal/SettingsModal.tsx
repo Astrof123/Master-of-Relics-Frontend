@@ -22,10 +22,8 @@ const SettingsModal = (props: SettingsModalProps) => {
     }
 
     const exitMenuClick = () => {
-        if (props.gameState.end) {
-            dispatch(setLeaveLobby())
-            navigate("/")
-        }
+        dispatch(setLeaveLobby())
+        navigate("/")
     }
 
     return (

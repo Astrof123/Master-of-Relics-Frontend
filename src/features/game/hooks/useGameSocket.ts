@@ -9,6 +9,7 @@ import { GAME_EVENT_NAME } from "../types/socket/game-events-name";
 import type { ExtraActionData, ToggleReadyMovementData, UseFaceData, UseSkillData, UseSpellData } from "../../action/types/action-evens-data";
 import { ACTION_EVENT_NAME } from "../../action/types/action-events-name";
 import { TimerService } from "../helpers/timerHelper";
+import { toast } from "sonner";
 
 export const useGameSocket = () => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export const useGameSocket = () => {
                     TimerService.getInstance().stopTimer();
                 }
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -46,7 +47,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -61,7 +62,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -73,10 +74,10 @@ export const useGameSocket = () => {
 
         socketService.emit(ACTION_EVENT_NAME.GIVE_UP, gameId, (response: SocketCallbackResponse<null>) => {
             if (response.success) {
-                // Добавить тоаст, что игрок покинул матч
+
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -90,7 +91,7 @@ export const useGameSocket = () => {
             if (response.success) {
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -104,7 +105,7 @@ export const useGameSocket = () => {
             if (response.success) {
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -119,7 +120,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -134,7 +135,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -149,7 +150,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -164,7 +165,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);
@@ -179,7 +180,7 @@ export const useGameSocket = () => {
 
             } 
             else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, [isConnected]);

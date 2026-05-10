@@ -50,7 +50,6 @@ const SortableArtifactWrapper = ({
         opacity: isDragging ? 0.8 : 1,
         zIndex: isDragging ? 1000 : 'auto',
         willChange: isDragging ? 'transform' : 'auto',
-        // pointerEvents: isDragging ? 'none' : 'auto' as const,
         maxWidth: '100vw',
         maxHeight: '100vh',
     };

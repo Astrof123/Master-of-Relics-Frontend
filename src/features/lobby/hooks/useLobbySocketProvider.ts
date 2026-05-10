@@ -18,7 +18,7 @@ export const useLobbySocketProvider = () => {
                 dispatch(setLobbies(response.data.lobbies))
                 console.log('Получены лобби:', response.data.lobbies);
             } else {
-                console.error('Ошибка:', response.message);
+                toast.error(response.message);
             }
         });
     }, []);

@@ -1,7 +1,6 @@
 import { EFFECT, type Effect, type EffectTypeClient } from "../types/game/effects";
 
 import SwiftBoots from "@assets/artifacts-img/SwiftBoots.svg";
-import SingleCharge from "@assets/buffs/SingleCharge.jpg";
 import AverterImg from "@assets/buffs/Averter.svg";
 import AxeOfTheBerserkerImg from "@assets/buffs/AxeOfTheBerserker.svg";
 import BoneKnifeImg from "@assets/buffs/BoneKnife.svg";
@@ -18,6 +17,11 @@ import SpellGraceImg from "@assets/buffs/SpellGrace.svg";
 import TemperCrownImg from "@assets/buffs/TemperCrown.svg";
 import VoiderImg from "@assets/buffs/Voider.svg";
 import VoltImg from "@assets/buffs/Volt.svg";
+import Rust from "@assets/buffs/Rust.svg";
+import SharpImg from "@assets/buffs/Sharp.svg";
+import DivineGuardImg from "@assets/buffs/DivineGuard.svg";
+import VampirismImg from "@assets/buffs/Vampirism.svg";
+import LiveForRound from "@assets/buffs/LiveForRound.svg";
 
 export const EFFECTS: Record<Effect, EffectTypeClient> = {
     [EFFECT.SINGLE_CHARGE]: {
@@ -71,7 +75,7 @@ export const EFFECTS: Record<Effect, EffectTypeClient> = {
     [EFFECT.LIVE_FOR_ROUND]: {
         id: EFFECT.LIVE_FOR_ROUND,
         name: "Live For Round",
-        img: BoneKnifeImg,
+        img: LiveForRound,
         title: "Артефакт уничтожится в конце раунда"
     },
     [EFFECT.BERSERK]: {
@@ -133,5 +137,29 @@ export const EFFECTS: Record<Effect, EffectTypeClient> = {
         name: "Avatar",
         img: ConcealerImg,
         title: "Не может быть целью заклинаний и способностей"
+    },
+    [EFFECT.RUST]: {
+        id: EFFECT.RUST,
+        name: "Rust",
+        img: Rust,
+        title: "Теряет в 1.5 раза больше прочности при получении урона"
+    },
+    [EFFECT.SHARP]: {
+        id: EFFECT.SHARP,
+        name: "Sharp",
+        img: SharpImg,
+        title: "Имеет +8 к урону при атаке (не способностью) до конца текущего раунда"
+    },
+    [EFFECT.DIVINE_GUARD]: {
+        id: EFFECT.DIVINE_GUARD,
+        name: "Divine Guard",
+        img: DivineGuardImg,
+        title: "Получает на 15 урона меньше от вражеских атак"
+    },
+    [EFFECT.VAMPIRISM]: {
+        id: EFFECT.VAMPIRISM,
+        name: "Vampirism",
+        img: VampirismImg,
+        title: "При атаке восстановит себе столько прочности, сколько нанесет урона"
     },
 };

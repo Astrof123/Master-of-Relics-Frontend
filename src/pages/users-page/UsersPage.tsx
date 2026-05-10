@@ -6,6 +6,7 @@ import { getAllUsers, setAdmin } from "@/features/users/store/actions";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { setAdminAfterRequest } from "@/features/users/store/userSlice";
+import { toast } from "sonner";
 
 function UsersPage() {
     const dispatch = useAppDispatch();
@@ -52,7 +53,9 @@ function UsersPage() {
             isAdmin: isAdmin
         }
 
-        dispatch(getAllUsers(data));
+        dispatch(getAllUsers(data)).catch(() => {
+            toast.error('Не удалось загрузить пользователей');
+        });
     }, [currentPage, debouncedSearch, bannedFilter, adminFilter]);
 
     const handlePrevPage = () => {
@@ -78,26 +81,13 @@ function UsersPage() {
         setProcessingUserId(userId);
         try {
             await dispatch(setAdmin({ userId, isAdmin })).unwrap();
-            let isBanned: boolean | undefined = undefined;
-            if (bannedFilter === "banned") {
-                isBanned = true;
-            } else if (bannedFilter === "notBanned") {
-                isBanned = false;
-            }
-
-            let isAdminFilterValue: boolean | undefined = undefined;
-            if (adminFilter === "admin") {
-                isAdminFilterValue = true;
-            } else if (adminFilter === "notAdmin") {
-                isAdminFilterValue = false;
-            }
-
+            toast.success(isAdmin ? 'Права администратора выданы' : 'Права администратора сняты');
             dispatch(setAdminAfterRequest({
                 userId: userId,
                 isAdmin: isAdmin
             }));
-        } catch (error) {
-            console.error("Ошибка при изменении прав администратора");
+        } catch (error: any) {
+            toast.error(error?.message || 'Ошибка при изменении прав администратора');
         } finally {
             setProcessingUserId(null);
         }

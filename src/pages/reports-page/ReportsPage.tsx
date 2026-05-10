@@ -212,7 +212,7 @@ function ReportsPage() {
                                         </div>
                                         <div className={styles["col-text"]}>
                                             <span className={styles["report-text"]} title={report.text}>
-                                                {report.text.length > 50 ? report.text.slice(0, 50) + "..." : report.text}
+                                                {report.text.length > 20 ? report.text.slice(0, 20) + "..." : report.text}
                                             </span>
                                         </div>
                                         <div className={styles["col-reported"]}>

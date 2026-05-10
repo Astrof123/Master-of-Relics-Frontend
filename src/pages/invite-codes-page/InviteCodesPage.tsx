@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { changeStatus, createInviteCodes, deleteInviteCode, getInviteCodes } from "@/features/invite-code/store/actions";
 import { deleteInviteCodeAfterRequest, setNewStatus } from "@/features/invite-code/store/inviteCodeSlice";
+import { toast } from "sonner";
 
 function InviteCodesPage() {
     const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ function InviteCodesPage() {
     const [showFilters, setShowFilters] = useState(false);
     const [statusFilter, setStatusFilter] = useState<"all" | InviteCodeStatus>("all");
     const [createCount, setCreateCount] = useState(1);
+    const [isCreating, setIsCreating] = useState(false);
     const limit = 10;
 
     useEffect(() => {
@@ -40,7 +42,9 @@ function InviteCodesPage() {
             status: statusFilter !== "all" ? statusFilter : undefined
         }
 
-        dispatch(getInviteCodes(data));
+        dispatch(getInviteCodes(data)).catch(() => {
+            toast.error('Не удалось загрузить инвайт-коды');
+        });
     }, [currentPage, debouncedSearch, startDate, endDate, statusFilter]);
 
     const handlePrevPage = () => {
@@ -64,27 +68,40 @@ function InviteCodesPage() {
     };
 
     const handleCreateInviteCodes = async () => {
-        if (createCount > 0 && createCount <= 100) {
-            await dispatch(createInviteCodes({ count: createCount }));
+        if (createCount <= 0 || createCount > 100) {
+            toast.warning('Количество кодов должно быть от 1 до 100');
+            return;
+        }
+        
+        setIsCreating(true);
+        try {
+            await dispatch(createInviteCodes({ count: createCount })).unwrap();
+            toast.success(`Создано ${createCount} инвайт-кодов`);
             setCreateCount(1);
-            dispatch(getInviteCodes({
+            
+            const data: GetInviteCodesData = {
                 limit: limit,
                 page: currentPage,
                 inviteCodeId: debouncedSearch || undefined,
                 startDate: startDate || undefined,
                 endDate: endDate || undefined,
                 status: statusFilter !== "all" ? statusFilter : undefined
-            }));
+            }
+            await dispatch(getInviteCodes(data));
+        } catch (error: any) {
+            toast.error(error?.message || 'Не удалось создать инвайт-коды');
+        } finally {
+            setIsCreating(false);
         }
     };
 
     const handleChangeStatusClick = async (inviteCodeId: string, newStatus: InviteCodeStatus) => {
         try {
             await dispatch(changeStatus({ inviteCodeId, newStatus })).unwrap();
-            dispatch(setNewStatus({ inviteCodeId, newStatus }))
-        }
-        catch {
-            
+            toast.success(`Статус изменён на ${getStatusText(newStatus)}`);
+            dispatch(setNewStatus({ inviteCodeId, newStatus }));
+        } catch (error: any) {
+            toast.error(error?.message || 'Не удалось изменить статус');
         }
     };
 
@@ -92,9 +109,10 @@ function InviteCodesPage() {
         if (window.confirm("Вы уверены, что хотите удалить этот инвайт-код?")) {
             try {
                 await dispatch(deleteInviteCode({ inviteCodeId })).unwrap();
+                toast.success('Инвайт-код удалён');
                 dispatch(deleteInviteCodeAfterRequest(inviteCodeId));
-            }
-            catch {
+            } catch (error: any) {
+                toast.error(error?.message || 'Не удалось удалить инвайт-код');
             }
         }
     };
@@ -154,13 +172,15 @@ function InviteCodesPage() {
                                 onChange={(e) => setCreateCount(Math.min(100, Math.max(1, parseInt(e.target.value) || 1)))}
                                 min={1}
                                 max={100}
+                                disabled={isCreating}
                             />
                         </div>
                         <button 
                             className={styles["create-btn"]}
                             onClick={handleCreateInviteCodes}
+                            disabled={isCreating}
                         >
-                            Создать инвайт-коды
+                            {isCreating ? "Создание..." : "Создать инвайт-коды"}
                         </button>
                     </div>
                     <div className={styles["header-actions"]}>
@@ -240,9 +260,6 @@ function InviteCodesPage() {
                     )}
                 </div>
             )}
-
-            {/* Панель создания кодов */}
-
 
             {isLoading ? (
                 <div className={styles["loading"]}>

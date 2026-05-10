@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store';
 import { login, logout, me, register } from '../store/actions';
 import type { LoginCredentials, RegisterData } from '../types/responses';
 import { useCallback, useMemo } from 'react';
+import { toast } from 'sonner';
 
 
 export const useAuth = () => {
@@ -9,7 +10,11 @@ export const useAuth = () => {
     const { user, accessToken, isLoading, error } = useAppSelector((state) => state.auth);
     
     const handleLogin = useCallback((credentials: LoginCredentials) => {
-        return dispatch(login(credentials));
+        return dispatch(login(credentials)).unwrap().then(() => {
+            toast.success('Добро пожаловать!');
+        }).catch((error) => {
+            toast.error(error.message || 'Ошибка входа');
+        });
     }, [dispatch]);
 
 

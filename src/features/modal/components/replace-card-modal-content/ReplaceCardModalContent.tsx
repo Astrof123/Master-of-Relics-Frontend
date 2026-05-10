@@ -19,20 +19,16 @@ const ReplaceCardModalContent = (props: ReplaceCardProps) => {
     const temporaryDeckData = useAppSelector(state => state.deck.temporaryDeckData);
     const collectionCards = useAppSelector(state => state.collection.collection?.cards);
     
-    // Фильтруем карты: только открытые, не равные заменяемой, и которых нет в колоде
     const availableCards = useMemo(() => {
         if (!collectionCards) return [];
         
-        // Находим текущую колоду
         const currentDeck = temporaryDeckData?.decks.find(deck => deck.id === props.details.deckId);
         if (!currentDeck) return [];
         
-        // ID карт, которые уже есть в колоде (исключаем заменяемую карту)
         const deckCardIds = currentDeck.cards
             .filter(card => card.id !== props.details.replacedCardId)
             .map(card => card.id);
         
-        // Фильтруем коллекцию
         return collectionCards.filter(card => 
             card.hasCard === true && 
             card.id !== props.details.replacedCardId &&
@@ -45,28 +41,22 @@ const ReplaceCardModalContent = (props: ReplaceCardProps) => {
         
         if (!temporaryDeckData) return;
         
-        // Находим колоду во временных данных
         const deckToUpdate = temporaryDeckData.decks.find(deck => deck.id === deckId);
         if (!deckToUpdate) return;
         
-        // Находим индекс заменяемой карты (позиция = индекс в массиве)
         const cardIndex = deckToUpdate.cards.findIndex(card => card.id === replacedCardId);
         if (cardIndex === -1) return;
         
-        // Сохраняем позицию заменяемой карты
         const oldPosition = deckToUpdate.cards[cardIndex].position || (cardIndex + 1);
         
-        // Создаем новую карту с сохранением позиции
         const cardWithPosition = {
             ...newCard,
             position: oldPosition
         };
         
-        // Обновляем карту в колоде
         const updatedCards = [...deckToUpdate.cards];
         updatedCards[cardIndex] = cardWithPosition;
         
-        // Обновляем временные данные
         dispatch(updateTemporaryDeckCards({
             deckId: deckId,
             cards: updatedCards
@@ -75,7 +65,6 @@ const ReplaceCardModalContent = (props: ReplaceCardProps) => {
         props.onClose();
     }, [dispatch, props.details, temporaryDeckData, props.onClose]);
 
-    // Фильтруем также карты, которые отображаются (не показываем дубликаты)
     const displayCards = useMemo(() => {
         return availableCards.filter(card => card.hasCard === true);
     }, [availableCards]);

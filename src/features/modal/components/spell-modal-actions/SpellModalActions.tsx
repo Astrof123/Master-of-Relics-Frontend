@@ -22,7 +22,7 @@ const SpellModalActions = ({ details, onClose }: SpellModalActionsProps) => {
     }
 
     return (
-        <>
+        <div className={clsx(styles["actions"])}>
             <h2 className={clsx(styles["main-title"])}>
                 Выберите действие:
             </h2>
@@ -38,7 +38,7 @@ const SpellModalActions = ({ details, onClose }: SpellModalActionsProps) => {
                     <span>У вас закончились очки действия</span>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 

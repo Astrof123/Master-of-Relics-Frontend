@@ -14,7 +14,6 @@ export const LobbyLayout = () => {
 
     useEffect(() => {
         if (isConnected) {
-            console.log("Присоединение к холу");
             joinHall()
         }
     }, [isConnected])

@@ -49,7 +49,7 @@ const ReportModalContent = (props: ReportModalProps) => {
         }
 
         try {
-            await handleSendReport(data).unwrap();
+            await handleSendReport(data);
             props.onClose();
             dispatch(setIsReported(true));
         } catch (err) {
