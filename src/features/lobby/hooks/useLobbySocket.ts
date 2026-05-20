@@ -74,6 +74,23 @@ export const useLobbySocket = () => {
         });
     }, [isConnected]);
 
+    const startGameWithBot = useCallback((lobbyId: string) => {
+        if (!isConnected) {
+            return;
+        }
+        console.log("Запуск игры")
+
+        socketService.emit(GAME_EVENT_NAME.CREATE_GAME_WITH_BOT, lobbyId, (response: SocketCallbackResponse<StartGameData>) => {
+            if (response.success) {
+                toast.success(response.message);
+                navigate(`/game/${response.data.gameId}`)
+            } else {
+                toast.error(response.message);
+                toast.error(response.message);
+            }
+        });
+    }, [isConnected]);
+
     const joinLobby = useCallback((lobbyId: string) => {
         if (!isConnected) {
             return;
@@ -224,6 +241,7 @@ export const useLobbySocket = () => {
         declineInvitation,
         getFriendsForInvite,
         joinLobbyByInvitation,
-        updateOptionsLobby
+        updateOptionsLobby,
+        startGameWithBot
     };
 };

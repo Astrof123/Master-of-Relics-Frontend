@@ -16,9 +16,9 @@ const LobbyButtons = (props: LobbyButtonsProps) => {
     const {
         leaveLobby,
         toggleReadyLobby,
-        deleteLobby,
         startGame,
-        enterGame
+        enterGame,
+        startGameWithBot
     } = useLobbySocket();
 
     const buttons = [];
@@ -70,6 +70,13 @@ const LobbyButtons = (props: LobbyButtonsProps) => {
                         type='button'
                     >
                         {props.editingOptions ? "Отмена настройки" : "Обновить настройки"}
+                    </button>
+                )                
+            }
+            if (Object.keys(props.lobby.players).length === 1) {
+                buttons.push(
+                    <button className={clsx(styles["green-button"])} key={props.lobby.id + "start-with-bot"} onClick={() => startGameWithBot(props.lobby.id)} type='button'>
+                        Начать с ботом
                     </button>
                 )                
             }

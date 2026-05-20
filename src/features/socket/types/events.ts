@@ -29,6 +29,7 @@ export interface ClientToServerEvents {
     
     [GAME_EVENT_NAME.JOIN_GAME]: (gameId: string, callback: (response: SocketCallbackResponse<JoinGameData>) => void) => void;
     
+    [GAME_EVENT_NAME.CREATE_GAME_WITH_BOT]: (lobbyId: string, callback: (response: SocketCallbackResponse<{ gameId: string }>) => void) => void;
     [GAME_EVENT_NAME.CREATE_GAME]: (lobbyId: string, callback: (response: SocketCallbackResponse<{ gameId: string }>) => void) => void;
     [DRAFT_EVENT_NAME.PICK_ARTIFACT]: (data: PickArtifactData, callback: (response: SocketCallbackResponse<null>) => void) => void;
     [DRAFT_EVENT_NAME.TOGGLE_READY_DRAFT]: (gameId: string, callback: (response: SocketCallbackResponse<null>) => void) => void;
