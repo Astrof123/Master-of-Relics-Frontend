@@ -3,7 +3,6 @@ import { EFFECT, type Effect, type EffectTypeClient } from "../types/game/effect
 import SwiftBoots from "@assets/artifacts-img/SwiftBoots.svg";
 import AverterImg from "@assets/buffs/Averter.svg";
 import AxeOfTheBerserkerImg from "@assets/buffs/AxeOfTheBerserker.svg";
-import BoneKnifeImg from "@assets/buffs/BoneKnife.svg";
 import ConcealerImg from "@assets/buffs/Concealer.svg";
 import VeilstrikeImg from "@assets/buffs/Veilstrike.svg";
 import DreamshacklerImg from "@assets/buffs/Dreamshackler.svg";

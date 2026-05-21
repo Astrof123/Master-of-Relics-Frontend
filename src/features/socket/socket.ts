@@ -154,7 +154,7 @@ class SocketService {
     }    
     
     emit<E extends keyof ClientToServerEvents>(
-        event: E,
+        event: E & (string | symbol),
         ...args: Parameters<ClientToServerEvents[E]>
     ): void {
         if (!this.socket?.connected) {
@@ -171,20 +171,19 @@ class SocketService {
     }
     
     on<E extends keyof ServerToClientEvents>(
-        event: E,
+        event: E & (string | symbol),
         callback: ServerToClientEvents[E]
     ): void {
         if (!this.socket) {
-            console.warn(`Cannot listen to ${event}: socket not initialized`);
+            console.warn(`Cannot listen to ${String(event)}: socket not initialized`);
             return;
         }
-        
-        this.socket.on(event, callback as any);
+        this.socket.on(event as string, callback as any);
     }
     
 
     off<E extends keyof ServerToClientEvents>(
-        event: E,
+        event: E & (string | symbol),
         callback?: ServerToClientEvents[E]
     ): void {
         if (!this.socket) return;

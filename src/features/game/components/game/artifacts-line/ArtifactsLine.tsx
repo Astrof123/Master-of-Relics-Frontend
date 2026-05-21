@@ -40,7 +40,6 @@ const ArtifactsLine = ({
     onReorder
 }: ArtifactsLineProps) => {
     const movedArtifact = useAppSelector((state) => state.game.movedArtifact);
-    const gameState = useAppSelector((state) => state.game.gameState);
 
     const artifactIds = artifacts.map(a => a.id);
 

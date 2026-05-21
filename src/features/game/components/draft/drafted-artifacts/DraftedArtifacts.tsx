@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import DraftNet from "../draft-net/DraftNet";
 import { useDraftSocket } from "@/features/game/hooks/useDraftSocket";
 import { useGameSocket } from "@/features/game/hooks/useGameSocket";
-import { GameTimer } from "../../common/game-timer/GameTimer";
 import { setLeaveLobby } from "@/features/lobby/store/lobbySlice";
 import { toast } from "sonner";
 

@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { GetInviteCodesResponseData, InviteCodeData } from "../types/responses";
 import { changeStatus, createInviteCodes, deleteInviteCode, getInviteCodes } from "./actions";
-import type { InviteCodeStatus } from "../types/invite-code";
 import type { ChangeStatusData } from "../types/requests";
 
 

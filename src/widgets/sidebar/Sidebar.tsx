@@ -7,7 +7,6 @@ import type { RootState } from '@/app/store';
 import { useSelector } from 'react-redux';
 import Coin from '@assets/icons/coin.png';
 import UserImg from "@assets/icons/user2.png";
-import Logo from "@assets/icons/logo.png"
 
 const Sidebar = () => {
     const { user, handleMe } = useAuth();

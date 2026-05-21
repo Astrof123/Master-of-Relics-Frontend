@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import socketService from '../../socket/socket';
 import type { SocketCallbackResponse } from "@/features/socket/types/response";
-import { setGameState, setPlayersOnline, setTimer } from "../store/gameSlice";
+import { setGameState, setPlayersOnline } from "../store/gameSlice";
 import type { JoinGameData } from "../types/socket/game-socket-data-responses";
 import { GAME_EVENT_NAME } from "../types/socket/game-events-name";
 import type { ExtraActionData, ToggleReadyMovementData, UseFaceData, UseSkillData, UseSpellData } from "../../action/types/action-evens-data";

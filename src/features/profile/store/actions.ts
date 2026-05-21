@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '@/shared/api/client';
-import type { GetReportsResponseDto, ReportResponseData, UserProfile } from '../types/responses';
+import type { GetReportsResponseDto, UserProfile } from '../types/responses';
 import type { BanUserData, FindFriendsData, GetReportsData, SendReportUserData, UnbanUserData } from '../types/requests';
 import type { User } from '@/features/auth/types/responses';
 

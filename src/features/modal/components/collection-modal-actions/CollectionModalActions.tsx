@@ -11,7 +11,7 @@ interface CollectionModalActions {
     onClose: () => void;
 }
 
-const CollectionModalActions = ({ card, details, onClose }: CollectionModalActions) => {
+const CollectionModalActions = ({ details, onClose }: CollectionModalActions) => {
     const { handleBuyArtifact } = useCollection();
     const user = useAppSelector((state) => state.auth.user);
 

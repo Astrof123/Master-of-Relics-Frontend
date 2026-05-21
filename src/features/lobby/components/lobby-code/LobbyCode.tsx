@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Lobby } from "../../types/lobby";
 import styles from "./LobbyCode.module.css";
-import KeyImg from "@assets/icons/key.png";
 import clsx from "clsx";
 
 interface LobbyCodeProps {

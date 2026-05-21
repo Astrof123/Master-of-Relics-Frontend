@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { GetReportsResponseDto, ReportResponseData } from "../types/responses";
+import type { GetReportsResponseDto } from "../types/responses";
 import { getReports, sendReport } from "./actions";
 
 interface ReportState {

@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState, type ChangeEvent } from "react";
 import clsx from "clsx";
-import { toast } from "sonner";
 
 function LoginScreen() {
     const { error, isLoading, accessToken, handleLogin } = useAuth();

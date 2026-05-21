@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import socketService from '../../socket/socket';
 import { useAppSelector } from '@app/store';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
-import type { FriendForInvite, JoinHallData, LobbyInvitation, StartGameData } from '../types/lobby-socket-data-responses';
-import type { Lobby } from '../types/lobby';
+import type { FriendForInvite, LobbyInvitation, StartGameData } from '../types/lobby-socket-data-responses';
 import { LOBBY_EVENT_NAME } from '../types/lobby-events-name';
 import { setCurrentLobby, setJoinedHall, setLobbies, setLeaveLobby, setOnlinePlayers, setInvitations, setFriendsForInvite } from '../store/lobbySlice';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +23,10 @@ export const useLobbySocket = () => {
             return;
         }
 
-        socketService.emit(LOBBY_EVENT_NAME.JOIN_HALL, null, (response: SocketCallbackResponse<JoinHallData>) => {
+        (socketService.emit as (event: string, data: null, callback: (response: any) => void) => void)(
+            LOBBY_EVENT_NAME.JOIN_HALL,
+            null,
+            (response) => {
             if (response.success) {
                 dispatch(setJoinedHall(true));
                 dispatch(setLobbies(response.data.lobbies))

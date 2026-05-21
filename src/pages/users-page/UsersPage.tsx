@@ -102,10 +102,6 @@ function UsersPage() {
         });
     };
 
-    const isUserBanned = (user: any) => {
-        return user.bannedUntil && new Date(user.bannedUntil) > new Date();
-    };
-
     return (
         <div className={styles["container"]}>
             <div className={styles["header"]}>
@@ -198,7 +194,6 @@ function UsersPage() {
                         </div>
                         <div className={styles["table-body"]}>
                             {users.data.map((user) => {
-                                const isBanned = isUserBanned(user);
                                 return (
                                     <div key={user.id} className={styles["user-row"]}>
                                         <div className={styles["col-id"]}>

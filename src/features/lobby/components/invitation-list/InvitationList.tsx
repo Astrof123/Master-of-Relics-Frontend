@@ -6,7 +6,7 @@ import UserImg from "@assets/icons/user2.png";
 
 function InvitationList() {
     const invitations = useAppSelector(state => state.lobby.invitations);
-    const { joinLobby, declineInvitation, joinLobbyByInvitation } = useLobbySocket();
+    const { declineInvitation, joinLobbyByInvitation } = useLobbySocket();
     const [processingId, setProcessingId] = useState<string | null>(null);
 
     const handleAccept = async (invitationId: string) => {
