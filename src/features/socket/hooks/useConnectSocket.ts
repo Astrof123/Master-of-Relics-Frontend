@@ -16,7 +16,6 @@ export const useConnectSocket = () => {
     useEffect(() => {
         const unsubscribeStatus = socketService.onStatusChange((status) => {
             const connected = status === 'CONNECTED';
-            console.log("Поменялся коннект в хуке сокета", connected)
             
             if (connected) {
                 dispatch(connectionEstablished());
@@ -46,8 +45,7 @@ export const useConnectSocket = () => {
     
     
     const connect = useCallback(() => {
-        console.log('🔄 useLobbySocket: подключение');
-        const url = 'ws://localhost:3000';
+        const url = '/socket.io/';
 
         if (accessToken) {
             socketService.setTokenRefreshCallback(async () => {
