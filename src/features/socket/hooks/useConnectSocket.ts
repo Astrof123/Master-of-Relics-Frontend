@@ -45,7 +45,7 @@ export const useConnectSocket = () => {
     
     
     const connect = useCallback(() => {
-        const url = '/socket.io/';
+        const url = '/';
 
         if (accessToken) {
             socketService.setTokenRefreshCallback(async () => {
