@@ -5,7 +5,7 @@ import { deactivateMoving, setGameState, setPlayersOnline } from '../store/gameS
 import type { ConnectionGame } from '../types/state/game';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
 import { GAME_EVENT_NAME } from '../types/socket/game-events-name';
-import type { GameNotificationData, GetGameStateData, TimerSyncData } from '../types/socket/game-socket-data-responses';
+import type { GameNotificationData, GetGameStateData } from '../types/socket/game-socket-data-responses';
 import { ACTION_EVENT_NAME } from '../../action/types/action-events-name';
 import type { AnimationData } from '../types/game/animation';
 import { pushAnimation } from '../store/animationSlice';
@@ -31,7 +31,7 @@ export const useGameSocketProvider = () => {
         });
     }, [isMoving]);
     
-    const handleTimerSync = useCallback((data: TimerSyncData) => {
+    const handleTimerSync = useCallback(() => {
     }, []);
 
     useEffect(() => {

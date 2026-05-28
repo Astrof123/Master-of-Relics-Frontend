@@ -21,7 +21,7 @@ export const useGameTimer = () => {
         TimerService.getInstance().syncTimer(data);
     }, []);
 
-    const handleTimerExpired = useCallback((data: { timerType: string }) => {
+    const handleTimerExpired = useCallback(() => {
         TimerService.getInstance().stopTimer();
     }, []);
 
