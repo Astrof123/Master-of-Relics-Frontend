@@ -46,6 +46,12 @@ export const EFFECT  = {
     RUST: 'rust',
     DIVINE_GUARD: 'divine_guard',
     SHARP: 'sharp',
+    SHIV: 'shiv',
+    LIGHT_BLIGHT: 'light_blight',
+    DARK_BLIGHT: 'dark_blight',
+    DESTRUCTION_BLIGHT: 'destruction_blight',
+    PIERCE: 'pierce',
+    // MULTISHOT: 'multishot',
 };
 
 export type Effect  = typeof EFFECT [keyof typeof EFFECT];

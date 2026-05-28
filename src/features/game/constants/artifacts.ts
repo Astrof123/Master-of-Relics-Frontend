@@ -30,6 +30,10 @@ import DivineStaffImg from "@assets/artifacts-img/DivineStaff.svg";
 import ReaperImg from "@assets/artifacts-img/Reaper.svg";
 import BoneKnifeImg from "@assets/artifacts-img/BoneKnife.svg";
 import DestructionShardImg from "@assets/artifacts-img/DestructionShard.svg";
+import BookOfWeaknessImg from "@assets/artifacts-img/BookOfWeakness.svg";
+import ShiverImg from "@assets/artifacts-img/Shiver.svg";
+import SpellblighterImg from "@assets/artifacts-img/Spellblighter.svg";
+import SpinepiercerImg from "@assets/artifacts-img/Spinepiercer.svg";
 
 import ArcaneShieldImgBattle from "@assets/artifacts-battle/ArcaneShield.svg";
 import SwiftBootsImgBattle from "@assets/artifacts-battle/SwiftBoots.svg";
@@ -60,6 +64,10 @@ import DivineStaffImgBattle from "@assets/artifacts-battle/DivineStaff.svg";
 import ReaperImgBattle from "@assets/artifacts-battle/Reaper.svg";
 import BoneKnifeImgBattle from "@assets/artifacts-battle/BoneKnife.svg";
 import DestructionShardImgBattle from "@assets/artifacts-battle/DestructionShard.svg";
+import BookOfWeaknessImgBattle from "@assets/artifacts-battle/BookOfWeakness.svg";
+import ShiverImgBattle from "@assets/artifacts-battle/Shiver.svg";
+import SpellblighterImgBattle from "@assets/artifacts-battle/Spellblighter.svg";
+import SpinepiercerImgBattle from "@assets/artifacts-battle/Spinepiercer.svg";
 
 import ArcaneShieldImgCardNoHp from "@assets/artifacts-card-without-stats/ArcaneShield.svg";
 import SwiftBootsImgCardNoHp from "@assets/artifacts-card-without-stats/SwiftBoots.svg";
@@ -90,6 +98,10 @@ import DivineStaffImgCardNoHp from "@assets/artifacts-card-without-stats/DivineS
 import ReaperImgCardNoHp from "@assets/artifacts-card-without-stats/Reaper.svg";
 import BoneKnifeImgCardNoHp from "@assets/artifacts-card-without-stats/BoneKnife.svg";
 import DestructionShardImgCardNoHp from "@assets/artifacts-card-without-stats/DestructionShard.svg";
+import BookOfWeaknessImgCardNoHp from "@assets/artifacts-card-without-stats/BookOfWeakness.svg";
+import ShiverImgCardNoHp from "@assets/artifacts-card-without-stats/Shiver.svg";
+import SpellblighterImgCardNoHp from "@assets/artifacts-card-without-stats/Spellblighter.svg";
+import SpinepiercerImgCardNoHp from "@assets/artifacts-card-without-stats/Spinepiercer.svg";
 
 export const ARTIFACTS: Record<string, ArtifactDataType> = {
     [ARTIFACT.ARCANE_SHIELD]: {
@@ -294,5 +306,33 @@ export const ARTIFACTS: Record<string, ArtifactDataType> = {
         img: DestructionShardImg,
         imgBattle: DestructionShardImgBattle,
         imgCardNoStats: DestructionShardImgCardNoHp,
+    },
+    [ARTIFACT.BOOK_OF_WEAKNESS]: {
+        id: ARTIFACT.BOOK_OF_WEAKNESS,
+        name: "Book of Weakness",
+        img: BookOfWeaknessImg,
+        imgBattle: BookOfWeaknessImgBattle,
+        imgCardNoStats: BookOfWeaknessImgCardNoHp,
+    },
+    [ARTIFACT.SHIVER]: {
+        id: ARTIFACT.SHIVER,
+        name: "Shiver",
+        img: ShiverImg,
+        imgBattle: ShiverImgBattle,
+        imgCardNoStats: ShiverImgCardNoHp,
+    },
+    [ARTIFACT.SPELLBLIGHTER]: {
+        id: ARTIFACT.SPELLBLIGHTER,
+        name: "Spellblighter",
+        img: SpellblighterImg,
+        imgBattle: SpellblighterImgBattle,
+        imgCardNoStats: SpellblighterImgCardNoHp,
+    },
+    [ARTIFACT.SPINEPIERCER]: {
+        id: ARTIFACT.SPINEPIERCER,
+        name: "Spinepiercer",
+        img: SpinepiercerImg,
+        imgBattle: SpinepiercerImgBattle,
+        imgCardNoStats: SpinepiercerImgCardNoHp,
     },
 };

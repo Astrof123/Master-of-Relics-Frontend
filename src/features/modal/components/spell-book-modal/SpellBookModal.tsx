@@ -12,6 +12,8 @@ import SpellBookImg from "@assets/icons/spellbook.png";
 import { useCardModal } from "../../hooks/useCardModal";
 import type { ModalSpellDetails } from "../../types/details";
 import { CARD_MODAL_TYPE, type OpenCardModalData } from "../../types/modal";
+import { MINIPHASE } from "@/features/game/types/state/phase";
+import { toast } from "sonner";
 
 interface SpellBookModalProps {
     isOpen: boolean;
@@ -19,6 +21,7 @@ interface SpellBookModalProps {
 }
 
 const SpellBookModal = (props: SpellBookModalProps) => {
+    const isMoving = useAppSelector(state => state.game.isMoving);
     const spells = useAppSelector(state => state.game.gameState?.player.spells);
     const gameState = useAppSelector(state => state.game.gameState);
     const [activeSchool, setActiveSchool] = useState<SpellType>(SPELLTYPE.LIGHT);
@@ -56,6 +59,11 @@ const SpellBookModal = (props: SpellBookModalProps) => {
     };
 
     const handleCardClick = useCallback((spell: SpellGameState) => {
+        if (gameState && (gameState.miniPhase === MINIPHASE.MOVEMENT || isMoving)) {
+            toast.info("Во время фазы перестановки артефактов нельзя использовать заклинания")
+            return null;
+        }
+
         const details: ModalSpellDetails = {
             spell,
             cardForView: {

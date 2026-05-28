@@ -69,7 +69,6 @@ export const createInviteCodes = createAsyncThunk('createInviteCodes', async (da
 
 export const changeStatus = createAsyncThunk('changeStatus', async (data: ChangeStatusData, { rejectWithValue }) => {
 	try {
-		console.log(data)
 		const response = await api.post(INVITE_CODES_ENDPOINTS.CHANGE_STATUS, data, {
 			withAuth: true,
 			retryOnUnauthorized: true,

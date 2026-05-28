@@ -95,6 +95,6 @@ export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => 
 			return rejectWithValue(error.response.data.message)
 		}
 		
-		return rejectWithValue('Не удалось получилось данные о себе');
+		return rejectWithValue('Не удалось получилось данные');
 	}
 });

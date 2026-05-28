@@ -41,7 +41,7 @@ import ONE_TARGET_ONE_DESTRUCTION_MANA_IMG from "@assets/faces/one_target_one_de
 import TARGET_X3_IMG from "@assets/faces/target_x3.svg";
 import TARGET_X4_IMG from "@assets/faces/target_x4.svg";
 import DESTRUCTION_MANA_X2_IMG from "@assets/faces/destruction_mana_x2.svg";
-
+import ONE_TARGET_ONE_HEART_IMG from "@assets/faces/one_target_one_heart.svg";
 
 export const FACES: Record<Face, FaceDataType> = {
     // [FACE.AGILITY]: {
@@ -219,5 +219,9 @@ export const FACES: Record<Face, FaceDataType> = {
     [FACE.TWO_RAGE_ONE_LIGHT_MANA]: {
         id: FACE.TWO_RAGE_ONE_LIGHT_MANA,
         img: TWO_RAGE_ONE_LIGHT_MANA_IMG,
+    },
+    [FACE.ONE_TARGET_ONE_HEART]: {
+        id: FACE.ONE_TARGET_ONE_HEART,
+        img: ONE_TARGET_ONE_HEART_IMG,
     },
 };

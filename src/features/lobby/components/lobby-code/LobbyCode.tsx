@@ -18,7 +18,6 @@ const LobbyCode = (props: LobbyCodeProps) => {
                 setCopySuccess(true);
                 setTimeout(() => setCopySuccess(false), 2000);
             } catch (err) {
-                console.error('Не удалось скопировать код');
             }
         }
     };

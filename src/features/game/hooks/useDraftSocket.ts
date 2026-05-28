@@ -35,7 +35,6 @@ export const useDraftSocket = () => {
 
     const toggleReadyDraft = useCallback((gameId: string) => {
         if (!isConnected) {
-            console.warn('Нельзя переключить готовность: нет подключения');
             return;
         }
 

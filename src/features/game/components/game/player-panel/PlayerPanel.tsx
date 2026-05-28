@@ -22,7 +22,7 @@ interface PlayerPanelProps {
 }
 
 const PlayerPanel = (props: PlayerPanelProps) => {
-    const isMoving = useAppSelector(state => state.game.isMoving);
+    
     const { endTurn, endRound, toggleReadyMovement } = useGameSocket();
     const { openCardModal } = useCardModal();
     const isChoice = useAppSelector((state) => state.choice.isChoice);
@@ -81,9 +81,9 @@ const PlayerPanel = (props: PlayerPanelProps) => {
             return;
         }
 
-        if (gameState.miniPhase === MINIPHASE.MOVEMENT || isMoving) {
-            return null;
-        }
+        // if (gameState.miniPhase === MINIPHASE.MOVEMENT || isMoving) {
+        //     return null;
+        // }
 
         const data: OpenCardModalData = {
             details: null,
@@ -182,7 +182,7 @@ const PlayerPanel = (props: PlayerPanelProps) => {
                                 </button>
                                 <button
                                     disabled={
-                                        gameState.currentTurn === playerState?.id && !isChoice
+                                        gameState.currentTurn === playerState?.id && !isChoice && gameState.player.extraData.countActionsSinceStartTurn > 0
                                         ? false
                                         : true}
                                     onClick={handleEndTurn} 

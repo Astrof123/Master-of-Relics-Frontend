@@ -49,6 +49,7 @@ export const FACE  = {
     ONE_DESTRUCTION_ONE_LIGHT_MANA: "one_destruction_one_light_mana",
     TWO_AGILITY: "two_agility",
     TWO_RAGE_ONE_LIGHT_MANA: "two_rage_one_light_mana",
+    ONE_TARGET_ONE_HEART: "one_target_one_heart",
 };
 
 export type Face  = typeof FACE [keyof typeof FACE];

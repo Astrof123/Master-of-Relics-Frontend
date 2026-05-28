@@ -36,6 +36,11 @@ export const ARTIFACT = {
     REAPER: 'reaper',
     BONE_KNIFE: 'bone_knife',
     DESTRUCTION_SHARD: 'destruction_shard',
+    BOOK_OF_WEAKNESS: 'book_of_weakness',
+    SHIVER: 'shiver',
+    SPELLBLIGHTER: 'spellblighter',
+    SPINEPIERCER: 'spinepiercer',
+    // MULTISHOT: 'multishot',
 };
 
 export type Artifact  = typeof ARTIFACT [keyof typeof ARTIFACT];

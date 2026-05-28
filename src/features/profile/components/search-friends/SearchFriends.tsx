@@ -46,7 +46,6 @@ const SearchFriends = (props: SearchFriendsProps) => {
                 setCopySuccess(true);
                 setTimeout(() => setCopySuccess(false), 2000);
             } catch (err) {
-                console.error('Не удалось скопировать код');
             }
         }
     };

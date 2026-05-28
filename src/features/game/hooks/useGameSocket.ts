@@ -17,7 +17,6 @@ export const useGameSocket = () => {
 
     const joinGame = useCallback((gameId: string) => {
         if (!isConnected) {
-            console.warn('Нельзя присоединиться к игре: нет подключения');
             return;
         }
 

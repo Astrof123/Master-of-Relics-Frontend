@@ -25,7 +25,6 @@ export const useGameSocketProvider = () => {
                     dispatch(deactivateMoving());
                 }
 
-                console.log('Получено новое состояние игры:', response.data.gameState);
             } else {
                 toast.error(response.message);
             }
@@ -33,7 +32,6 @@ export const useGameSocketProvider = () => {
     }, [isMoving]);
     
     const handleTimerSync = useCallback((data: TimerSyncData) => {
-        console.log(data);
     }, []);
 
     useEffect(() => {
@@ -56,7 +54,6 @@ export const useGameSocketProvider = () => {
 
         const handlePlayersOnlineUpdated = (data: Record<string, ConnectionGame>) => {
             dispatch(setPlayersOnline(data));
-            console.log('Получено состояние подключения игроков:', data);
         };
 
         socketService.on(GAME_EVENT_NAME.GAME_STATE_UPDATED, handleGameStateUpdated);

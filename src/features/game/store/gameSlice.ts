@@ -40,7 +40,6 @@ const gameSocketSlice = createSlice({
             }
         },
         setGameState: (state, action: PayloadAction<GameForClient>) => {
-            console.log("Новое состояние:", action.payload);
             let oldTemporaryArtifacts;
             if (state.gameState && Object.keys(state.gameState.player.temporaryArtifacts).length !== 0 && !action.payload.player.isReady && state.gameState?.miniPhase === MINIPHASE.MOVEMENT && action.payload.phase === PHASE.BATTLE) {
                 oldTemporaryArtifacts = JSON.parse(JSON.stringify(state.gameState?.player.temporaryArtifacts));

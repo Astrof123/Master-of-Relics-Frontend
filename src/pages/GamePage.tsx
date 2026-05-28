@@ -27,7 +27,6 @@ function GamePage() {
 
     useEffect(() => {
         if (isConnected && id) {
-            console.log("Присоединение к игре");
             joinGame(id)
         }
     }, [isConnected])

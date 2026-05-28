@@ -50,7 +50,6 @@ class SocketService {
     
     connect(config: SocketConfig): void {
         if (this.status === SOCKETSTATUS.CONNECTED || this.status === SOCKETSTATUS.CONNECTING) {
-            console.warn('Socket is already connecting or connected');
             return;
         }
         
@@ -71,7 +70,6 @@ class SocketService {
             
         } 
         catch (error) {
-            console.error('Failed to create socket connection:', error);
             this.updateStatus(SOCKETSTATUS.ERROR);
             this.notifyError(error as Error);
         }
@@ -91,7 +89,6 @@ class SocketService {
     }
     
     private handleConnect(): void {
-        console.log('Socket connected with ID:', this.socket?.id);
         this.updateStatus(SOCKETSTATUS.CONNECTED);
         
         this.currentUser = {
@@ -102,7 +99,6 @@ class SocketService {
     }
     
     private handleDisconnect(reason: string): void {
-        console.log('Socket disconnected:', reason);
         this.updateStatus(SOCKETSTATUS.DISCONNECTED);
         this.currentRooms.clear();
         
@@ -112,7 +108,6 @@ class SocketService {
     }
     
     private handleConnectError(error: Error): void {
-        console.error('Socket connection error:', error);
 
         if (error.message.includes('Невалидный токен')) {
             this.handleTokenRefresh();
@@ -124,7 +119,6 @@ class SocketService {
     
     private async handleTokenRefresh(): Promise<void> {
         if (!this.tokenRefreshCallback) {
-            console.error('No token refresh callback provided');
             this.updateStatus(SOCKETSTATUS.ERROR);
             this.notifyError(new Error('Unable to refresh token: no callback provided'));
             return;
@@ -142,14 +136,12 @@ class SocketService {
                 this.socket.connect();
             }
         } catch (refreshError) {
-            console.error('Failed to refresh token:', refreshError);
             this.updateStatus(SOCKETSTATUS.ERROR);
             this.notifyError(new Error('Token refresh failed'));
         }
     }
 
     private handleError(error: any): void {
-        console.error('Socket error:', error);
         this.notifyError(new Error(error.message || 'Unknown socket error'));
     }    
     
@@ -158,14 +150,12 @@ class SocketService {
         ...args: Parameters<ClientToServerEvents[E]>
     ): void {
         if (!this.socket?.connected) {
-            console.warn(`Cannot emit ${event}: socket not connected`);
             return;
         }
         
         try {
             this.socket.emit(event, ...args);
         } catch (error) {
-            console.error(`Failed to emit ${event}:`, error);
             this.notifyError(error as Error);
         }
     }
@@ -175,7 +165,6 @@ class SocketService {
         callback: ServerToClientEvents[E]
     ): void {
         if (!this.socket) {
-            console.warn(`Cannot listen to ${String(event)}: socket not initialized`);
             return;
         }
         this.socket.on(event as string, callback as any);

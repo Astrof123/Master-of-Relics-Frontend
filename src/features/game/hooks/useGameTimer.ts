@@ -22,7 +22,6 @@ export const useGameTimer = () => {
     }, []);
 
     const handleTimerExpired = useCallback((data: { timerType: string }) => {
-        console.log('Timer expired event:', data);
         TimerService.getInstance().stopTimer();
     }, []);
 

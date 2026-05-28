@@ -19,7 +19,6 @@ export const useLobbySocket = () => {
 
     const joinHall = useCallback(() => {
         if (!isConnected) {
-            console.warn('Нельзя присоединиться к залу игр: нет подключения');
             return;
         }
 
@@ -63,7 +62,6 @@ export const useLobbySocket = () => {
         if (!isConnected) {
             return;
         }
-        console.log("Запуск игры")
 
         socketService.emit(GAME_EVENT_NAME.CREATE_GAME, lobbyId, (response: SocketCallbackResponse<StartGameData>) => {
             if (response.success) {
@@ -80,7 +78,6 @@ export const useLobbySocket = () => {
         if (!isConnected) {
             return;
         }
-        console.log("Запуск игры")
 
         socketService.emit(GAME_EVENT_NAME.CREATE_GAME_WITH_BOT, lobbyId, (response: SocketCallbackResponse<StartGameData>) => {
             if (response.success) {

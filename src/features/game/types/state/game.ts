@@ -109,7 +109,9 @@ export interface Player {
     offerDraw: boolean;
     extraData: {
         skippedMoves: number;
-    }
+        countActionsSinceStartTurn: number;
+    },
+    isBot: boolean;
 }
 
 

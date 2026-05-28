@@ -21,6 +21,9 @@ import SharpImg from "@assets/buffs/Sharp.svg";
 import DivineGuardImg from "@assets/buffs/DivineGuard.svg";
 import VampirismImg from "@assets/buffs/Vampirism.svg";
 import LiveForRound from "@assets/buffs/LiveForRound.svg";
+import ShivImg from "@assets/artifacts-img/Shiver.svg";
+import SpellblighterImg from "@assets/artifacts-img/Spellblighter.svg";
+import SpinepiercerImg from "@assets/artifacts-img/Spinepiercer.svg";
 
 export const EFFECTS: Record<Effect, EffectTypeClient> = {
     [EFFECT.SINGLE_CHARGE]: {
@@ -160,5 +163,35 @@ export const EFFECTS: Record<Effect, EffectTypeClient> = {
         name: "Vampirism",
         img: VampirismImg,
         title: "При атаке восстановит себе столько прочности, сколько нанесет урона"
+    },
+    [EFFECT.SHIV]: {
+        id: EFFECT.SHIV,
+        name: "Shiv",
+        img: ShivImg,
+        title: "Невозможно восстановление прочности этому артефакту"
+    },
+    [EFFECT.LIGHT_BLIGHT]: {
+        id: EFFECT.LIGHT_BLIGHT,
+        name: "Light Blight",
+        img: SpellblighterImg,
+        title: "Нельзя применять заклинания света"
+    },
+    [EFFECT.DARK_BLIGHT]: {
+        id: EFFECT.DARK_BLIGHT,
+        name: "Dark Blight",
+        img: SpellblighterImg,
+        title: "Нельзя применять заклинания тьмы"
+    },
+    [EFFECT.DESTRUCTION_BLIGHT]: {
+        id: EFFECT.DESTRUCTION_BLIGHT,
+        name: "Destruction Blight",
+        img: SpellblighterImg,
+        title: "Нельзя применять заклинания разрушения"
+    },
+    [EFFECT.PIERCE]: {
+        id: EFFECT.PIERCE,
+        name: "Pierce",
+        img: SpinepiercerImg,
+        title: "При атаке с передней линии получает +15 к урону"
     },
 };

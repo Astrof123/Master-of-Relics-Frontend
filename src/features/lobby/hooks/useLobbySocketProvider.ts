@@ -8,16 +8,17 @@ import { useNavigate } from 'react-router-dom';
 import type { GetLobbyListData, LobbyInvitation } from '../types/lobby-socket-data-responses';
 import type { SocketCallbackResponse } from '@/features/socket/types/response';
 import { toast } from 'sonner';
+import { useAppSelector } from '@/app/store';
 
 export const useLobbySocketProvider = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isConnected = useAppSelector((state) => state.connectSocket.isConnected);
     
     const getLobbies = useCallback(() => {
         socketService.emit(LOBBY_EVENT_NAME.GET_LOBBY_LIST, null, (response: SocketCallbackResponse<GetLobbyListData>) => {
             if (response.success) {
                 dispatch(setLobbies(response.data.lobbies))
-                console.log('Получены лобби:', response.data.lobbies);
             } else {
                 toast.error(response.message);
             }
@@ -25,6 +26,10 @@ export const useLobbySocketProvider = () => {
     }, []);
 
     useEffect(() => {
+        if (!isConnected) {
+            return;
+        }
+
         const handleLobbyListUpdated = () => {
             getLobbies()
         };
@@ -34,18 +39,15 @@ export const useLobbySocketProvider = () => {
         };
 
         const handleYouInvited = (data: LobbyInvitation[]) => {
-            console.log("Получены приглашения", data)
             dispatch(setInvitations(data))
         };
         
         const handleLobbyUpdate = (data: Lobby) => {
             dispatch(setCurrentLobby(data))
-            console.log('Получено текущее лобби:', data);
         };
 
         const handleGameStartedUpdate = (gameId: string) => {
             navigate(`/game/${gameId}`)
-            console.log('Игра началась');
         };
 
         socketService.on(LOBBY_EVENT_NAME.YOU_INVITED, handleYouInvited);
@@ -61,7 +63,7 @@ export const useLobbySocketProvider = () => {
             socketService.off(LOBBY_EVENT_NAME.LOBBY_UPDATE, handleLobbyUpdate);
             socketService.off(LOBBY_EVENT_NAME.GAME_STARTED, handleGameStartedUpdate);
         };
-    }, [dispatch]);
+    }, [dispatch, isConnected]);
 
     return {};
 };
