@@ -65,7 +65,7 @@ jobs:
       - name: Deploy with docker compose
         run: |
           cd /app
-          docker compose up -p masterofrelics -d --build frontend
+          docker compose -p masterofrelics up -d --build frontend
           echo "Frontend container restarted"
       
       - name: Clean up old images
