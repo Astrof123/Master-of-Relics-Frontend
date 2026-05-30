@@ -11,3 +11,25 @@
     flex-direction: row;
     gap: 12px;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .container {
+        gap: 12px;
+    }
+
+    .artifacts-row {
+        gap: 10px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .container {
+        gap: 24px;
+    }
+
+    .artifacts-row {
+        gap: 18px;
+    }
+}

@@ -402,3 +402,164 @@
 .search-bar:disabled:hover {
     border-color: #5d4a36;
 }
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .title-wrapper h1 {
+        font-size: 24px;
+    }
+
+    .online-players {
+        font-size: 15px;
+    }
+
+    .search-bar, .code-input {
+        width: 200px;
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .code-input {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .code-button {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .ban-banner {
+        padding: 10px 16px;
+        gap: 14px;
+    }
+
+    .ban-icon {
+        width: 36px;
+    }
+
+    .ban-title {
+        font-size: 16px;
+    }
+
+    .ban-label {
+        font-size: 12px;
+        min-width: 90px;
+    }
+
+    .ban-reason {
+        font-size: 13px;
+    }
+
+    .ban-date {
+        font-size: 14px;
+        padding: 3px 10px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .title-wrapper h1 {
+        font-size: 26px;
+    }
+
+    .online-players {
+        font-size: 16px;
+    }
+
+    .search-bar, .code-input {
+        width: 240px;
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    .code-input {
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+
+    .code-button {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    .ban-banner {
+        padding: 12px 20px;
+        gap: 16px;
+    }
+
+    .ban-icon {
+        width: 42px;
+    }
+
+    .ban-title {
+        font-size: 18px;
+    }
+
+    .ban-label {
+        font-size: 13px;
+        min-width: 100px;
+    }
+
+    .ban-reason {
+        font-size: 14px;
+    }
+
+    .ban-date {
+        font-size: 16px;
+        padding: 4px 12px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .title-wrapper h1 {
+        font-size: 36px;
+    }
+
+    .online-players {
+        font-size: 22px;
+    }
+
+    .search-bar, .code-input {
+        width: 320px;
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+
+    .code-input {
+        font-size: 18px;
+        letter-spacing: 4px;
+    }
+
+    .code-button {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+
+    .ban-banner {
+        padding: 20px 32px;
+        gap: 24px;
+    }
+
+    .ban-icon {
+        width: 60px;
+    }
+
+    .ban-title {
+        font-size: 24px;
+    }
+
+    .ban-label {
+        font-size: 16px;
+        min-width: 130px;
+    }
+
+    .ban-reason {
+        font-size: 16px;
+    }
+
+    .ban-date {
+        font-size: 20px;
+        padding: 6px 16px;
+    }
+}

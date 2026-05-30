@@ -682,3 +682,167 @@
     font-weight: 700;
     font-size: 20px;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .modal-overlay {
+        padding: 30px;
+    }
+
+    .spellbook-wrapper {
+        height: 580px;
+    }
+
+    .spellbook-left {
+        padding: 12px 20px;
+    }
+
+    .spellbook-img {
+        width: 34px;
+    }
+
+    .spellbook-title {
+        font-size: 20px;
+    }
+
+    .school-btn {
+        padding: 10px 14px;
+    }
+
+    .school-name {
+        font-size: 13px;
+    }
+
+    .spellbook-right {
+        padding: 20px;
+    }
+
+    .spell-image {
+        height: 280px;
+    }
+
+    .spell-cost {
+        font-size: 18px;
+        -webkit-text-stroke: 1px black;
+    }
+
+    .cooldown {
+        font-size: 18px;
+    }
+
+    .cooldown-wrapper {
+        padding: 4px 12px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .spellbook-wrapper {
+        height: 620px;
+    }
+
+    .spell-image {
+        height: 330px;
+    }
+
+    /* .spell-cost {
+        font-size: 17.5px;
+        -webkit-text-stroke: 1px black;
+    } */
+
+    .spell-cost--high {
+        left: 13.3%;
+        top: 9%;
+    }
+
+    .spell-cost--low {
+        left: 15.7%;
+        top: 9%;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .modal-content {
+        width: 1500px;
+    }
+
+    .modal-overlay {
+        padding: 50px;
+    }
+
+    .spellbook-wrapper {
+        height: 800px;
+    }
+
+    .spellbook-left {
+        padding: 24px 32px;
+    }
+
+    .spellbook-img {
+        width: 52px;
+    }
+
+    .spellbook-title {
+        font-size: 30px;
+    }
+
+    .schools-container {
+        gap: 20px;
+    }
+
+    .school-btn {
+        padding: 16px 24px;
+    }
+
+    .school-name {
+        font-size: 18px;
+    }
+
+    .spellbook-right {
+        padding: 32px 36px;
+    }
+
+    .spells-grid {
+        gap: 28px;
+    }
+
+    .spell-image {
+        height: 420px;
+    }
+
+    .spell-cost {
+        font-size: 24px;
+        -webkit-text-stroke: 1.5px black;
+    }
+
+    .empty-spells {
+        padding: 80px 30px;
+    }
+
+    .empty-icon {
+        font-size: 80px;
+    }
+
+    .empty-spells p {
+        font-size: 22px;
+    }
+
+    .cooldown-wrapper {
+        padding: 8px 20px;
+    }
+
+    .cooldown {
+        font-size: 22px;
+    }
+
+    .spell-cost--high {
+        left: 13.3%;
+        top: 9.5%;
+    }
+
+    .spell-cost--low {
+        left: 15.7%;
+        top: 9.5%;
+    }
+}

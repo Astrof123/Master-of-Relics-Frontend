@@ -351,3 +351,72 @@
     font-size: 16px;
     font-weight: 600;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .options-wrapper {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .checkbox-label {
+        padding: 10px 14px;
+        flex: 1;
+        min-width: 160px;
+    }
+
+    .checkbox-text {
+        font-size: 14px;
+    }
+
+    .checkbox-icon {
+        width: 18px;
+    }
+
+    .timer-text {
+        font-size: 14px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .options-wrapper {
+        gap: 16px;
+    }
+
+    .checkbox-label {
+        padding: 12px 16px;
+    }
+
+    .checkbox-text {
+        font-size: 15px;
+    }
+
+    .timer-text {
+        font-size: 15px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .options-wrapper {
+        gap: 24px;
+    }
+
+    .checkbox-label {
+        padding: 16px 24px;
+    }
+
+    .checkbox-text {
+        font-size: 18px;
+        gap: 12px;
+    }
+
+    .checkbox-icon {
+        width: 24px;
+    }
+
+    .timer-text {
+        font-size: 18px;
+    }
+}

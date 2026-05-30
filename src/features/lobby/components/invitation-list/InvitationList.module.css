@@ -345,3 +345,124 @@
         padding: 2px 8px;
     }
 }
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .invitation-container {
+        padding: 14px;
+    }
+
+    .header-title {
+        font-size: 16px;
+    }
+
+    .header-icon {
+        font-size: 22px;
+    }
+
+    .invitation-avatar {
+        width: 38px;
+        height: 38px;
+    }
+
+    .invitation-avatar img {
+        width: 26px;
+    }
+
+    .invitation-nickname {
+        font-size: 15px;
+    }
+
+    .invitation-text {
+        font-size: 13px;
+    }
+
+    .accept-btn, .decline-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .invitation-container {
+        padding: 18px;
+    }
+
+    .header-title {
+        font-size: 18px;
+    }
+
+    .header-icon {
+        font-size: 24px;
+    }
+
+    .invitation-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .invitation-avatar img {
+        width: 30px;
+    }
+
+    .invitation-nickname {
+        font-size: 16px;
+    }
+
+    .invitation-text {
+        font-size: 14px;
+    }
+
+    .accept-btn, .decline-btn {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+
+    .header-count {
+        font-size: 14px;
+        padding: 3px 10px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .invitation-container {
+        padding: 28px;
+    }
+
+    .header-title {
+        font-size: 24px;
+    }
+
+    .header-icon {
+        font-size: 32px;
+    }
+
+    .invitation-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .invitation-avatar img {
+        width: 40px;
+    }
+
+    .invitation-nickname {
+        font-size: 20px;
+    }
+
+    .invitation-text {
+        font-size: 18px;
+    }
+
+    .accept-btn, .decline-btn {
+        padding: 12px 28px;
+        font-size: 16px;
+    }
+
+    .header-count {
+        font-size: 18px;
+        padding: 6px 16px;
+    }
+}

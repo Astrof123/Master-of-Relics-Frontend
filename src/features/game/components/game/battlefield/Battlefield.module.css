@@ -7,3 +7,19 @@
     padding: 24px 8px;
     box-sizing: border-box;   
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .container {
+        padding: 16px 8px;
+        height: 75%;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .container {
+        padding: 24px 16px;
+        height: 80%;
+    }
+}

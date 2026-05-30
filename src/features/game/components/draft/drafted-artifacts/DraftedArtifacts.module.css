@@ -278,3 +278,114 @@
 }
 
 
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .drafted-wrapper {
+        padding: 18px 16px;
+        gap: 10px;
+    }
+
+    .exit-button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .phase-info {
+        padding: 12px;
+    }
+
+    .phase-info p {
+        font-size: 13px;
+    }
+
+    .phase-value {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    .enemy-status {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    .draft-actions button {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .net-container {
+        margin: 6px 0;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .drafted-wrapper {
+        padding: 22px 18px;
+        gap: 12px;
+    }
+
+    .exit-button {
+        padding: 7px 12px;
+        font-size: 15px;
+    }
+
+    .phase-value {
+        font-size: 20px;
+    }
+
+    .draft-actions button {
+        padding: 14px 22px;
+        font-size: 15px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .drafted-wrapper {
+        padding: 32px 28px;
+        gap: 20px;
+    }
+
+    .exit-button {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+
+    .phase-info {
+        padding: 20px;
+    }
+
+    .phase-info p {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .phase-value {
+        font-size: 28px;
+        padding: 14px;
+    }
+
+    .enemy-status {
+        padding: 18px;
+        font-size: 18px;
+    }
+
+    .draft-actions {
+        gap: 16px;
+    }
+
+    .draft-actions button {
+        padding: 18px 32px;
+        font-size: 18px;
+    }
+
+    .net-container {
+        margin: 12px 0;
+    }
+
+    .net-container::-webkit-scrollbar {
+        width: 10px;
+    }
+}

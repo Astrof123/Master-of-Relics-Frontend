@@ -29,3 +29,28 @@
         gap: 20px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .draft-content {
+        gap: 18px;
+        padding: 16px;
+        height: calc(100vh - 20px);
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .draft-content {
+        gap: 22px;
+        padding: 20px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .draft-content {
+        gap: 32px;
+        padding: 28px;
+    }
+}

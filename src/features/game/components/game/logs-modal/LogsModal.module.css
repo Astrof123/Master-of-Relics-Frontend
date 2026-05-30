@@ -157,3 +157,37 @@
         padding: 6px 8px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .logs-modal {
+        bottom: 60px;
+        left: 15px;
+        min-width: 250px;
+        max-width: 300px;
+        max-height: 280px;
+    }
+
+    .logs-modal span {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .logs-modal {
+        bottom: 90px;
+        left: 30px;
+        min-width: 350px;
+        max-width: 420px;
+        max-height: 400px;
+        padding: 20px;
+    }
+
+    .logs-modal span {
+        font-size: 16px;
+        padding: 10px 16px;
+        border-left-width: 4px;
+    }
+}

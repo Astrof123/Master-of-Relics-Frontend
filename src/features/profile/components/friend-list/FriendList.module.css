@@ -9,13 +9,15 @@
 }
 
 .friends-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    
+    /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
     gap: 16px;
     margin-top: 8px;
 }
 
 .friend-card {
+    min-width: 340px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -111,9 +113,9 @@
 }
 
 @media (max-width: 768px) {
-    .friends-list {
+    /* .friends-list {
         grid-template-columns: 1fr;
-    }
+    } */
 }
 
 @keyframes pulse {
@@ -121,3 +123,123 @@
     50% { opacity: 1; }
 }
 
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .friends-section {
+        padding: 18px;
+    }
+
+    .friends-list {
+        gap: 12px;
+    }
+
+    .friend-card {
+        padding: 10px 14px;
+        gap: 12px;
+    }
+
+    .friend-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .friend-avatar img {
+        width: 26px;
+    }
+
+    .friend-name {
+        font-size: 16px;
+    }
+
+    .friend-status-text {
+        font-size: 14px;
+    }
+
+    .empty-friends {
+        padding: 30px;
+    }
+
+    .empty-icon {
+        font-size: 40px;
+    }
+
+    .empty-friends p {
+        font-size: 15px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .friends-section {
+        padding: 22px;
+    }
+
+    .friends-list {
+        gap: 14px;
+    }
+
+    .friend-card {
+        padding: 12px 16px;
+    }
+
+    .friend-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .friend-name {
+        font-size: 17px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .friends-section {
+        padding: 32px;
+    }
+
+    .friends-list {
+        gap: 20px;
+    }
+
+    .friend-card {
+        padding: 18px 24px;
+        gap: 20px;
+    }
+
+    .friend-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .friend-avatar img {
+        width: 40px;
+    }
+
+    .friend-name {
+        font-size: 22px;
+        margin-bottom: 8px;
+    }
+
+    .friend-status-text {
+        font-size: 18px;
+    }
+
+    .status-dot-small {
+        width: 10px;
+        height: 10px;
+    }
+
+    .empty-friends {
+        padding: 50px;
+    }
+
+    .empty-icon {
+        font-size: 60px;
+    }
+
+    .empty-friends p {
+        font-size: 20px;
+    }
+}

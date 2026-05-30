@@ -318,3 +318,89 @@
         font-size: 13px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .report-modal {
+        padding: 22px;
+        min-width: 450px;
+    }
+
+    .report-header h3 {
+        font-size: 20px;
+    }
+
+    .header-icon {
+        width: 26px;
+    }
+
+    .form-label {
+        font-size: 15px;
+    }
+
+    .report-select, .report-textarea {
+        font-size: 15px;
+        padding: 12px 14px;
+    }
+
+    .textarea-counter {
+        font-size: 11px;
+    }
+
+    .cancel-btn, .submit-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .report-modal {
+        padding: 26px;
+        min-width: 520px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .report-modal {
+        padding: 36px;
+        min-width: 650px;
+    }
+
+    .report-header h3 {
+        font-size: 28px;
+    }
+
+    .header-icon {
+        width: 36px;
+    }
+
+    .form-label {
+        font-size: 20px;
+    }
+
+    .report-select, .report-textarea {
+        font-size: 18px;
+        padding: 16px 20px;
+    }
+
+    .textarea-counter {
+        font-size: 14px;
+    }
+
+    .error-message {
+        font-size: 16px;
+        padding: 14px 18px;
+    }
+
+    .cancel-btn, .submit-btn {
+        padding: 14px 24px;
+        font-size: 18px;
+    }
+
+    .spinner {
+        width: 20px;
+        height: 20px;
+    }
+}

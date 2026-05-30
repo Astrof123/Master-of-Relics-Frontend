@@ -392,3 +392,75 @@
         padding: 24px 16px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .modal-card-wrapper {
+        padding: 28px 32px;
+        gap: 28px;
+    }
+
+    .card-img {
+        height: 380px;
+    }
+
+    .actions-wrapper {
+        min-width: 280px;
+        padding: 24px 20px;
+    }
+
+    .actions-wrapper h2 {
+        font-size: 22px;
+    }
+
+    .close-button {
+        width: 42px;
+        height: 42px;
+        top: -12px;
+        right: -12px;
+    }
+
+    .close-button img {
+        width: 18px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .card-img {
+        height: 420px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .modal-card-wrapper {
+        padding: 48px 56px;
+        gap: 48px;
+    }
+
+    .card-img {
+        height: 520px;
+    }
+
+    .actions-wrapper {
+        min-width: 400px;
+        padding: 36px 32px;
+    }
+
+    .actions-wrapper h2 {
+        font-size: 30px;
+        margin-bottom: 24px;
+    }
+
+    .close-button {
+        width: 56px;
+        height: 56px;
+        top: -18px;
+        right: -18px;
+    }
+
+    .close-button img {
+        width: 24px;
+    }
+}

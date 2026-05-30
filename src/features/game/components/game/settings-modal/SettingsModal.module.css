@@ -174,3 +174,39 @@
     bottom: -3px;
     background:rgb(194, 116, 22);
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .settings-modal {
+        bottom: 60px;
+        right: 15px;
+        min-width: 160px;
+    }
+
+    .settings-button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .settings-modal {
+        bottom: 90px;
+        right: 30px;
+        min-width: 220px;
+        padding: 16px;
+    }
+
+    .settings-button {
+        padding: 12px 18px;
+        font-size: 16px;
+    }
+
+    .draw-icon {
+        width: 18px;
+        height: 18px;
+        right: -4px;
+        bottom: -4px;
+    }
+}

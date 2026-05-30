@@ -1005,3 +1005,236 @@
     gap: 16px;
     align-items: center;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .container {
+        padding: 20px;
+    }
+
+    .header-title {
+        font-size: 28px;
+    }
+
+    .filter-toggle, .create-btn {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .create-input {
+        padding: 10px 14px;
+        font-size: 16px;
+    }
+
+    .filter-input, .status-select {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+
+    .table-header {
+        grid-template-columns: 280px 150px 110px 110px 180px;
+        padding: 14px 18px;
+        gap: 14px;
+    }
+
+    .code-row {
+        grid-template-columns: 280px 150px 110px 110px 180px;
+        padding: 14px 18px;
+        gap: 14px;
+    }
+
+    .code-id {
+        font-size: 13px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+
+    .user-id {
+        font-size: 12px;
+    }
+
+    .status-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .date {
+        font-size: 14px;
+    }
+
+    .status-btn, .delete-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .page-btn {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    .stats {
+        font-size: 14px;
+    }
+
+    .stats-value {
+        font-size: 18px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .container {
+        padding: 24px;
+        max-width: 1400px;
+    }
+
+    .header-title {
+        font-size: 30px;
+    }
+
+    .filter-toggle, .create-btn {
+        font-size: 15px;
+        padding: 12px 24px;
+    }
+
+    .create-input {
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+
+    .table-header {
+        grid-template-columns: 320px 160px 120px 110px 190px;
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .code-row {
+        grid-template-columns: 320px 160px 120px 110px 190px;
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .code-id {
+        font-size: 14px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .container {
+        padding: 36px;
+        max-width: 1700px;
+    }
+
+    .header-title {
+        font-size: 38px;
+        margin-bottom: 36px;
+    }
+
+    .filter-toggle, .create-btn {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+
+    .create-input {
+        padding: 14px 20px;
+        font-size: 20px;
+        width: 120px;
+    }
+
+    .filter-label {
+        font-size: 17px;
+    }
+
+    .filter-input, .status-select {
+        font-size: 16px;
+        padding: 14px 18px;
+    }
+
+    .table-header {
+        grid-template-columns: 400px 200px 140px 130px 220px;
+        padding: 20px 28px;
+        gap: 20px;
+    }
+
+    .code-row {
+        grid-template-columns: 400px 200px 140px 130px 220px;
+        padding: 20px 28px;
+        gap: 20px;
+    }
+
+    .code-id {
+        font-size: 16px;
+        padding: 8px 14px;
+    }
+
+    .user-name {
+        font-size: 17px;
+    }
+
+    .user-id {
+        font-size: 14px;
+    }
+
+    .status-badge {
+        font-size: 15px;
+        padding: 10px 18px;
+    }
+
+    .date {
+        font-size: 16px;
+    }
+
+    .status-btn, .delete-btn {
+        font-size: 15px;
+        padding: 10px 18px;
+    }
+
+    .page-btn {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+
+    .page-info {
+        padding: 10px 24px;
+    }
+
+    .page-current {
+        font-size: 24px;
+    }
+
+    .stats {
+        font-size: 17px;
+    }
+
+    .stats-value {
+        font-size: 22px;
+    }
+
+    .empty-state {
+        padding: 120px 60px;
+    }
+
+    .empty-state p {
+        font-size: 22px;
+    }
+
+    .empty-icon {
+        font-size: 90px;
+    }
+
+    .loading {
+        padding: 120px;
+    }
+
+    .loading-spinner {
+        width: 80px;
+        height: 80px;
+    }
+
+    .loading span {
+        font-size: 24px;
+    }
+}

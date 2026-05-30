@@ -317,3 +317,124 @@
 .close-button img {
     width: 20px;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .modal-card-wrapper {
+        padding: 24px;
+    }
+
+    .modal-card-inner-wrapper {
+        gap: 16px;
+    }
+
+    .face {
+        width: 60px;
+        height: 60px;
+    }
+
+    .buffs {
+        min-height: 250px;
+        gap: 10px;
+    }
+
+    .buff-wrapper {
+        width: 42px;
+        height: 42px;
+    }
+
+    .buff-wrapper span {
+        font-size: 18px;
+    }
+
+    .actions {
+        width: 320px;
+        height: 400px;
+        padding: 20px;
+    }
+
+    .close-button {
+        width: 40px;
+        height: 40px;
+        top: -12px;
+        right: -12px;
+    }
+
+    .close-button img {
+        width: 18px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .modal-card-wrapper {
+        padding: 28px;
+    }
+
+    .face {
+        width: 65px;
+        height: 65px;
+    }
+
+    .actions {
+        width: 350px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .modal-card-wrapper {
+        padding: 40px;
+    }
+
+    .modal-card-max-hp {
+        padding: 16px 32px;
+        font-size: 20px;
+    }
+
+    .modal-card-inner-wrapper {
+        gap: 32px;
+    }
+
+    .face {
+        width: 90px;
+        height: 90px;
+    }
+
+    .buffs {
+        min-height: 380px;
+        gap: 16px;
+        padding: 12px 16px;
+    }
+
+    .buff-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .buff-wrapper span {
+        font-size: 26px;
+        -webkit-text-stroke: 1.3px black;
+    }
+
+    .effect-title {
+        font-size: 18px;
+    }
+
+    .actions {
+        width: 480px;
+        height: 550px;
+        padding: 28px;
+    }
+
+    .close-button {
+        width: 56px;
+        height: 56px;
+        top: -18px;
+        right: -18px;
+    }
+
+    .close-button img {
+        width: 26px;
+    }
+}

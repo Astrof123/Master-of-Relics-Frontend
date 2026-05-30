@@ -1104,3 +1104,212 @@
         font-size: 13px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .reports-container {
+        padding: 20px;
+    }
+
+    .header-title {
+        font-size: 28px;
+    }
+
+    .filter-toggle {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .table-header {
+        grid-template-columns: 130px 1fr 150px 150px 110px 120px 35px;
+        padding: 14px 18px;
+        gap: 14px;
+    }
+
+    .report-row {
+        grid-template-columns: 130px 1fr 150px 150px 110px 120px 35px;
+        padding: 14px 18px;
+        gap: 14px;
+    }
+
+    .type-badge, .status-badge {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .user-name {
+        font-size: 15px;
+        max-width: 140px;
+    }
+
+    .user-id {
+        font-size: 12px;
+        max-width: 90px;
+    }
+
+    .report-text {
+        font-size: 15px;
+        max-width: 350px;
+    }
+
+    .date {
+        font-size: 14px;
+    }
+
+    .page-btn {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    .stats {
+        font-size: 14px;
+    }
+
+    .stats-value {
+        font-size: 18px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .reports-container {
+        padding: 24px;
+        max-width: 1400px;
+    }
+
+    .header-title {
+        font-size: 30px;
+    }
+
+    .filter-toggle {
+        font-size: 15px;
+        padding: 12px 24px;
+    }
+
+    .table-header {
+        grid-template-columns: 150px 1fr 160px 160px 120px 130px 35px;
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .report-row {
+        grid-template-columns: 150px 1fr 160px 160px 120px 130px 35px;
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .type-badge, .status-badge {
+        font-size: 14px;
+        padding: 7px 8px;
+    }
+
+    .user-name {
+        font-size: 16px;
+        max-width: 160px;
+    }
+
+    .report-text {
+        font-size: 16px;
+        max-width: 400px;
+    }
+
+    .date {
+        font-size: 15px;
+    }
+
+    .page-btn {
+        padding: 12px 28px;
+        font-size: 15px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .reports-container {
+        padding: 36px;
+        max-width: 1700px;
+    }
+
+    .header-title {
+        font-size: 38px;
+        margin-bottom: 36px;
+    }
+
+    .filter-toggle {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+
+    .table-header {
+        grid-template-columns: 180px 1fr 200px 200px 140px 150px 45px;
+        padding: 20px 28px;
+        gap: 24px;
+    }
+
+    .report-row {
+        grid-template-columns: 180px 1fr 200px 200px 140px 150px 45px;
+        padding: 20px 28px;
+        gap: 24px;
+    }
+
+    .type-badge, .status-badge {
+        font-size: 16px;
+        padding: 10px 18px;
+    }
+
+    .user-name {
+        font-size: 18px;
+        max-width: 220px;
+    }
+
+    .user-id {
+        font-size: 14px;
+        max-width: 140px;
+    }
+
+    .report-text {
+        font-size: 17px;
+        max-width: 550px;
+    }
+
+    .date {
+        font-size: 16px;
+    }
+
+    .expand-icon {
+        font-size: 16px;
+    }
+
+    .page-btn {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+
+    .page-info {
+        padding: 10px 24px;
+    }
+
+    .page-current {
+        font-size: 24px;
+    }
+
+    .stats {
+        font-size: 17px;
+    }
+
+    .stats-value {
+        font-size: 22px;
+    }
+
+    .full-text {
+        font-size: 19px;
+    }
+
+    .full-text-label {
+        font-size: 17px;
+    }
+
+    .expanded-content {
+        padding: 24px 28px 28px;
+    }
+}

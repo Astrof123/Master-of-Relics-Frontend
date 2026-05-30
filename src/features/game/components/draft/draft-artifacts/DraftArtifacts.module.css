@@ -277,3 +277,108 @@
     gap: 8px;
     font-family: "Forum";
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .draft-artifacts-wrapper {
+        padding: 18px;
+        border-width: 2px;
+    }
+
+    .draft-artifacts-top h2 {
+        font-size: 20px;
+        padding-left: 12px;
+    }
+
+    .draft-artifacts-top button {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+
+    .players-status {
+        gap: 12px;
+    }
+
+    .player-connection {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .player-name {
+        width: 45px;
+        max-width: 45px;
+        font-size: 13px;
+    }
+
+    .deck-container {
+        padding-right: 6px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .draft-artifacts-wrapper {
+        padding: 22px;
+    }
+
+    .draft-artifacts-top h2 {
+        font-size: 22px;
+    }
+
+    .draft-artifacts-top button {
+        padding: 11px 22px;
+        font-size: 14px;
+    }
+
+    .player-name {
+        width: 55px;
+        max-width: 55px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .draft-artifacts-wrapper {
+        padding: 32px;
+    }
+
+    .draft-artifacts-wrapper::after {
+        top: -20px;
+        left: 40px;
+        padding: 10px 32px;
+        font-size: 18px;
+    }
+
+    .draft-artifacts-top h2 {
+        font-size: 28px;
+        padding-left: 20px;
+    }
+
+    .draft-artifacts-top button {
+        padding: 14px 32px;
+        font-size: 16px;
+    }
+
+    .players-status {
+        gap: 20px;
+    }
+
+    .player-connection {
+        padding: 12px 18px;
+        font-size: 16px;
+    }
+
+    .player-name {
+        width: 80px;
+        max-width: 80px;
+        font-size: 16px;
+    }
+
+    .deck-container {
+        padding-right: 12px;
+    }
+
+    .deck-container::-webkit-scrollbar {
+        width: 10px;
+    }
+}

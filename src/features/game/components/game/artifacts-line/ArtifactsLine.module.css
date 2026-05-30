@@ -10,3 +10,17 @@
     background-color: rgba(170, 120, 60, 0.15);
     box-shadow: inset 0 0 20px rgba(170, 120, 60, 0.3);
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .artifacts-row {
+        gap: 10px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .artifacts-row {
+        gap: 18px;
+    }
+}

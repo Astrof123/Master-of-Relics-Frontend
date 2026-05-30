@@ -47,9 +47,9 @@
 /* Список друзей */
 .friends-list {
     display: flex;
-    flex-direction: column;
     gap: 12px;
-    max-height: 300px;
+    /* max-height: 300px; */
+    flex-direction: row;
     overflow-y: auto;
     padding-right: 4px;
 }
@@ -76,7 +76,7 @@
 
 /* Карточка друга */
 .friend-card {
-    width: 400px;
+    min-width: 300px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -368,4 +368,138 @@
 
 .friend-avatar img {
     width: 35px;
+}
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .invite-container {
+        padding: 16px;
+    }
+
+    .header-title {
+        font-size: 18px;
+    }
+
+    .refresh-button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .friend-card {
+        /* width: 350px; */
+        padding: 6px 10px;
+    }
+
+    .friend-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .friend-avatar img {
+        width: 28px;
+    }
+
+    .friend-nickname {
+        font-size: 16px;
+    }
+
+    .status-text {
+        font-size: 14px;
+    }
+
+    .invite-btn,
+    .invited-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .invite-container {
+        padding: 18px;
+    }
+
+    .header-title {
+        font-size: 20px;
+    }
+
+    .friend-card {
+        /* width: 380px; */
+    }
+
+    .friend-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .friend-avatar img {
+        width: 32px;
+    }
+
+    .friend-nickname {
+        font-size: 17px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .invite-container {
+        padding: 24px;
+    }
+
+    .header-title {
+        font-size: 24px;
+    }
+
+    .refresh-button {
+        padding: 12px 28px;
+        font-size: 16px;
+    }
+
+    .friend-card {
+        /* width: 450px; */
+        padding: 12px 16px;
+        gap: 20px;
+    }
+
+    .friend-avatar {
+        width: 56px;
+        height: 56px;
+    }
+
+    .friend-avatar img {
+        width: 40px;
+    }
+
+    .friend-nickname {
+        font-size: 20px;
+    }
+
+    .status-text {
+        font-size: 18px;
+    }
+
+    .status-dot {
+        width: 12px;
+        height: 12px;
+    }
+
+    .invite-btn,
+    .invited-btn {
+        padding: 10px 24px;
+        font-size: 16px;
+    }
+
+    .empty-friends {
+        padding: 50px;
+    }
+
+    .empty-icon {
+        font-size: 60px;
+    }
+
+    .empty-friends p {
+        font-size: 18px;
+    }
 }

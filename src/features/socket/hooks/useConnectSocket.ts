@@ -45,7 +45,7 @@ export const useConnectSocket = () => {
     
     
     const connect = useCallback(() => {
-        const url = '/';
+        const url = 'ws://localhost:3000';
 
         if (accessToken) {
             socketService.setTokenRefreshCallback(async () => {
@@ -62,13 +62,11 @@ export const useConnectSocket = () => {
             });
         }
         else {
-            console.error("Нету токена")
         }
     }, []);
     
 
     const disconnect = useCallback(() => {
-        console.log('🛑 useLobbySocket: отключение');
         socketService.disconnect();
     }, []);
     

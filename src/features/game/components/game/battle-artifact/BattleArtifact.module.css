@@ -433,3 +433,114 @@
     }
 }
 
+
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .artifact-img {
+        width: 140px;
+    }
+
+    .face {
+        width: 38px;
+        height: 38px;
+        top: -6px;
+        right: 8px;
+    }
+
+    .state {
+        font-size: 10px;
+        padding: 3px 8px;
+        left: -3px;
+        top: -6px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 14px;
+        -webkit-text-stroke: 0.8px black;
+    }
+
+    .value-left-top--high {
+        left: 11%;
+        bottom: 18%;
+    }
+    .value-left-top--low {
+        left: 14%;
+        bottom: 18%;
+    }
+    .value-left-top--very-low {
+        left: 16.5%;
+        bottom: 18%;
+    }
+
+    .damage-value, .heal-value {
+        font-size: 28px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .artifact-img {
+        width: 155px;
+    }
+
+    .face {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .artifact-img {
+        width: 200px;
+    }
+
+    .face {
+        width: 55px;
+        height: 55px;
+        top: -10px;
+        right: 12px;
+    }
+
+    .state {
+        font-size: 14px;
+        padding: 6px 14px;
+        left: -5px;
+        top: -10px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 20px;
+        -webkit-text-stroke: 1.2px black;
+    }
+
+    .value-left-top--high {
+        left: 12.5%;
+        bottom: 18%;
+    }
+    .value-left-top--low {
+        left: 15%;
+        bottom: 18%;
+    }
+    .value-left-top--very-low {
+        left: 17.5%;
+        bottom: 18%;
+    }
+    .value-right-top--high {
+        right: 11%;
+        bottom: 18%;
+    }
+    .value-right-top--low {
+        right: 12.5%;
+        bottom: 15%;
+    }
+    .value-right-top--very-low {
+        right: 15%;
+        bottom: 15.5%;
+    }
+
+    .damage-value, .heal-value {
+        font-size: 44px;
+    }
+}

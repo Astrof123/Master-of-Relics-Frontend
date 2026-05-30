@@ -14,13 +14,11 @@ let store: { getState: () => RootState; dispatch: (action: any) => void } | null
 
 export const initApiClient = (reduxStore: { getState: () => RootState; dispatch: (action: any) => void }) => {
     store = reduxStore;
-    console.log('API клиент подключен к Redux store');
 };
 
 
 const getAccessToken = (): string | null => {
     if (!store) {
-        console.warn('Store не инициализирован');
         return null;
     }
     
@@ -28,13 +26,12 @@ const getAccessToken = (): string | null => {
         const state = store.getState();
         return state.auth.accessToken;
     } catch (error) {
-        console.error('Ошибка при получении токена из store:', error);
         return null;
     }
 };
 
 
-const API_BASE_URL = "/api";
+const API_BASE_URL = "http://localhost:3000";
 
 
 const axiosInstance = axios.create({

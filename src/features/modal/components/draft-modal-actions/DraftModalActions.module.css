@@ -245,3 +245,49 @@
         font-size: 18px;
     }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .draft-actions h2 {
+        font-size: 22px;
+    }
+
+    .pick-button {
+        padding: 16px 24px;
+        font-size: 16px;
+    }
+
+    .view-only-message {
+        padding: 30px 20px;
+        font-size: 18px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .pick-button {
+        padding: 18px 28px;
+        font-size: 17px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .draft-actions h2 {
+        font-size: 30px;
+    }
+
+    .pick-button {
+        padding: 24px 40px;
+        font-size: 22px;
+    }
+
+    .view-only-message {
+        padding: 50px 40px;
+        font-size: 24px;
+    }
+
+    .view-only-message span {
+        font-size: 80px;
+    }
+}

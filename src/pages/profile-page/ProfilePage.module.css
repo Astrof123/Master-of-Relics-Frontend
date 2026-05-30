@@ -412,3 +412,123 @@
     overflow: hidden;
     display: inline-block;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .profile-container {
+        padding: 16px;
+        gap: 18px;
+    }
+
+    .profile-header {
+        padding: 20px;
+    }
+
+    .avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .avatar img {
+        width: 60px;
+    }
+
+    .nickname {
+        font-size: 26px;
+    }
+
+    .status {
+        font-size: 15px;
+    }
+
+    .status-dot {
+        width: 11px;
+        height: 11px;
+    }
+
+    .profile-id {
+        font-size: 14px;
+        margin-left: 16px;
+    }
+
+    .logout {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .profile-container {
+        gap: 22px;
+    }
+
+    .profile-header {
+        padding: 24px;
+    }
+
+    .avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    .avatar img {
+        width: 70px;
+    }
+
+    .nickname {
+        font-size: 30px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .profile-container {
+        gap: 32px;
+        padding: 28px;
+        max-width: 1400px;
+    }
+
+    .profile-header {
+        padding: 32px;
+        gap: 24px;
+    }
+
+    .avatar-section {
+        gap: 32px;
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .avatar img {
+        width: 90px;
+    }
+
+    .nickname {
+        font-size: 40px;
+        margin-bottom: 12px;
+    }
+
+    .status {
+        font-size: 22px;
+        gap: 12px;
+    }
+
+    .status-dot {
+        width: 16px;
+        height: 16px;
+    }
+
+    .profile-id {
+        font-size: 18px;
+        margin-left: 24px;
+    }
+
+    .logout {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+}

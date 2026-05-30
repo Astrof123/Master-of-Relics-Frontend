@@ -272,3 +272,45 @@
 .prize-img {
     width: 32px;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .endgame-result {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+
+    .result-icon {
+        width: 28px;
+    }
+
+    .endgame-prize {
+        font-size: 16px;
+        padding: 8px 18px;
+    }
+
+    .prize-img {
+        width: 26px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .endgame-result {
+        font-size: 28px;
+        padding: 16px 36px;
+    }
+
+    .result-icon {
+        width: 40px;
+    }
+
+    .endgame-prize {
+        font-size: 20px;
+        padding: 14px 32px;
+    }
+
+    .prize-img {
+        width: 36px;
+    }
+}

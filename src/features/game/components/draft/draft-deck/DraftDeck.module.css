@@ -207,3 +207,105 @@
     right: 15.5%;
     bottom: 15%;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .deck {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .deck h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .artifact {
+        width: 150px;
+    }
+
+    .artifact--picked::after {
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+        top: 6px;
+        right: 6px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 14px;
+        -webkit-text-stroke: 0.8px black;
+    }
+
+    .value-left-top--high {
+        left: 11%;
+        bottom: 18%;
+    }
+    .value-left-top--low {
+        left: 14%;
+        bottom: 18%;
+    }
+    .value-left-top--very-low {
+        left: 16%;
+        bottom: 18%;
+    }
+    .value-right-top--high {
+        right: 11%;
+        bottom: 14%;
+    }
+    .value-right-top--low {
+        right: 12%;
+        bottom: 15%;
+    }
+    .value-right-top--very-low {
+        right: 15%;
+        bottom: 14%;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .deck {
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .artifact {
+        width: 180px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 16px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .deck {
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .deck h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+
+    .artifact {
+        width: 220px;
+    }
+
+    .artifact--picked::after {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 19px;
+        -webkit-text-stroke: 1.2px black;
+    }
+}

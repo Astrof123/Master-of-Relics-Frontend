@@ -395,3 +395,105 @@
     margin-top: 8px;
     margin-bottom: 20px;
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .replace-modal {
+        padding: 22px;
+        min-width: 650px;
+    }
+
+    .modal-header h3 {
+        font-size: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 170px));
+        gap: 14px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 16px;
+        -webkit-text-stroke: 0.9px black;
+    }
+
+    .replace-icon {
+        width: 26px;
+    }
+
+    .replace-text {
+        font-size: 13px;
+    }
+
+    .empty-cards {
+        min-width: 300px;
+        padding: 40px 30px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .replace-modal {
+        padding: 26px;
+        min-width: 750px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(190px, 190px));
+        gap: 16px;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 17px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .replace-modal {
+        padding: 36px;
+        min-width: 950px;
+        max-width: 1100px;
+    }
+
+    .modal-header h3 {
+        font-size: 28px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 240px));
+        gap: 24px;
+        max-height: 70vh;
+    }
+
+    .value-left-top, .value-right-top {
+        font-size: 22px;
+        -webkit-text-stroke: 1.3px black;
+    }
+
+    .replace-icon {
+        width: 40px;
+    }
+
+    .replace-text {
+        font-size: 18px;
+    }
+
+    .empty-cards {
+        min-width: 400px;
+        padding: 60px 50px;
+    }
+
+    .empty-icon {
+        font-size: 80px;
+    }
+
+    .empty-cards p {
+        font-size: 22px;
+    }
+
+    .empty-close-btn {
+        padding: 14px 32px;
+        font-size: 18px;
+    }
+}

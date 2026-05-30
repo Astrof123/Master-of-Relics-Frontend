@@ -397,6 +397,7 @@
 
 /* Карточка лобби - улучшенная */
 .lobby-card {
+    box-sizing: border-box;
     padding: 20px;
     background: linear-gradient(145deg, #2f2824 0%, #1a1518 100%);
     border-radius: 12px;
@@ -752,4 +753,163 @@
 
 .player-item-icon {
     width: 18px;
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .lobbies-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 18px;
+    }
+
+    .lobby-card {
+        padding: 14px;
+    }
+
+    .lobby-name {
+        font-size: 18px;
+        padding: 5px 12px;
+    }
+
+    .player-item {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .player-item-nickname {
+        max-width: 70px;
+    }
+
+    .lobby-actions button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .private-text,
+    .lobby-state,
+    .lobby-timer-state {
+        padding: 3px 10px;
+        font-size: 10px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .lobbies-list {
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 24px;
+    }
+
+    .lobby-card {
+        padding: 18px;
+    }
+
+    .lobby-name {
+        font-size: 20px;
+        padding: 5px 14px;
+    }
+
+    .players-list strong {
+        font-size: 14px;
+    }
+
+    .player-item {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .player-item-nickname {
+        max-width: 90px;
+    }
+
+    .lobby-actions button {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .private-text,
+    .lobby-state,
+    .lobby-timer-state {
+        padding: 4px 12px;
+        font-size: 11px;
+    }
+
+    .empty-message,
+    .error-message {
+        padding: 60px 20px;
+        font-size: 18px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .lobbies-list {
+        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        gap: 40px;
+    }
+
+    .lobby-card {
+        padding: 24px;
+    }
+
+    .subtitle {
+        font-size: 24px;
+        margin: 24px 0 20px;
+    }
+
+    .subtitle img {
+        width: 30px;
+    }
+
+    .lobby-name {
+        font-size: 27px;
+        padding: 8px 20px;
+    }
+
+    .players-list strong {
+        font-size: 18px;
+    }
+
+    .player-item {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .player-item-nickname {
+        max-width: 140px;
+    }
+
+    .player-item-icon {
+        width: 24px;
+    }
+
+    .lobby-actions button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+
+    .private-text,
+    .lobby-state,
+    .lobby-timer-state {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    .empty-message,
+    .error-message {
+        padding: 100px 40px;
+        font-size: 24px;
+    }
+
+    .empty-message::before,
+    .empty-message::after {
+        font-size: 60px;
+    }
 }

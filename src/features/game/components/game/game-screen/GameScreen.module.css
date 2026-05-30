@@ -4,3 +4,26 @@
     height: 100vh;
     font-family: "Forum";
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .game-content {
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 16px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .game-content {
+        width: 1280px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .game-content {
+        width: 1550px;
+    }
+}

@@ -230,3 +230,106 @@
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.8; }
 }
+
+/* Ноутбук (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .offers-section {
+        padding: 18px;
+    }
+
+    .offers-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .offer-card {
+        padding: 12px 16px;
+    }
+
+    .offer-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .offer-avatar img {
+        width: 26px;
+    }
+
+    .offer-nickname {
+        font-size: 16px;
+    }
+
+    .offer-buttons button {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Десктоп (1400px - 1749px) */
+@media (min-width: 1400px) and (max-width: 1749px) {
+    .offers-section {
+        padding: 22px;
+    }
+
+    .offers-title {
+        font-size: 20px;
+    }
+
+    .offer-card {
+        padding: 14px 18px;
+    }
+
+    .offer-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .offer-nickname {
+        font-size: 17px;
+    }
+}
+
+/* Крупные мониторы (1750px+) */
+@media (min-width: 1750px) {
+    .offers-section {
+        padding: 32px;
+    }
+
+    .offers-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+        gap: 14px;
+    }
+
+    .offers-list {
+        gap: 16px;
+    }
+
+    .offer-card {
+        padding: 20px 24px;
+        gap: 24px;
+    }
+
+    .offer-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .offer-avatar img {
+        width: 38px;
+    }
+
+    .offer-nickname {
+        font-size: 22px;
+    }
+
+    .offer-buttons {
+        gap: 16px;
+    }
+
+    .offer-buttons button {
+        padding: 12px 28px;
+        font-size: 18px;
+        gap: 10px;
+    }
+}

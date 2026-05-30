@@ -535,3 +535,265 @@ button {
     width:auto;
 }
 
+@media (min-width: 1920px) {
+    .auth-form {
+        max-width: 650px;
+        padding: 56px 52px;
+    }
+
+    .auth-title {
+        font-size: 42px;
+        margin-bottom: 42px;
+        padding-bottom: 24px;
+    }
+
+    .auth-label {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .auth-input {
+        padding: 20px 26px;
+        font-size: 20px;
+    }
+
+    .auth-input::placeholder {
+        font-size: 18px;
+    }
+
+    .auth-error-message {
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+
+    .auth-hint {
+        font-size: 15px;
+        padding: 12px 16px;
+        margin-top: 16px;
+    }
+
+    .auth-button {
+        padding: 22px 40px;
+        font-size: 22px;
+        margin-top: 28px;
+    }
+
+    .auth-link {
+        font-size: 18px;
+        margin-top: 32px;
+        padding: 12px;
+    }
+
+    .auth-error-banner {
+        padding: 18px;
+        font-size: 18px;
+        margin-top: 28px;
+    }
+
+    .auth-loader {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+    }
+}
+
+/* Десктоп (1400px - 1919px) */
+@media (min-width: 1400px) and (max-width: 1919px) {
+    .auth-form {
+        max-width: 550px;
+        padding: 48px 44px;
+    }
+
+    .auth-title {
+        font-size: 36px;
+        margin-bottom: 36px;
+    }
+
+    .auth-input {
+        padding: 18px 22px;
+        font-size: 18px;
+    }
+
+    .auth-button {
+        padding: 20px 36px;
+        font-size: 20px;
+    }
+} 
+
+/* Планшеты (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .auth-form {
+        max-width: 450px;
+        padding: 32px 28px;
+    }
+
+    .auth-title {
+        font-size: 28px;
+        margin-bottom: 28px;
+    }
+
+    .auth-label {
+        font-size: 15px;
+    }
+
+    .auth-input {
+        padding: 14px 18px;
+        font-size: 16px;
+    }
+
+    .auth-button {
+        padding: 16px 28px;
+        font-size: 18px;
+    }
+}
+
+/* Мобильные устройства (до 767px) */
+@media (max-width: 767px) {
+    .auth-form {
+        padding: 24px 20px;
+        max-width: 100%;
+        margin: 0 16px;
+    }
+
+    .auth-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .auth-label {
+        font-size: 14px;
+    }
+
+    .auth-input {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .auth-input::placeholder {
+        font-size: 13px;
+    }
+
+    .auth-error-message,
+    .auth-hint {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .auth-button {
+        padding: 14px 24px;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    .auth-link {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .auth-error-banner {
+        padding: 12px;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+}
+
+/* Маленькие мобильные (до 480px) */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 12px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .auth-form {
+        padding: 20px 16px;
+    }
+
+    .auth-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .auth-field {
+        margin-bottom: 16px;
+    }
+
+    .auth-input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .auth-button {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+    /* Формы авторизации */
+    .auth-form {
+        max-width: 420px;
+        padding: 28px 24px;
+    }
+
+    .auth-title {
+        font-size: 26px;
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+    }
+
+    .auth-label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .auth-input {
+        padding: 12px 16px;
+        font-size: 15px;
+    }
+
+    .auth-input::placeholder {
+        font-size: 13px;
+    }
+
+    .auth-error-message,
+    .auth-hint {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .auth-button {
+        padding: 12px 24px;
+        font-size: 16px;
+        margin-top: 16px;
+    }
+
+    .auth-link {
+        font-size: 14px;
+        margin-top: 20px;
+        padding: 6px;
+    }
+
+    .auth-loader {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+    }
+
+    /* Модальные окна */
+    .modal-content {
+        max-width: 80%;
+        max-height: 85vh;
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        top: 10px;
+        right: 10px;
+    }
+}
