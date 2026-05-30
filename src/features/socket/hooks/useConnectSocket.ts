@@ -45,7 +45,7 @@ export const useConnectSocket = () => {
     
     
     const connect = useCallback(() => {
-        const url = 'ws://localhost:3000';
+        const url = '/';
 
         if (accessToken) {
             socketService.setTokenRefreshCallback(async () => {
