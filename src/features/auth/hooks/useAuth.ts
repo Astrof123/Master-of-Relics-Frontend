@@ -12,8 +12,7 @@ export const useAuth = () => {
     const handleLogin = useCallback((credentials: LoginCredentials) => {
         return dispatch(login(credentials)).unwrap().then(() => {
             toast.success('Добро пожаловать!');
-        }).catch((error) => {
-            toast.error(error.message || 'Ошибка входа');
+        }).catch(() => {
         });
     }, [dispatch]);
 

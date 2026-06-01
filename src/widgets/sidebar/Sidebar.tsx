@@ -30,12 +30,12 @@ const Sidebar = () => {
             <div className={styles.user}>
                 <div className={styles['user-info']}>
                     <div className={styles["user-name-wrapper"]}>
-                    <div className={styles["avatar"]}>
-                        <img src={UserImg} alt="" />
-                    </div>
-                        {user && (
-                            <span className={styles['user-name']}>{user.nickname.length > 20 ? user.nickname.slice(0, 16) + "..." : user!.nickname}</span>
-                        )}
+                        <div className={styles["avatar"]}>
+                            <img src={UserImg} alt="" />
+                        </div>
+                            {user && (
+                                <span className={styles['user-name']}>{user.nickname.length > 20 ? user.nickname.slice(0, 16) + "..." : user!.nickname}</span>
+                            )}
                     </div>
 
                     <span className={styles['user-gold']}>

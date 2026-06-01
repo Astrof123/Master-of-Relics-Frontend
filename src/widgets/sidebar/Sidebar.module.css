@@ -344,8 +344,8 @@
 }
 
 .avatar {
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     background: #2f241b;
     border: 3px solid #8b6f4c;
     border-radius: 50%;
@@ -376,8 +376,8 @@
     }
 
     .avatar {
-        width: 44px;
-        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .avatar img {
@@ -419,8 +419,8 @@
     }
 
     .avatar {
-        width: 50px;
-        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
     }
 
     .avatar img {
@@ -462,8 +462,8 @@
     }
 
     .avatar {
-        width: 60px;
-        height: 60px;
+        min-width: 60px;
+        min-height: 60px;
     }
 
     .avatar img {
