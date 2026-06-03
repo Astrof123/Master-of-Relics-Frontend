@@ -1,0 +1,29 @@
+User-agent: *
+Disallow: /
+
+User-agent: Googlebot
+Allow: /$
+Allow: /collection$
+Allow: /knowledge$
+Allow: /profile/*$
+Disallow: /admin/
+Disallow: /create$
+Disallow: /my-lobby$
+Disallow: /game/*
+Disallow: /login$
+Disallow: /register$
+Crawl-delay: 5
+
+User-agent: Yandex
+Allow: /$
+Allow: /collection$
+Allow: /knowledge$
+Disallow: /admin/
+Disallow: /game/*
+Crawl-delay: 5
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: *
+Disallow: /

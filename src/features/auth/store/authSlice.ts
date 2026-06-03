@@ -89,7 +89,7 @@ const authSlice = createSlice({
 			})
 			.addCase(me.rejected, (state, action) => {
 				state.isLoading = false;
-  				state.error = action.payload as string || 'Не удалось получить данные о себе';
+  				state.error = action.payload as string;
 			})
 	},
 });

@@ -71,13 +71,23 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 });
 
 
-export const refreshToken = createAsyncThunk('auth/refresh', async () => {
-	const response = await api.get<AuthResponse>(AUTH_ENDPOINTS.REFRESH_TOKEN, {
-		withAuth: false,
-        retryOnUnauthorized: false
-	});
+export const refreshToken = createAsyncThunk('auth/refresh', async (_, { rejectWithValue }) => {
+	try {
+		const response = await api.get<AuthResponse>(AUTH_ENDPOINTS.REFRESH_TOKEN, {
+			withAuth: false,
+			retryOnUnauthorized: false,
+		});
 
-	return response.data;
+		return response.data;
+	}
+	catch (error: any) {
+		if (error.response?.data?.message) {
+			return rejectWithValue(error.response.data.message)
+		}
+		
+		
+		return rejectWithValue('Не удалось обновить токены');
+	}
 });
 
 
@@ -87,11 +97,14 @@ export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => 
 			withAuth: true,
 			retryOnUnauthorized: true
 		});
-
 		return response.data;
 	}
 	catch (error: any) {
 		if (error.response?.data?.message) {
+			if (error.response?.status === 401) {
+				return rejectWithValue("")
+			}
+
 			return rejectWithValue(error.response.data.message)
 		}
 		
