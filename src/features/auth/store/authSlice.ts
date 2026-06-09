@@ -24,7 +24,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
+        setNullError: (state) => {
+            state.error = null;
+        },
     },
 	extraReducers: (builder) => {
 		builder
@@ -93,5 +95,9 @@ const authSlice = createSlice({
 			})
 	},
 });
+
+export const {
+	setNullError
+} = authSlice.actions;
 
 export default authSlice.reducer;

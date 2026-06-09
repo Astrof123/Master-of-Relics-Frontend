@@ -2,10 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState, type ChangeEvent } from "react";
 import clsx from "clsx";
+import { useAppDispatch } from "@/app/store";
+import { setNullError } from "../../store/authSlice";
 
 function LoginScreen() {
     const { error, isLoading, accessToken, handleLogin } = useAuth();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const [formData, setFormData] = useState({
         login: "",
@@ -24,6 +27,8 @@ function LoginScreen() {
     })
 
     useEffect(() => {
+        dispatch(setNullError())
+
         if (accessToken) {
             navigate("/");
         }

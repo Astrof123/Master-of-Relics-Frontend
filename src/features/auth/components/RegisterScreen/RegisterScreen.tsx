@@ -2,10 +2,13 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import clsx from "clsx";
+import { setNullError } from "../../store/authSlice";
+import { useAppDispatch } from "@/app/store";
 
 function RegisterScreen() {
     const { error, accessToken, isLoading, handleRegister } = useAuth();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const [formData, setFormData] = useState({
         nickname: "",
@@ -33,6 +36,7 @@ function RegisterScreen() {
     })
 
     useEffect(() => {
+        dispatch(setNullError())
         if (accessToken) {
             navigate("/")
         }
